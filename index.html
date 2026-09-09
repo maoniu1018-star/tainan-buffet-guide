@@ -59,7 +59,7 @@ footer{margin-top:40px;padding:28px 0;border-top:1px solid var(--line);color:var
 <div id="modal" class="modal"><div class="dialog"><button class="close" id="close">×</button><div id="detail"></div></div></div>
 
 <script>
-let DATA={restaurants:[],updatedAt:"—"}; const cats=["全部","火鍋吃到飽","燒肉吃到飽","飯店 Buffet","海鮮 Buffet","平價自助吧","精緻 Buffet"]; let state={q:"",district:"",sort:"default",type:"全部"}; const $=id=>document.getElementById(id);
+let DATA={restaurants:[],updatedAt:"—"}; const cats=["全部","火鍋吃到飽","燒肉吃到飽","牛排自助吧","飯店 Buffet","海鮮 Buffet","日式 Buffet","平價自助吧","精緻 Buffet"]; let state={q:"",district:"",sort:"default",type:"全部"}; const $=id=>document.getElementById(id);
 function esc(v){return String(v??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]))}
 function pnum(s){const m=String(s||"").replace(/,/g,"").match(/(?:NT\\$|\\$)?\\s*(\\d{3,5})/);return m?+m[1]:Infinity}
 function stars(r){if(r.rating==null)return '<span class="stars">☆☆☆☆☆</span><span>尚無評分</span>';const n=Math.max(0,Math.min(5,Number(r.rating)));let out="";for(let i=0;i<5;i++)out+=i<Math.round(n)?"★":"☆";return '<span class="stars">'+out+'</span><b>'+n.toFixed(1)+'</b><small>/5</small>'}
