@@ -1,6 +1,6 @@
 {
   "updatedAt": "2026-09-09",
-  "updateStatus": "Monthly source check template",
+  "updateStatus": "Monthly source check completed",
   "restaurants": [
     {
       "name": "奇美食品幸福工廠 幸福吃到飽",
@@ -18,7 +18,8 @@
       "url": "https://onelife.tw/menu/1122",
       "tags": [
         "平價自助吧"
-      ]
+      ],
+      "sourceCheckedAt": "2026-09-09"
     },
     {
       "name": "饗麻饗辣 台南永華旗艦店",
@@ -36,7 +37,8 @@
       "url": "https://www.enjoyhot.com.tw/store.php?act=view&id=1",
       "tags": [
         "火鍋吃到飽"
-      ]
+      ],
+      "sourceCheckedAt": "2026-09-09"
     },
     {
       "name": "逐鹿炭火燒肉 台南店",
@@ -72,7 +74,8 @@
       "url": "https://page.line.me/222xkicq/faq/1178953777629571",
       "tags": [
         "燒肉吃到飽"
-      ]
+      ],
+      "sourceCheckedAt": "2026-09-09"
     },
     {
       "name": "灼花燒肉 HIBANA",
@@ -90,7 +93,8 @@
       "url": "https://hibana.tw/",
       "tags": [
         "燒肉吃到飽"
-      ]
+      ],
+      "sourceCheckedAt": "2026-09-09"
     },
     {
       "name": "Oh! Yaki 精緻燒肉吃到飽 台南店",
@@ -144,7 +148,8 @@
       "url": "https://www.hotel-tainan.com.tw/dining/ins.php?index_id=136",
       "tags": [
         "飯店 Buffet"
-      ]
+      ],
+      "sourceCheckedAt": "2026-09-09"
     },
     {
       "name": "台南桂田酒店 阿力海百匯餐廳",
@@ -162,7 +167,8 @@
       "url": "https://www.tainan.queenaplaza.com/dining-detail/Alihi_Restaurant/",
       "tags": [
         "飯店 Buffet"
-      ]
+      ],
+      "sourceCheckedAt": "2026-09-09"
     },
     {
       "name": "禧榕軒大飯店 榕廷百匯餐廳",
@@ -180,7 +186,8 @@
       "url": "https://onelife.tw/menu/708",
       "tags": [
         "飯店 Buffet"
-      ]
+      ],
+      "sourceCheckedAt": "2026-09-09"
     },
     {
       "name": "夏都城旅安平館 城食百匯",
@@ -198,7 +205,8 @@
       "url": "https://www.tnchateau.com.tw/restaurant-detail/city-cuisine/",
       "tags": [
         "飯店 Buffet"
-      ]
+      ],
+      "sourceCheckedAt": "2026-09-09"
     },
     {
       "name": "台南大員皇冠假日酒店 元素全日餐廳",
@@ -216,7 +224,8 @@
       "url": "https://onelife.tw/menu/698",
       "tags": [
         "飯店 Buffet"
-      ]
+      ],
+      "sourceCheckedAt": "2026-09-09"
     },
     {
       "name": "隱岳閣（台南雀客門市）",
@@ -234,7 +243,8 @@
       "url": "https://www.harpersbazaar.com/tw/life/food/g71555372/2026-new-opening-buffet/",
       "tags": [
         "精緻 Buffet"
-      ]
+      ],
+      "sourceCheckedAt": "2026-09-09"
     },
     {
       "name": "漢來海港 台南南紡店",
