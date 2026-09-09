@@ -1,33 +1,22 @@
-const $=s=>document.querySelector(s);const grid=$("#grid"),empty=$("#empty");
+
+const $=id=>document.getElementById(id);
 const data=[...new Map(RESTAURANTS.map(x=>[x.name,x])).values()];
-const areas=[...new Set(data.map(x=>x.area).filter(Boolean))].sort((a,b)=>a.localeCompare(b,'zh-Hant'));
-const types=[...new Set(data.map(x=>x.type).filter(Boolean))].sort((a,b)=>a.localeCompare(b,'zh-Hant'));
-areas.forEach(x=>$("#area").insertAdjacentHTML('beforeend',`<option>${x}</option>`));
-types.forEach(x=>$("#type").insertAdjacentHTML('beforeend',`<option>${x}</option>`));
-function photoFor(x){
-  const n=x.name;
-  if(n.includes('肉次方')) return 'assets/bbq.svg';
-  if(n.includes('涮乃葉')||n.includes('饗麻饗辣')||n.includes('億品鍋')||n.includes('武灰鍋')||n.includes('九鼎鍋')||n.includes('XM')||n.includes('尬麻')||n.includes('嗑肉石鍋')||n.includes('牧鍋')||n.includes('井賀')||n.includes('狂一鍋')||n.includes('肉多多')||n.includes('兩餐')) return 'assets/hotpot.svg';
-  if(x.type.includes('Buffet')) return 'assets/bbuffet.svg';
-  if(x.type.includes('牛排')) return 'assets/steak.svg';
-  return x.type.includes('燒肉')||x.type.includes('韓式')||x.type.includes('日式')?'assets/bbq.svg':'assets/bbuffet.svg';
-}
-function render(){
- const q=$("#q").value.trim().toLowerCase(),a=$("#area").value,t=$("#type").value,tag=$("#tag").value,vo=$("#verifiedOnly").checked;
- const rows=data.filter(x=>(!q||JSON.stringify(x).toLowerCase().includes(q))&&(!a||x.area===a)&&(!t||x.type===t)&&(!tag||x.tags.includes(tag))&&(!vo||x.status.includes('🟢')));
- $("#count").textContent=`共 ${rows.length} 家`;
- grid.innerHTML='';empty.hidden=rows.length>0;
- rows.forEach(x=>{
-  const tpl=$("#card").content.cloneNode(true),img=tpl.querySelector('.photo-img');
-  tpl.querySelector('.chips').innerHTML=x.tags.map(v=>`<span class="chip">${v}</span>`).join('')+`<span class="status ${x.status.includes('🟢')?'ok':'warn'}">${x.status}</span>`;
-  tpl.querySelector('h2').textContent=x.name;tpl.querySelector('.price').textContent='💰 '+x.price;tpl.querySelector('.addr').textContent='📍 '+x.address+'｜'+x.area;tpl.querySelector('.hours').textContent='🕐 '+x.hours;tpl.querySelector('.desc').textContent='✨ '+x.desc;
-  img.src=x.photo||photoFor(x);img.alt=x.name+'代表圖片';
-  tpl.querySelector('.source').textContent='來源：'+x.source;tpl.querySelector('.checked').textContent='最後核對：2026/09/10';
-  let act=tpl.querySelector('.actions');
-  if(x.phone&&/^06[-\s]?\d/.test(x.phone))act.insertAdjacentHTML('beforeend',`<a href="tel:${x.phone.replace(/[^0-9]/g,'')}">☎️ 電話</a>`);
-  if(x.booking)act.insertAdjacentHTML('beforeend',`<a href="${x.booking}" target="_blank" rel="noopener noreferrer">🔴 官方訂位</a>`);
-  if(x.official)act.insertAdjacentHTML('beforeend',`<a class="secondary" href="${x.official}" target="_blank" rel="noopener noreferrer">🌐 官方網站</a>`);
-  grid.appendChild(tpl);
- });
-}
-['q','area','type','tag','verifiedOnly'].forEach(id=>$("#"+id).addEventListener(id==='q'?'input':'change',render));render();
+const cats=['全部','🍱 Buffet','🍲 火鍋','🔥 燒肉','🥩 牛排'];
+function categoryOf(r){const t=String(r.type||''); if(t.includes('Buffet')) return '🍱 Buffet'; if(t.includes('火鍋')) return '🍲 火鍋'; if(t.includes('韓式') && String(r.name||'').includes('兩餐')) return '🍱 Buffet'; if(t.includes('燒肉')||t.includes('韓式')) return '🔥 燒肉'; if(t.includes('牛排')) return '🥩 牛排'; if(t.includes('日式')) return '🍱 Buffet'; return t||'其他'}
+const areas=[...new Set(data.map(x=>x.area).filter(Boolean))].sort();
+areas.forEach(x=>$('#district').insertAdjacentHTML('beforeend',`<option value="${esc(x)}">${esc(x)}</option>`));
+let state={q:'',district:'',budget:'',sort:'default',type:'全部'};
+function esc(v){return String(v??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
+function pnum(s){const m=String(s||'').replace(/,/g,'').match(/(?:NT\$|\$)?\s*(\d{3,5})/);return m?+m[1]:Infinity}
+function stars(r){if(r.rating==null)return '<span class="stars">☆☆☆☆☆</span><span>尚無 Google 評分</span>';const n=Math.max(0,Math.min(5,Number(r.rating)));let o='';for(let i=0;i<5;i++)o+=i<Math.round(n)?'★':'☆';const count=r.reviewCount?`<small>(${Number(r.reviewCount).toLocaleString()} 則)</small>`:'';return `<span class="stars">${o}</span><b>${n.toFixed(1)}</b><small>/5 · Google</small>${count}`}
+function budgetMatch(r,b){if(!b)return true;const n=pnum(r.price);if(!Number.isFinite(n))return false;return b==='under300'?n<300:b==='300to500'?n>=300&&n<=500:b==='500to800'?n>500&&n<=800:b==='800to1200'?n>800&&n<=1200:n>1200}
+function filtered(){let a=data.filter(r=>{const t=[r.name,r.type,r.area,r.address,r.desc].join(' ').toLowerCase();return(!state.q||t.includes(state.q.toLowerCase()))&&(!state.district||r.area===state.district)&&(state.type==='全部'||categoryOf(r)===state.type)&&budgetMatch(r,state.budget)});if(state.sort==='weekdayAsc')a.sort((a,b)=>pnum(a.price)-pnum(b.price));if(state.sort==='ratingDesc')a.sort((a,b)=>(b.rating??-1)-(a.rating??-1));if(state.sort==='name')a.sort((a,b)=>a.name.localeCompare(b.name,'zh-Hant'));return a}
+function splitPrice(x){let s=x.price||'依店家公告';let weekday=s,dinner='—';if(/平日/.test(s)){const parts=s.split('；');weekday=parts[0];dinner=parts.slice(1).join('；')||'—'}else if(/午/.test(s)&&/晚/.test(s)){const parts=s.split('；');weekday=parts[0];dinner=parts.slice(1).join('；')||'—'}else if(/NT\$/.test(s)&&/起/.test(s)){weekday=s;dinner=s}return {weekday,dinner}}
+function detail(r){const map='https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(r.name+' '+r.address);return `<h2>${esc(r.name)}</h2><div class="rating">${stars(r)}</div><div class="rows"><div class="row"><div class="k">價目表</div><div class="v">平日／午餐：${esc(splitPrice(r).weekday)}<br>晚餐／假日：${esc(splitPrice(r).dinner)}<br>兒童：${esc(r.child||'依店家公告')}<br>服務費：${esc(r.service||'依店家公告')}</div></div><div class="row"><div class="k">地址</div><div class="v">${esc(r.address||'—')}</div></div><div class="row"><div class="k">電話</div><div class="v">${esc(r.phone||'—')}</div></div><div class="row"><div class="k">營業時間</div><div class="v">${esc(r.hours||'—')}</div></div><div class="row"><div class="k">特色／備註</div><div class="v">${esc(r.desc||'—')} ${esc(r.note||'')}</div></div><div class="row"><div class="k">資料來源</div><div class="v">${esc(r.source||'—')}</div></div><div class="row"><div class="k">最後核對</div><div class="v">2026/09/10</div></div></div><div class="actions"><a class="main" href="${map}" target="_blank" rel="noopener">🗺️ 開啟地圖</a>${r.phone&&/^06-\d/.test(r.phone)?`<a href="tel:${r.phone.replace(/-/g,'')}">☎️ 電話</a>`:''}${r.official?`<a href="${esc(r.official)}" target="_blank" rel="noopener">🌐 官方網站</a>`:''}${r.booking?`<a href="${esc(r.booking)}" target="_blank" rel="noopener">🔴 官方訂位</a>`:''}</div>`}
+function show(r){$('#detail').innerHTML=detail(r);$('#modal').classList.add('show')}
+function render(){const rows=filtered();$('#resultInfo').textContent=`目前顯示 ${rows.length} 間`;$('#cards').innerHTML=rows.length?rows.map(r=>{const p=splitPrice(r);const map='https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(r.name+' '+r.address);return `<article class="card"><div class="badges"><span class="badge">${esc(r.type||'吃到飽')}</span>${(r.tags||[]).slice(0,2).map(v=>`<span class="badge">${esc(v)}</span>`).join('')}<span class="badge ${r.status&&r.status.includes('🟢')?'ok':'warn'}">${esc(r.status||'待確認')}</span></div><h3>${esc(r.name)}</h3><div class="rating">${stars(r)}</div><div class="addr">📍 ${esc(r.address||'—')}</div><div class="addr">☎️ ${r.phone&&r.phone!=='依官方最新資訊'?`<a href="tel:${esc(r.phone.replace(/-/g,''))}">${esc(r.phone)}</a>`:esc(r.phone||'—')}</div><div class="prices"><div class="pricebox"><div class="lab">平日／午餐</div><div class="num">${esc(p.weekday)}</div></div><div class="pricebox"><div class="lab">晚餐／假日</div><div class="num">${esc(p.dinner)}</div></div></div><div class="meta"><div><b>兒童：</b>${esc(r.child||'依店家公告')}</div><div><b>服務費：</b>${esc(r.service||'依店家公告')}</div></div><div class="locbar"><a class="locbtn primary" href="${map}" target="_blank" rel="noopener">🗺️ 開啟地圖</a></div><div class="actions"><button class="main" data-name="${esc(r.name)}">完整資訊／來源</button>${r.official?`<a href="${esc(r.official)}" target="_blank" rel="noopener">🌐 官方網站</a>`:''}</div></article>`}).join(''):'<div class="notice">找不到符合條件的餐廳，請清除篩選。</div>';$cardsButtons()}
+function $cardsButtons(){document.querySelectorAll('[data-name]').forEach(b=>b.onclick=()=>{const r=data.find(x=>x.name===b.dataset.name);if(r)show(r)})}
+cats.forEach((c,i)=>{const b=document.createElement('button');b.className='chip'+(i===0?' active':'');b.textContent=c;b.onclick=()=>{state.type=c;document.querySelectorAll('.chip').forEach(x=>x.classList.remove('active'));b.classList.add('active');render()};$('#chips').appendChild(b)});
+$('#q').oninput=e=>{state.q=e.target.value;render()};$('#district').onchange=e=>{state.district=e.target.value;render()};$('#budget').onchange=e=>{state.budget=e.target.value;render()};$('#sort').onchange=e=>{state.sort=e.target.value;render()};$('#reset').onclick=()=>{state={q:'',district:'',budget:'',sort:'default',type:'全部'};$('#q').value='';$('#district').value='';$('#budget').value='';$('#sort').value='default';document.querySelectorAll('.chip').forEach((x,i)=>x.classList.toggle('active',i===0));render()};
+$('#close').onclick=()=>$('#modal').classList.remove('show');$('#modal').onclick=e=>{if(e.target.id==='modal')$('#modal').classList.remove('show')};
+$('#statCount').textContent=`已收錄 ${data.length} 間`;$('#sumCount').textContent=`${data.length} 間`;const nums=data.map(x=>pnum(x.price)).filter(Number.isFinite);$('#sumMin').textContent=nums.length?`NT$${Math.min(...nums).toLocaleString()}`:'—';const rs=data.map(x=>x.rating).filter(x=>typeof x==='number');$('#sumRating').textContent=rs.length?(rs.reduce((a,b)=>a+b,0)/rs.length).toFixed(1):'—';render();
