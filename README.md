@@ -1,3 +1,6 @@
+## 目前資料量
+目前收錄 **89 家**台南 Buffet／吃到飽／自助吧相關店家。
+
 # 台南吃到飽價格大全｜GitHub Pages + AI 每月更新
 
 這個版本會由 GitHub Pages 發布網站，GitHub Actions 每月檢查設定的公開來源頁面，再用 OpenAI 判讀餐價。
