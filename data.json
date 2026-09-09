@@ -1,6 +1,6 @@
 {
   "updatedAt": "2026-09-09",
-  "updateStatus": "Monthly source check completed",
+  "updateStatus": "Monthly source check template",
   "restaurants": [
     {
       "name": "奇美食品幸福工廠 幸福吃到飽",
@@ -19,7 +19,9 @@
       "tags": [
         "平價自助吧"
       ],
-      "sourceCheckedAt": "2026-09-09"
+      "rating": 4.1,
+      "reviewCount": 9628,
+      "ratingSource": "Google 地圖評分"
     },
     {
       "name": "饗麻饗辣 台南永華旗艦店",
@@ -38,7 +40,9 @@
       "tags": [
         "火鍋吃到飽"
       ],
-      "sourceCheckedAt": "2026-09-09"
+      "rating": 4.3,
+      "reviewCount": 4203,
+      "ratingSource": "Google 地圖評分"
     },
     {
       "name": "逐鹿炭火燒肉 台南店",
@@ -56,7 +60,10 @@
       "url": "https://www.opentable.com.tw/restaurant/profile/179069",
       "tags": [
         "燒肉吃到飽"
-      ]
+      ],
+      "rating": 4.3,
+      "reviewCount": 7175,
+      "ratingSource": "Google 地圖評分"
     },
     {
       "name": "田季發爺燒肉 台南中華店",
@@ -75,7 +82,9 @@
       "tags": [
         "燒肉吃到飽"
       ],
-      "sourceCheckedAt": "2026-09-09"
+      "rating": 4.7,
+      "reviewCount": 9304,
+      "ratingSource": "Google 地圖評分"
     },
     {
       "name": "灼花燒肉 HIBANA",
@@ -94,7 +103,9 @@
       "tags": [
         "燒肉吃到飽"
       ],
-      "sourceCheckedAt": "2026-09-09"
+      "rating": null,
+      "reviewCount": null,
+      "ratingSource": "Google 地圖評分"
     },
     {
       "name": "Oh! Yaki 精緻燒肉吃到飽 台南店",
@@ -112,7 +123,10 @@
       "url": "https://www.klook.com/zh-TW/blog/tainan-yakiniku-buffet/",
       "tags": [
         "燒肉吃到飽"
-      ]
+      ],
+      "rating": 4.5,
+      "reviewCount": 857,
+      "ratingSource": "Google 地圖評分"
     },
     {
       "name": "煙波大飯店台南館 食東西自助餐廳",
@@ -130,7 +144,10 @@
       "url": "https://www.opentable.com.tw/restaurant/profile/187355",
       "tags": [
         "飯店 Buffet"
-      ]
+      ],
+      "rating": 4.6,
+      "reviewCount": 3207,
+      "ratingSource": "Google 地圖評分"
     },
     {
       "name": "台南大飯店 歐式自助餐",
@@ -149,7 +166,9 @@
       "tags": [
         "飯店 Buffet"
       ],
-      "sourceCheckedAt": "2026-09-09"
+      "rating": 4.1,
+      "reviewCount": 6789,
+      "ratingSource": "Google 地圖評分"
     },
     {
       "name": "台南桂田酒店 阿力海百匯餐廳",
@@ -168,7 +187,9 @@
       "tags": [
         "飯店 Buffet"
       ],
-      "sourceCheckedAt": "2026-09-09"
+      "rating": null,
+      "reviewCount": null,
+      "ratingSource": "Google 地圖評分"
     },
     {
       "name": "禧榕軒大飯店 榕廷百匯餐廳",
@@ -187,7 +208,9 @@
       "tags": [
         "飯店 Buffet"
       ],
-      "sourceCheckedAt": "2026-09-09"
+      "rating": 4.2,
+      "reviewCount": 368,
+      "ratingSource": "Google 地圖評分"
     },
     {
       "name": "夏都城旅安平館 城食百匯",
@@ -206,7 +229,9 @@
       "tags": [
         "飯店 Buffet"
       ],
-      "sourceCheckedAt": "2026-09-09"
+      "rating": null,
+      "reviewCount": null,
+      "ratingSource": "Google 地圖評分"
     },
     {
       "name": "台南大員皇冠假日酒店 元素全日餐廳",
@@ -225,7 +250,9 @@
       "tags": [
         "飯店 Buffet"
       ],
-      "sourceCheckedAt": "2026-09-09"
+      "rating": null,
+      "reviewCount": null,
+      "ratingSource": "Google 地圖評分"
     },
     {
       "name": "隱岳閣（台南雀客門市）",
@@ -244,7 +271,9 @@
       "tags": [
         "精緻 Buffet"
       ],
-      "sourceCheckedAt": "2026-09-09"
+      "rating": null,
+      "reviewCount": null,
+      "ratingSource": "Google 地圖評分"
     },
     {
       "name": "漢來海港 台南南紡店",
@@ -262,7 +291,10 @@
       "url": "https://www.google.com/maps/search/?api=1&query=漢來海港+台南南紡店",
       "tags": [
         "海鮮 Buffet"
-      ]
+      ],
+      "rating": 4.2,
+      "reviewCount": 7683,
+      "ratingSource": "Google 地圖評分"
     }
   ]
 }
