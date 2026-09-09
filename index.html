@@ -9,7 +9,7 @@
 *{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,"Segoe UI","Noto Sans TC",sans-serif;color:var(--ink);background:linear-gradient(#fff8fb,#fff)}
 a{color:inherit}.wrap{max-width:1180px;margin:auto;padding:0 20px}
 .hero{padding:40px 0 32px;background:radial-gradient(circle at 15% 0,#ffe2ec 0,transparent 35%),#fff8fb;border-bottom:1px solid var(--line)}
-.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:34px}.brand{font-weight:800;letter-spacing:.08em}.heart{color:var(--p);font-size:22px}.creator{color:var(--p);font-weight:800}.nav{display:flex;gap:18px;color:var(--muted);font-size:14px}.nav a{text-decoration:none}
+.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:34px}.brand{font-weight:800;letter-spacing:.08em}.heart{color:var(--p);font-size:22px}.creator{color:var(--p);font-weight:800;text-decoration:none}.creator:hover{text-decoration:underline}.nav{display:flex;gap:18px;color:var(--muted);font-size:14px}.nav a{text-decoration:none}
 .kicker{font-size:12px;letter-spacing:.18em;color:var(--p);font-weight:800}.hero h1{font-size:clamp(32px,5vw,58px);line-height:1.08;margin:10px 0 14px}.hero h1 span{color:var(--p)}.hero p{max-width:780px;color:var(--muted);line-height:1.8;margin:0}.stats{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}.pill{padding:8px 13px;border:1px solid var(--line);border-radius:999px;background:#fff;font-size:13px}
 .controls{position:sticky;top:0;z-index:5;padding:16px 0;background:rgba(255,250,252,.95);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
 .searchrow{display:grid;grid-template-columns:1.5fr 1fr 1fr auto;gap:10px}.input,.select,.btn{width:100%;height:46px;border:1px solid var(--line);border-radius:14px;background:#fff;padding:0 14px;font:inherit;color:var(--ink)}.btn{cursor:pointer}
@@ -36,7 +36,7 @@ footer{margin-top:40px;padding:28px 0;border-top:1px solid var(--line);color:var
 <div class="kicker">TAINAN BUFFET GUIDE</div>
 <h1>今天吃哪一家？<br><span>台南吃到飽價格大全</span></h1>
 <p>火鍋、燒肉、牛排、飯店 Buffet、海鮮、自助吧，一次查看價格、兒童費用、服務費、評論星評與導航。</p>
-<div class="stats"><div class="pill" id="statCount">資料載入中…</div><div class="pill">⭐ 評論星評</div><div class="pill">📍 目前位置導航</div><div class="pill">製作者：<span class="creator">Chung NING</span></div></div>
+<div class="stats"><div class="pill" id="statCount">資料載入中…</div><div class="pill">⭐ 評論星評</div><div class="pill">📍 目前位置導航</div><div class="pill">製作者：<a class="creator" href="https://www.instagram.com/h.ning1018/" target="_blank" rel="noopener noreferrer" aria-label="Chung NING Instagram">Chung NING&nbsp;·&nbsp;Instagram</a></div></div>
 </div></header>
 
 <section class="controls"><div class="wrap">
@@ -54,7 +54,7 @@ footer{margin-top:40px;padding:28px 0;border-top:1px solid var(--line);color:var
 <div id="cards" class="grid"></div>
 <div class="notice" id="notice"><b>⚠️ 價格與評分提醒：</b>評論星評會隨平台變化；價格、兒童費與特殊節日價也可能調整。實際消費前請以店家最新公告為準。</div>
 </main>
-<footer><div class="wrap">台南吃到飽價格大全｜製作者：<span class="creator">Chung NING</span>｜資料整理以公開／官方資訊為主。</div></footer>
+<footer><div class="wrap">台南吃到飽價格大全｜製作者：<a class="creator" href="https://www.instagram.com/h.ning1018/" target="_blank" rel="noopener noreferrer" aria-label="Chung NING Instagram">Chung NING&nbsp;·&nbsp;Instagram</a>｜資料整理以公開／官方資訊為主。</div></footer>
 
 <div id="modal" class="modal"><div class="dialog"><button class="close" id="close">×</button><div id="detail"></div></div></div>
 
