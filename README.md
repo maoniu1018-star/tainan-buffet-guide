@@ -10,6 +10,10 @@ GitHub Pages 靜態網站。
 - 支援搜尋、行政區、預算、類型與排序
 - 保留 Chung NING 與 Instagram： https://www.instagram.com/h.ning1018/
 
+## 檔案說明
+
+`index.html` 已內嵌完整 61 間餐廳資料與前端程式，避免 GitHub Pages 因外部資料檔載入異常而出現空白餐廳列表。`data.js`、`app.js` 同步保留供維護使用。
+
 ## GitHub Pages
 將根目錄檔案上傳至既有 repository 的 `main` 分支，Pages 使用 `main / root`。
 
