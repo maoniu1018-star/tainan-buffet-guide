@@ -1,20 +1,14 @@
-# 台南吃到飽｜自助吧餐廳搜尋
+# 台南吃到飽｜Buffet、火鍋、燒肉、自助吧價格大全
 
-GitHub Pages 靜態網站。
+GitHub Pages 靜態網站。請將本資料夾根目錄的 `index.html` 與 `data.json` 一起放在 Repository 根目錄。
+
+## 核心功能
+- 完整平日／晚餐價目表
+- 兒童費用、服務費、備註
+- 搜尋、行政區、類型、預算、排序
+- Google Maps
+- 官方網站／訂位連結（有資料才顯示）
+- 製作者 Chung NING／Instagram
 
 ## 部署
-1. 將本資料夾內的檔案放在 repository 根目錄。
-2. GitHub → Settings → Pages。
-3. Source 選 `Deploy from a branch`，Branch 選 `main` / `/root`。
-4. 儲存後等待 GitHub Pages 部署。
-
-## 專案特色
-- 餐廳搜尋、地區／類型／條件篩選。
-- 可切換「只看已核對」。
-- 分店獨立資料。
-- 電話、官方網站、已確認的官方訂位入口。
-- 每筆資料顯示核對狀態與最後核對日期。
-- Footer 保留製作者 Chung NING 與 Instagram @h.ning1018。
-
-## 資料原則
-官方網站／官方社群／商場官方頁優先；第三方資料僅作交叉驗證。價格、營業時間、菜單與訂位方式可能調整，公開前仍建議使用者向店家再次確認。
+GitHub → Settings → Pages → Deploy from a branch → `main` → `/ (root)`。
