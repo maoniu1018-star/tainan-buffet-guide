@@ -1,0 +1,258 @@
+{
+  "updatedAt": "2026-09-09",
+  "updateStatus": "Monthly source check template",
+  "restaurants": [
+    {
+      "name": "奇美食品幸福工廠 幸福吃到飽",
+      "type": "平價自助吧",
+      "priceLevel": "平價",
+      "district": "仁德區",
+      "address": "台南市仁德區機場路1008號",
+      "weekday": "NT$158 起",
+      "dinner": "—（午餐自助吧）",
+      "child": "101–140cm NT$118；81–100cm NT$68；80cm以下免費",
+      "service": "10%（公開資料）",
+      "note": "幸福吃到飽；用餐時間依店家公告",
+      "checkedAt": "2026-09-09",
+      "source": "公開價目資料",
+      "url": "https://onelife.tw/menu/1122",
+      "tags": [
+        "平價自助吧"
+      ]
+    },
+    {
+      "name": "饗麻饗辣 台南永華旗艦店",
+      "type": "火鍋吃到飽",
+      "priceLevel": "中價位",
+      "district": "安平區",
+      "address": "台南市安平區永華路二段35號",
+      "weekday": "NT$658",
+      "dinner": "NT$758",
+      "child": "100cm以下免費；100–120cm NT$258；120–140cm NT$388",
+      "service": "10%",
+      "note": "官方目前列：平日午間 11:30–14:30、平日晚間 17:00–22:30；假日全天 NT$788",
+      "checkedAt": "2026-09-09",
+      "source": "官方店家",
+      "url": "https://www.enjoyhot.com.tw/store.php?act=view&id=1",
+      "tags": [
+        "火鍋吃到飽"
+      ]
+    },
+    {
+      "name": "逐鹿炭火燒肉 台南店",
+      "type": "燒肉吃到飽",
+      "priceLevel": "中價位",
+      "district": "中西區",
+      "address": "台南市中西區環河街92號",
+      "weekday": "NT$769",
+      "dinner": "NT$769",
+      "child": "100cm以下免費；100–130cm NT$389；130cm以上成人價",
+      "service": "10%",
+      "note": "120分鐘；平日午晚餐／假日全天",
+      "checkedAt": "2026-09-09",
+      "source": "OpenTable餐廳資訊",
+      "url": "https://www.opentable.com.tw/restaurant/profile/179069",
+      "tags": [
+        "燒肉吃到飽"
+      ]
+    },
+    {
+      "name": "田季發爺燒肉 台南中華店",
+      "type": "燒肉吃到飽",
+      "priceLevel": "中價位",
+      "district": "東區",
+      "address": "台南市東區中華東路二段101號",
+      "weekday": "NT$658 起",
+      "dinner": "NT$658 起",
+      "child": "99cm以下免費；100–140cm依方案半價（約NT$329／419／494）",
+      "service": "10%",
+      "note": "價格依方案 NT$658／838／988；不限餐期、平假日；120分鐘",
+      "checkedAt": "2026-09-09",
+      "source": "田季發爺官方／LINE FAQ",
+      "url": "https://page.line.me/222xkicq/faq/1178953777629571",
+      "tags": [
+        "燒肉吃到飽"
+      ]
+    },
+    {
+      "name": "灼花燒肉 HIBANA",
+      "type": "燒肉吃到飽",
+      "priceLevel": "高價位",
+      "district": "中西區",
+      "address": "台南市中西區中正路39巷16號",
+      "weekday": "NT$1,680 起",
+      "dinner": "NT$1,680 起",
+      "child": "100cm以下免費；101–130cm半價",
+      "service": "10%",
+      "note": "和牛精肉櫃吃到飽；120分鐘，最後點餐至90分鐘",
+      "checkedAt": "2026-09-09",
+      "source": "灼花燒肉官方",
+      "url": "https://hibana.tw/",
+      "tags": [
+        "燒肉吃到飽"
+      ]
+    },
+    {
+      "name": "Oh! Yaki 精緻燒肉吃到飽 台南店",
+      "type": "燒肉吃到飽",
+      "priceLevel": "中價位",
+      "district": "中西區",
+      "address": "台南市中西區民生路二段87號1樓",
+      "weekday": "NT$649 起",
+      "dinner": "NT$649 起",
+      "child": "依方案／身高規則",
+      "service": "依店家公告",
+      "note": "2026燒肉吃到飽整理列為 NT$649 起；實際方案依當期菜單",
+      "checkedAt": "2026-09-09",
+      "source": "Klook 2026燒肉攻略",
+      "url": "https://www.klook.com/zh-TW/blog/tainan-yakiniku-buffet/",
+      "tags": [
+        "燒肉吃到飽"
+      ]
+    },
+    {
+      "name": "煙波大飯店台南館 食東西自助餐廳",
+      "type": "飯店 Buffet",
+      "priceLevel": "中高價位",
+      "district": "中西區",
+      "address": "台南市中西區永福路一段269號",
+      "weekday": "NT$630",
+      "dinner": "週五晚餐 NT$950",
+      "child": "早午餐 110–140cm NT$340；晚餐 6–11歲 NT$475；3–5歲 NT$150+清潔費",
+      "service": "10%",
+      "note": "早午餐 10:30–13:30；特殊節日依公告",
+      "checkedAt": "2026-09-09",
+      "source": "公開餐價／OpenTable資料",
+      "url": "https://www.opentable.com.tw/restaurant/profile/187355",
+      "tags": [
+        "飯店 Buffet"
+      ]
+    },
+    {
+      "name": "台南大飯店 歐式自助餐",
+      "type": "飯店 Buffet",
+      "priceLevel": "中高價位",
+      "district": "中西區",
+      "address": "台南市中西區成功路1號",
+      "weekday": "午餐 NT$1,180",
+      "dinner": "NT$1,280",
+      "child": "未滿3歲免費；3–未滿6歲 NT$150；6–未滿12歲半價",
+      "service": "10%",
+      "note": "平日午晚餐為週一、週四、週五；週二、週三午晚餐店休",
+      "checkedAt": "2026-09-09",
+      "source": "台南大飯店官方",
+      "url": "https://www.hotel-tainan.com.tw/dining/ins.php?index_id=136",
+      "tags": [
+        "飯店 Buffet"
+      ]
+    },
+    {
+      "name": "台南桂田酒店 阿力海百匯餐廳",
+      "type": "飯店 Buffet",
+      "priceLevel": "高價位",
+      "district": "永康區",
+      "address": "台南市永康區永安一街99號",
+      "weekday": "午餐 NT$1,360",
+      "dinner": "NT$1,590",
+      "child": "3–5歲 NT$380；6–11歲晚餐 NT$795",
+      "service": "10%",
+      "note": "2026/2/1起價格；假日及特殊節日另計",
+      "checkedAt": "2026-09-09",
+      "source": "桂田酒店官方",
+      "url": "https://www.tainan.queenaplaza.com/dining-detail/Alihi_Restaurant/",
+      "tags": [
+        "飯店 Buffet"
+      ]
+    },
+    {
+      "name": "禧榕軒大飯店 榕廷百匯餐廳",
+      "type": "飯店 Buffet",
+      "priceLevel": "中高價位",
+      "district": "北區",
+      "address": "台南市北區成功路28號",
+      "weekday": "NT$880 起",
+      "dinner": "NT$780 起",
+      "child": "依年齡／身高與當期餐價",
+      "service": "10%",
+      "note": "不同餐期價格不同；建議訂位前查看最新官方價目",
+      "checkedAt": "2026-09-09",
+      "source": "公開餐價整理",
+      "url": "https://onelife.tw/menu/708",
+      "tags": [
+        "飯店 Buffet"
+      ]
+    },
+    {
+      "name": "夏都城旅安平館 城食百匯",
+      "type": "飯店 Buffet",
+      "priceLevel": "中高價位",
+      "district": "南區",
+      "address": "台南市南區新建路47號",
+      "weekday": "依官方當期價目表",
+      "dinner": "依官方當期價目表",
+      "child": "3–5歲 NT$150；3歲以下免費（公開資料）",
+      "service": "10%",
+      "note": "週三至週日午晚餐；特殊節日另公告",
+      "checkedAt": "2026-09-09",
+      "source": "夏都城旅官方",
+      "url": "https://www.tnchateau.com.tw/restaurant-detail/city-cuisine/",
+      "tags": [
+        "飯店 Buffet"
+      ]
+    },
+    {
+      "name": "台南大員皇冠假日酒店 元素全日餐廳",
+      "type": "飯店 Buffet",
+      "priceLevel": "中高價位",
+      "district": "安平區",
+      "address": "台南市安平區州平路289號",
+      "weekday": "午餐 NT$759",
+      "dinner": "NT$1,099",
+      "child": "7–11歲約半價；6歲以下依店家規則",
+      "service": "10%",
+      "note": "餐價可能依活動與特殊節日調整",
+      "checkedAt": "2026-09-09",
+      "source": "公開餐價整理",
+      "url": "https://onelife.tw/menu/698",
+      "tags": [
+        "飯店 Buffet"
+      ]
+    },
+    {
+      "name": "隱岳閣（台南雀客門市）",
+      "type": "精緻 Buffet",
+      "priceLevel": "中高價位",
+      "district": "永康區",
+      "address": "台南市永康區中正北路218號",
+      "weekday": "NT$660",
+      "dinner": "NT$720",
+      "child": "6–12歲 NT$330／360；3–6歲 NT$180",
+      "service": "10%",
+      "note": "2026新開幕；平日午餐 NT$660，假日及國定假日 NT$720",
+      "checkedAt": "2026-09-09",
+      "source": "Harper's BAZAAR 2026資訊整理",
+      "url": "https://www.harpersbazaar.com/tw/life/food/g71555372/2026-new-opening-buffet/",
+      "tags": [
+        "精緻 Buffet"
+      ]
+    },
+    {
+      "name": "漢來海港 台南南紡店",
+      "type": "海鮮 Buffet",
+      "priceLevel": "中高價位",
+      "district": "東區",
+      "address": "台南市東區中華東路一段366號4樓",
+      "weekday": "依官方當期價目表",
+      "dinner": "依官方當期價目表",
+      "child": "依身高／年齡規則",
+      "service": "依店家公告",
+      "note": "午餐／下午餐／晚餐分餐期，價格可能調整",
+      "checkedAt": "2026-09-09",
+      "source": "門市公開資訊",
+      "url": "https://www.google.com/maps/search/?api=1&query=漢來海港+台南南紡店",
+      "tags": [
+        "海鮮 Buffet"
+      ]
+    }
+  ]
+}
