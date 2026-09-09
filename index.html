@@ -1,5 +1,19 @@
-<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="台南吃到飽與自助吧餐廳搜尋。分店獨立整理，標示資料核對狀態、價格、地址、電話與官方資訊。"><title>台南吃到飽｜自助吧餐廳搜尋</title><link rel="stylesheet" href="style.css"></head><body>
-<header><div class="wrap"><div class="brand">🍽️ TAINAN BUFFET GUIDE</div><h1>台南吃到飽｜自助吧餐廳搜尋</h1><p>只收錄「吃到飽」或「有自助吧」的店家；分店獨立整理，資料以官方來源優先。</p></div></header>
-<main class="wrap"><section class="notice"><strong>資料說明</strong><span>🟢 已核對＝目前可由官方／可靠來源交叉確認；🟡 部分核對＝仍有欄位待補，不代表該欄位已獲官方確認。</span></section><section class="filters"><input id="q" placeholder="搜尋餐廳、區域、特色…"><select id="area"><option value="">全部地區</option></select><select id="type"><option value="">全部類型</option></select><select id="tag"><option value="">全部條件</option><option>♾️ 吃到飽</option><option>🍱 自助吧</option><option>🔴 可以訂位</option><option>💰 $300以下</option><option>💰 $500以下</option></select></section><div class="meta"><span id="count"></span><span>資料基準日：2026/09/10</span></div><section id="grid" class="grid"></section></main>
-<template id="card"><article class="card"><div class="photo">🍽️</div><div class="body"><div class="chips"></div><h2></h2><p class="price"></p><p class="addr"></p><p class="hours"></p><p class="desc"></p><div class="actions"></div><details><summary>資料來源與核對狀態</summary><p class="source"></p><p class="checked"></p></details></div></article></template>
-<script src="data.js"></script><script src="app.js"></script></body></html>
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="台南吃到飽與自助吧餐廳搜尋。分店獨立整理，價格、地址、電話、營業時間與訂位資訊優先採官方來源核對。">
+<meta name="theme-color" content="#fff8f4"><title>台南吃到飽｜自助吧餐廳搜尋</title><link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header><div class="wrap hero"><div class="brand">🍽️ TAINAN BUFFET GUIDE</div><h1>台南吃到飽｜自助吧餐廳搜尋</h1><p>找真正符合「吃到飽」或「有自助吧」的台南餐廳。分店獨立整理，官方來源優先。</p><div class="hero-pills"><span>♾️ 吃到飽</span><span>🍱 自助吧</span><span>📍 台南全區</span></div></div></header>
+<main class="wrap">
+<section class="notice"><div><strong>資料標準</strong><span>　🟢 已核對：目前可由官方／可靠來源交叉確認。　🟡 部分核對：仍有欄位待補，不代表所有欄位均已官方確認。</span></div></section>
+<section class="filters"><input id="q" placeholder="搜尋餐廳、區域、特色…" autocomplete="off"><select id="area"><option value="">全部地區</option></select><select id="type"><option value="">全部類型</option></select><select id="tag"><option value="">全部條件</option><option>♾️ 吃到飽</option><option>🍱 自助吧</option><option>🔴 可以訂位</option><option>💰 $300以下</option><option>💰 $500以下</option></select></section>
+<div class="toolbar"><div class="meta"><span id="count"></span><span>資料基準日：2026/09/10</span></div><label class="verified"><input type="checkbox" id="verifiedOnly"> 只看已核對</label></div>
+<section id="grid" class="grid"></section><div id="empty" class="empty" hidden>找不到符合條件的餐廳，換個關鍵字或篩選條件試試。</div>
+</main>
+<footer><div class="wrap footer-inner"><div><strong>TAINAN BUFFET GUIDE</strong><p>台南吃到飽・自助吧餐廳搜尋</p></div><div class="creator"><span>製作者：Chung NING</span><a href="https://www.instagram.com/h.ning1018/" target="_blank" rel="noopener noreferrer">📷 Instagram @h.ning1018</a></div><div class="footer-note">資料以官方來源優先，餐廳方案與營業時間可能調整，前往前請再確認。</div></div></footer>
+<template id="card"><article class="card"><div class="photo-wrap"><img class="photo-img" loading="lazy" alt=""><div class="photo-credit">代表視覺</div></div><div class="body"><div class="chips"></div><h2></h2><p class="price"></p><p class="addr"></p><p class="hours"></p><p class="desc"></p><div class="actions"></div><details><summary>資料來源與核對狀態</summary><p class="source"></p><p class="checked"></p></details></div></article></template>
+<script src="data.js"></script><script src="app.js"></script>
+</body></html>

@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 500">
+<defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f0e5d2"/><stop offset="1" stop-color="#d7b77a"/></linearGradient><filter id="s"><feDropShadow dx="0" dy="14" stdDeviation="18" flood-opacity=".12"/></filter></defs>
+<rect width="1200" height="500" fill="url(#g)"/>
+<circle cx="1030" cy="90" r="170" fill="#fff" opacity=".18"/><circle cx="150" cy="440" r="210" fill="#fff" opacity=".12"/>
+<g filter="url(#s)"><rect x="365" y="205" width="470" height="180" rx="32" fill="#8c6b50"/><rect x="410" y="165" width="110" height="80" rx="18" fill="#fff4dc"/><rect x="545" y="150" width="110" height="95" rx="18" fill="#f5d7b1"/><rect x="680" y="175" width="110" height="70" rx="18" fill="#e7c59d"/><ellipse cx="470" cy="300" rx="80" ry="45" fill="#fff"/><ellipse cx="600" cy="300" rx="80" ry="45" fill="#fff"/><ellipse cx="730" cy="300" rx="80" ry="45" fill="#fff"/><circle cx="470" cy="300" r="30" fill="#d98568"/><circle cx="600" cy="300" r="30" fill="#8caf69"/><circle cx="730" cy="300" r="30" fill="#e0b05e"/></g>
+<text x="70" y="90" font-family="Arial, Noto Sans TC, sans-serif" font-size="34" font-weight="700" fill="#3a2c28">Buffet</text>
+<text x="70" y="130" font-family="Arial, Noto Sans TC, sans-serif" font-size="18" fill="#6d5a54">自助餐・百匯</text>
+</svg>

@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 500">
+<defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#ead7cf"/><stop offset="1" stop-color="#c99a8b"/></linearGradient><filter id="s"><feDropShadow dx="0" dy="14" stdDeviation="18" flood-opacity=".12"/></filter></defs>
+<rect width="1200" height="500" fill="url(#g)"/>
+<circle cx="1030" cy="90" r="170" fill="#fff" opacity=".18"/><circle cx="150" cy="440" r="210" fill="#fff" opacity=".12"/>
+<g filter="url(#s)"><ellipse cx="600" cy="300" rx="250" ry="120" fill="#fff"/><path d="M465 275 C470 205 545 185 610 220 C670 175 760 215 740 295 C720 370 625 385 545 355 C495 345 460 320 465 275Z" fill="#9b5542"/><path d="M520 255l170 80M560 220l140 120M500 300l120-90" stroke="#e7ae73" stroke-width="18" stroke-linecap="round" opacity=".75"/><circle cx="820" cy="330" r="36" fill="#f1dca8"/></g>
+<text x="70" y="90" font-family="Arial, Noto Sans TC, sans-serif" font-size="34" font-weight="700" fill="#3a2c28">牛排＋自助吧</text>
+<text x="70" y="130" font-family="Arial, Noto Sans TC, sans-serif" font-size="18" fill="#6d5a54">排餐・自助吧</text>
+</svg>
