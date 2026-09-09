@@ -1,8 +1,10 @@
+window.addEventListener('error',function(e){console.error(e.error||e.message);});
 
 const $=id=>document.getElementById(id);
-const data=[...new Map(RESTAURANTS.map(x=>[x.name,x])).values()];
+const sourceData=Array.isArray(window.RESTAURANTS)?window.RESTAURANTS:[];
+const data=[...new Map(sourceData.map(x=>[x.name,x])).values()];
 const cats=['全部','🍱 Buffet','🍲 火鍋','🔥 燒肉','🥩 牛排'];
-function categoryOf(r){const t=String(r.type||''); if(t.includes('Buffet')) return '🍱 Buffet'; if(t.includes('火鍋')) return '🍲 火鍋'; if(t.includes('韓式') && String(r.name||'').includes('兩餐')) return '🍱 Buffet'; if(t.includes('燒肉')||t.includes('韓式')) return '🔥 燒肉'; if(t.includes('牛排')) return '🥩 牛排'; if(t.includes('日式')) return '🍱 Buffet'; return t||'其他'}
+function categoryOf(r){const t=String(r.type||''); if(t.includes('Buffet')) return '🍱 Buffet'; if(t.includes('火鍋')) return '🍲 火鍋'; if(t.includes('燒肉')||t.includes('韓式')) return '🔥 燒肉'; if(t.includes('牛排')) return '🥩 牛排'; return '🍱 Buffet'}
 const areas=[...new Set(data.map(x=>x.area).filter(Boolean))].sort();
 areas.forEach(x=>$('#district').insertAdjacentHTML('beforeend',`<option value="${esc(x)}">${esc(x)}</option>`));
 let state={q:'',district:'',budget:'',sort:'default',type:'全部'};

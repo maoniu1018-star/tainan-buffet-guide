@@ -1,4 +1,4 @@
-const RESTAURANTS = [
+window.RESTAURANTS = [
 {name:'肉次方 燒肉放題 台南府前店',rating:4.9,reviewCount:34002,ratingSource:'Google Maps',type:'🔥 燒肉',tags:['♾️ 吃到飽'],area:'安平區',price:'約 $600–800',address:'台南市安平區府前路二段500號 2F-1',phone:'06-299-2997',hours:'依餐期／日期為準',desc:'日式燒肉放題；分店獨立建卡。',source:'商家資料＋食藥署吃到飽稽查交叉核對',status:'🟢 已核對'},
 {name:'涮乃葉 台南大全聯店',rating:4.3,reviewCount:1161,ratingSource:'Google Maps',type:'🍲 火鍋',tags:['♾️ 吃到飽','🍱 自助吧','🔴 可以訂位'],area:'北區',price:'依方案',address:'台南市北區臨安路二段310號 2F',phone:'06-223-1896',hours:'平日 11:00–22:00；假日 10:30–22:00',desc:'蔬菜、麵食、醬料、熟食、甜點飲料等自助內容。',source:'商場／官方資料＋商家資料',status:'🟢 已核對',official:'https://syabuyo.com.tw/'},
 {name:'涮乃葉 台南三井店',rating:3.6,reviewCount:562,ratingSource:'Google Maps',type:'🍲 火鍋',tags:['♾️ 吃到飽','🍱 自助吧','🔴 可以訂位'],area:'歸仁區',price:'依方案',address:'台南市歸仁區歸仁大道101號 2F',phone:'06-303-2863',hours:'依商場營業時間',desc:'健康新鮮吃到飽；三井分店獨立建卡。',source:'MITSUI OUTLET PARK 台南官方資料＋食藥署稽查交叉核對',status:'🟢 已核對'},
