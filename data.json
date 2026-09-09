@@ -21,7 +21,8 @@
       ],
       "rating": 4.1,
       "reviewCount": 9628,
-      "ratingSource": "Google 地圖評分"
+      "ratingSource": "Google 地圖評分",
+      "urlType": "official_or_first_party"
     },
     {
       "name": "饗麻饗辣 台南永華旗艦店",
@@ -36,13 +37,14 @@
       "note": "官方目前列：平日午間 11:30–14:30、平日晚間 17:00–22:30；假日全天 NT$788",
       "checkedAt": "2026-09-09",
       "source": "官方店家",
-      "url": "https://www.enjoyhot.com.tw/store.php?act=view&id=1",
+      "url": "https://www.enjoyhot.com.tw/",
       "tags": [
         "火鍋吃到飽"
       ],
       "rating": 4.3,
       "reviewCount": 4203,
-      "ratingSource": "Google 地圖評分"
+      "ratingSource": "Google 地圖評分",
+      "urlType": "official"
     },
     {
       "name": "逐鹿炭火燒肉 台南店",
@@ -57,13 +59,14 @@
       "note": "120分鐘；平日午晚餐／假日全天",
       "checkedAt": "2026-09-09",
       "source": "OpenTable餐廳資訊",
-      "url": "https://www.opentable.com.tw/restaurant/profile/179069",
+      "url": "https://www.facebook.com/mydeerTN/",
       "tags": [
         "燒肉吃到飽"
       ],
       "rating": 4.3,
       "reviewCount": 7175,
-      "ratingSource": "Google 地圖評分"
+      "ratingSource": "Google 地圖評分",
+      "urlType": "official_first_party"
     },
     {
       "name": "田季發爺燒肉 台南中華店",
@@ -78,13 +81,14 @@
       "note": "價格依方案 NT$658／838／988；不限餐期、平假日；120分鐘",
       "checkedAt": "2026-09-09",
       "source": "田季發爺官方／LINE FAQ",
-      "url": "https://page.line.me/222xkicq/faq/1178953777629571",
+      "url": "https://www.tianji.com.tw/",
       "tags": [
         "燒肉吃到飽"
       ],
       "rating": 4.7,
       "reviewCount": 9304,
-      "ratingSource": "Google 地圖評分"
+      "ratingSource": "Google 地圖評分",
+      "urlType": "official"
     },
     {
       "name": "灼花燒肉 HIBANA",
@@ -105,7 +109,8 @@
       ],
       "rating": null,
       "reviewCount": null,
-      "ratingSource": "Google 地圖評分"
+      "ratingSource": "Google 地圖評分",
+      "urlType": "official"
     },
     {
       "name": "Oh! Yaki 精緻燒肉吃到飽 台南店",
@@ -126,7 +131,8 @@
       ],
       "rating": 4.5,
       "reviewCount": 857,
-      "ratingSource": "Google 地圖評分"
+      "ratingSource": "Google 地圖評分",
+      "urlType": "needs_verification"
     },
     {
       "name": "煙波大飯店台南館 食東西自助餐廳",
@@ -141,13 +147,14 @@
       "note": "早午餐 10:30–13:30；特殊節日依公告",
       "checkedAt": "2026-09-09",
       "source": "公開餐價／OpenTable資料",
-      "url": "https://www.opentable.com.tw/restaurant/profile/187355",
+      "url": "https://tainan.lakeshore.com.tw/dining/w-e-food/",
       "tags": [
         "飯店 Buffet"
       ],
       "rating": 4.6,
       "reviewCount": 3207,
-      "ratingSource": "Google 地圖評分"
+      "ratingSource": "Google 地圖評分",
+      "urlType": "official"
     },
     {
       "name": "台南大飯店 歐式自助餐",
@@ -162,13 +169,14 @@
       "note": "平日午晚餐為週一、週四、週五；週二、週三午晚餐店休",
       "checkedAt": "2026-09-09",
       "source": "台南大飯店官方",
-      "url": "https://www.hotel-tainan.com.tw/dining/ins.php?index_id=136",
+      "url": "https://www.hotel-tainan.com.tw/",
       "tags": [
         "飯店 Buffet"
       ],
       "rating": 4.1,
       "reviewCount": 6789,
-      "ratingSource": "Google 地圖評分"
+      "ratingSource": "Google 地圖評分",
+      "urlType": "official"
     },
     {
       "name": "台南桂田酒店 阿力海百匯餐廳",
@@ -183,13 +191,14 @@
       "note": "2026/2/1起價格；假日及特殊節日另計",
       "checkedAt": "2026-09-09",
       "source": "桂田酒店官方",
-      "url": "https://www.tainan.queenaplaza.com/dining-detail/Alihi_Restaurant/",
+      "url": "https://www.tainan.queenaplaza.com/",
       "tags": [
         "飯店 Buffet"
       ],
       "rating": null,
       "reviewCount": null,
-      "ratingSource": "Google 地圖評分"
+      "ratingSource": "Google 地圖評分",
+      "urlType": "official"
     },
     {
       "name": "禧榕軒大飯店 榕廷百匯餐廳",
@@ -210,7 +219,8 @@
       ],
       "rating": 4.2,
       "reviewCount": 368,
-      "ratingSource": "Google 地圖評分"
+      "ratingSource": "Google 地圖評分",
+      "urlType": "official_or_first_party"
     },
     {
       "name": "夏都城旅安平館 城食百匯",
@@ -225,13 +235,14 @@
       "note": "週三至週日午晚餐；特殊節日另公告",
       "checkedAt": "2026-09-09",
       "source": "夏都城旅官方",
-      "url": "https://www.tnchateau.com.tw/restaurant-detail/city-cuisine/",
+      "url": "https://www.tnchateau.com.tw/",
       "tags": [
         "飯店 Buffet"
       ],
       "rating": null,
       "reviewCount": null,
-      "ratingSource": "Google 地圖評分"
+      "ratingSource": "Google 地圖評分",
+      "urlType": "official"
     },
     {
       "name": "台南大員皇冠假日酒店 元素全日餐廳",
@@ -246,13 +257,14 @@
       "note": "餐價可能依活動與特殊節日調整",
       "checkedAt": "2026-09-09",
       "source": "公開餐價整理",
-      "url": "https://onelife.tw/menu/698",
+      "url": "https://www.crowneplazatainan.com/",
       "tags": [
         "飯店 Buffet"
       ],
       "rating": null,
       "reviewCount": null,
-      "ratingSource": "Google 地圖評分"
+      "ratingSource": "Google 地圖評分",
+      "urlType": "official"
     },
     {
       "name": "隱岳閣（台南雀客門市）",
@@ -273,7 +285,8 @@
       ],
       "rating": null,
       "reviewCount": null,
-      "ratingSource": "Google 地圖評分"
+      "ratingSource": "Google 地圖評分",
+      "urlType": "official_or_first_party"
     },
     {
       "name": "漢來海港 台南南紡店",
@@ -288,13 +301,14 @@
       "note": "午餐／下午餐／晚餐分餐期，價格可能調整",
       "checkedAt": "2026-09-09",
       "source": "門市公開資訊",
-      "url": "https://www.google.com/maps/search/?api=1&query=漢來海港+台南南紡店",
+      "url": "https://www.hilai-foods.com/",
       "tags": [
         "海鮮 Buffet"
       ],
       "rating": 4.2,
       "reviewCount": 7683,
-      "ratingSource": "Google 地圖評分"
+      "ratingSource": "Google 地圖評分",
+      "urlType": "official"
     },
     {
       "name": "嗑肉石鍋 東門店",
@@ -309,14 +323,15 @@
       "note": "公開平台參考均消約 NT$400；實際餐價請以店家最新公告為準",
       "checkedAt": "2026-09-09",
       "source": "愛食記台南吃到飽分類（2026-09-09）",
-      "url": "https://ifoodie.tw/explore/台南市/list/市火鍋吃到飽",
+      "url": "https://www.meatshotpot.com/",
       "tags": [
         "火鍋吃到飽"
       ],
       "rating": 5.0,
       "reviewCount": 4,
       "ratingSource": "愛食記頁面評分",
-      "avgSpend": 400
+      "avgSpend": 400,
+      "urlType": "official"
     },
     {
       "name": "狂一鍋 台南仁德店",
@@ -331,14 +346,15 @@
       "note": "公開平台參考均消約 NT$330；實際餐價請以店家最新公告為準",
       "checkedAt": "2026-09-09",
       "source": "愛食記台南吃到飽分類（2026-09-09）",
-      "url": "https://ifoodie.tw/explore/台南市/list/市火鍋吃到飽",
+      "url": "https://www.twfondueretro.com/",
       "tags": [
         "火鍋吃到飽"
       ],
       "rating": 5.0,
       "reviewCount": 11,
       "ratingSource": "愛食記頁面評分",
-      "avgSpend": 330
+      "avgSpend": 330,
+      "urlType": "official"
     },
     {
       "name": "一個圓鍋火鍋店",
@@ -360,7 +376,8 @@
       "rating": 4.7,
       "reviewCount": 9,
       "ratingSource": "愛食記頁面評分",
-      "avgSpend": 550
+      "avgSpend": 550,
+      "urlType": "needs_verification"
     },
     {
       "name": "敝姓鍋 台南海安店",
@@ -375,14 +392,15 @@
       "note": "公開平台參考均消約 NT$350；實際餐價請以店家最新公告為準",
       "checkedAt": "2026-09-09",
       "source": "愛食記台南吃到飽分類（2026-09-09）",
-      "url": "https://ifoodie.tw/explore/台南市/list/市火鍋吃到飽",
+      "url": "https://www.hotpotguo.com/",
       "tags": [
         "火鍋吃到飽"
       ],
       "rating": 4.6,
       "reviewCount": 13,
       "ratingSource": "愛食記頁面評分",
-      "avgSpend": 350
+      "avgSpend": 350,
+      "urlType": "official"
     },
     {
       "name": "初巴適麻辣鍋 台南1號店",
@@ -404,7 +422,8 @@
       "rating": 5.0,
       "reviewCount": 7,
       "ratingSource": "愛食記頁面評分",
-      "avgSpend": 1199
+      "avgSpend": 1199,
+      "urlType": "needs_verification"
     },
     {
       "name": "尬麻xm 火|鍋|聚|場 南紡店",
@@ -426,7 +445,8 @@
       "rating": 4.6,
       "reviewCount": 16,
       "ratingSource": "愛食記頁面評分",
-      "avgSpend": 499
+      "avgSpend": 499,
+      "urlType": "needs_verification"
     },
     {
       "name": "吃道飽韓風火烤兩吃",
@@ -441,14 +461,15 @@
       "note": "公開平台參考均消約 NT$400；實際餐價請以店家最新公告為準",
       "checkedAt": "2026-09-09",
       "source": "愛食記台南吃到飽分類（2026-09-09）",
-      "url": "https://ifoodie.tw/explore/台南市/list/市火鍋吃到飽",
+      "url": "https://www.facebook.com/eatdaofull/",
       "tags": [
         "火鍋吃到飽"
       ],
       "rating": 4.8,
       "reviewCount": 7,
       "ratingSource": "愛食記頁面評分",
-      "avgSpend": 400
+      "avgSpend": 400,
+      "urlType": "official_first_party"
     },
     {
       "name": "肉多多火鍋 台南東寧店",
@@ -463,14 +484,15 @@
       "note": "公開平台參考均消約 NT$400；實際餐價請以店家最新公告為準",
       "checkedAt": "2026-09-09",
       "source": "愛食記台南吃到飽分類（2026-09-09）",
-      "url": "https://ifoodie.tw/explore/台南市/list/市火鍋吃到飽",
+      "url": "https://www.twrododo.com/",
       "tags": [
         "火鍋吃到飽"
       ],
       "rating": 4.2,
       "reviewCount": 11,
       "ratingSource": "愛食記頁面評分",
-      "avgSpend": 400
+      "avgSpend": 400,
+      "urlType": "official"
     },
     {
       "name": "月季",
@@ -492,7 +514,8 @@
       "rating": 4.3,
       "reviewCount": 18,
       "ratingSource": "愛食記頁面評分",
-      "avgSpend": 450
+      "avgSpend": 450,
+      "urlType": "needs_verification"
     },
     {
       "name": "築間幸福鍋物 台南成大店",
@@ -507,14 +530,15 @@
       "note": "公開平台參考均消約 NT$500；實際餐價請以店家最新公告為準",
       "checkedAt": "2026-09-09",
       "source": "愛食記台南吃到飽分類（2026-09-09）",
-      "url": "https://ifoodie.tw/explore/台南市/list/市火鍋吃到飽",
+      "url": "https://www.jhujian.com.tw/jhujianshabu/tw/store",
       "tags": [
         "火鍋吃到飽"
       ],
       "rating": 5.0,
       "reviewCount": 4,
       "ratingSource": "愛食記頁面評分",
-      "avgSpend": 500
+      "avgSpend": 500,
+      "urlType": "official"
     },
     {
       "name": "二鍋壽喜燒鍋物放題",
@@ -529,14 +553,15 @@
       "note": "公開平台參考均消約 NT$500；實際餐價請以店家最新公告為準",
       "checkedAt": "2026-09-09",
       "source": "愛食記台南吃到飽分類（2026-09-09）",
-      "url": "https://ifoodie.tw/explore/台南市/list/市火鍋吃到飽",
+      "url": "https://linktr.ee/2guo.sukiyaki",
       "tags": [
         "火鍋吃到飽"
       ],
       "rating": 5.0,
       "reviewCount": 2,
       "ratingSource": "愛食記頁面評分",
-      "avgSpend": 500
+      "avgSpend": 500,
+      "urlType": "official_first_party"
     },
     {
       "name": "鬥牛士二鍋 中山店",
@@ -551,14 +576,15 @@
       "note": "公開平台參考均消約 NT$338；實際餐價請以店家最新公告為準",
       "checkedAt": "2026-09-09",
       "source": "愛食記台南吃到飽分類（2026-09-09）",
-      "url": "https://ifoodie.tw/explore/台南市/list/市火鍋吃到飽",
+      "url": "https://www.bullfight.com.tw/",
       "tags": [
         "火鍋吃到飽"
       ],
       "rating": 4.5,
       "reviewCount": 45,
       "ratingSource": "愛食記頁面評分",
-      "avgSpend": 338
+      "avgSpend": 338,
+      "urlType": "official"
     },
     {
       "name": "Mo-Mo-Paradise 台南夢時代牧場",
@@ -573,14 +599,15 @@
       "note": "公開平台參考均消約 NT$550；實際餐價請以店家最新公告為準",
       "checkedAt": "2026-09-09",
       "source": "愛食記台南吃到飽分類（2026-09-09）",
-      "url": "https://ifoodie.tw/explore/台南市/list/市火鍋吃到飽",
+      "url": "https://www.mo-mo.com.tw/",
       "tags": [
         "火鍋吃到飽"
       ],
       "rating": 4.5,
       "reviewCount": 25,
       "ratingSource": "愛食記頁面評分",
-      "avgSpend": 550
+      "avgSpend": 550,
+      "urlType": "official"
     },
     {
       "name": "川囍紅湯串串鍋 海安店",
@@ -595,14 +622,15 @@
       "note": "公開平台參考均消約 NT$250；實際餐價請以店家最新公告為準",
       "checkedAt": "2026-09-09",
       "source": "愛食記台南吃到飽分類（2026-09-09）",
-      "url": "https://ifoodie.tw/explore/台南市/list/市火鍋吃到飽",
+      "url": "https://www.chunxi.com.tw/",
       "tags": [
         "火鍋吃到飽"
       ],
       "rating": 4.5,
       "reviewCount": 12,
       "ratingSource": "愛食記頁面評分",
-      "avgSpend": 250
+      "avgSpend": 250,
+      "urlType": "official"
     },
     {
       "name": "XM麻辣鍋",
@@ -624,7 +652,8 @@
       "rating": 4.0,
       "reviewCount": 22,
       "ratingSource": "愛食記頁面評分",
-      "avgSpend": 500
+      "avgSpend": 500,
+      "urlType": "needs_verification"
     },
     {
       "name": "六扇門時尚湯鍋 台南永大店",
@@ -639,14 +668,15 @@
       "note": "公開平台參考均消約 NT$220；實際餐價請以店家最新公告為準",
       "checkedAt": "2026-09-09",
       "source": "愛食記台南吃到飽分類（2026-09-09）",
-      "url": "https://ifoodie.tw/explore/台南市/list/市火鍋吃到飽",
+      "url": "https://www.6owldoor.com/門市資訊總覽",
       "tags": [
         "火鍋吃到飽"
       ],
       "rating": 4.3,
       "reviewCount": 5,
       "ratingSource": "愛食記頁面評分",
-      "avgSpend": 220
+      "avgSpend": 220,
+      "urlType": "official"
     },
     {
       "name": "兩餐두끼韓國年糕火鍋吃到飽 台南店",
@@ -661,14 +691,15 @@
       "note": "公開平台參考均消約 NT$299；實際餐價請以店家最新公告為準",
       "checkedAt": "2026-09-09",
       "source": "愛食記台南吃到飽分類（2026-09-09）",
-      "url": "https://ifoodie.tw/explore/台南市/list/市火鍋吃到飽",
+      "url": "https://www.dookki.com.tw/tainan-store",
       "tags": [
         "火鍋吃到飽"
       ],
       "rating": 4.1,
       "reviewCount": 8,
       "ratingSource": "愛食記頁面評分",
-      "avgSpend": 299
+      "avgSpend": 299,
+      "urlType": "official"
     },
     {
       "name": "春囍打邊爐 台南店",
@@ -683,14 +714,15 @@
       "note": "公開平台參考均消約 NT$600；實際餐價請以店家最新公告為準",
       "checkedAt": "2026-09-09",
       "source": "愛食記台南吃到飽分類（2026-09-09）",
-      "url": "https://ifoodie.tw/explore/台南市/list/市火鍋吃到飽",
+      "url": "https://chunxi.com.tw/",
       "tags": [
         "火鍋吃到飽"
       ],
       "rating": 4.8,
       "reviewCount": 22,
       "ratingSource": "愛食記頁面評分",
-      "avgSpend": 600
+      "avgSpend": 600,
+      "urlType": "official"
     },
     {
       "name": "牧鍋 頂級熟成牛鍋物",
@@ -712,7 +744,8 @@
       "rating": 4.1,
       "reviewCount": 39,
       "ratingSource": "愛食記頁面評分",
-      "avgSpend": 300
+      "avgSpend": 300,
+      "urlType": "needs_verification"
     },
     {
       "name": "和牛涮 日式鍋物放題 台南中華西店",
@@ -727,14 +760,15 @@
       "note": "公開平台參考均消約 NT$900；實際餐價請以店家最新公告為準",
       "checkedAt": "2026-09-09",
       "source": "愛食記台南吃到飽分類（2026-09-09）",
-      "url": "https://ifoodie.tw/explore/台南市/list/市火鍋吃到飽",
+      "url": "https://www.wagyushabu.com.tw/",
       "tags": [
         "火鍋吃到飽"
       ],
       "rating": 4.5,
       "reviewCount": 6,
       "ratingSource": "愛食記頁面評分",
-      "avgSpend": 900
+      "avgSpend": 900,
+      "urlType": "official"
     },
     {
       "name": "井賀鍋物文賢店",
@@ -749,14 +783,15 @@
       "note": "公開平台參考均消約 NT$500；實際餐價請以店家最新公告為準",
       "checkedAt": "2026-09-09",
       "source": "愛食記台南吃到飽分類（2026-09-09）",
-      "url": "https://ifoodie.tw/explore/台南市/list/市火鍋吃到飽",
+      "url": "https://www.jinghe-hotpot.com.tw/",
       "tags": [
         "火鍋吃到飽"
       ],
       "rating": 4.5,
       "reviewCount": 2,
       "ratingSource": "愛食記頁面評分",
-      "avgSpend": 500
+      "avgSpend": 500,
+      "urlType": "official"
     },
     {
       "name": "涮乃葉日式涮涮鍋",
@@ -771,14 +806,15 @@
       "note": "公開平台參考均消約 NT$470；實際餐價請以店家最新公告為準",
       "checkedAt": "2026-09-09",
       "source": "愛食記台南吃到飽分類（2026-09-09）",
-      "url": "https://ifoodie.tw/explore/台南市/list/市火鍋吃到飽",
+      "url": "https://syabuyo.com.tw/store.php?area=4",
       "tags": [
         "火鍋吃到飽"
       ],
       "rating": 3.8,
       "reviewCount": 19,
       "ratingSource": "愛食記頁面評分",
-      "avgSpend": 470
+      "avgSpend": 470,
+      "urlType": "official"
     },
     {
       "name": "野村日式碳烤燒肉 永大店",
@@ -793,14 +829,15 @@
       "note": "公開平台參考均消約 NT$850；實際餐價請以店家最新公告為準",
       "checkedAt": "2026-09-09",
       "source": "愛食記台南吃到飽分類（2026-09-09）",
-      "url": "https://ifoodie.tw/explore/台南市/list/市火鍋吃到飽",
+      "url": "https://www.facebook.com/883049798528190",
       "tags": [
         "燒肉吃到飽"
       ],
       "rating": 4.9,
       "reviewCount": 63,
       "ratingSource": "愛食記頁面評分",
-      "avgSpend": 850
+      "avgSpend": 850,
+      "urlType": "official_first_party"
     },
     {
       "name": "本格和牛燒肉放題 台南西門店",
@@ -815,14 +852,15 @@
       "note": "公開平台參考均消約 NT$900；實際餐價請以店家最新公告為準",
       "checkedAt": "2026-09-09",
       "source": "愛食記台南吃到飽分類（2026-09-09）",
-      "url": "https://ifoodie.tw/explore/台南市/list/市火鍋吃到飽",
+      "url": "https://www.jhujian.com.tw/honkakuwagyu/tw/store/honkaku%E5%8D%97%E9%83%A8%E5%9C%B0%E5%8D%80",
       "tags": [
         "燒肉吃到飽"
       ],
       "rating": 4.7,
       "reviewCount": 3900,
       "ratingSource": "愛食記頁面評分",
-      "avgSpend": 900
+      "avgSpend": 900,
+      "urlType": "official"
     },
     {
       "name": "肉次方 燒肉放題 台南府前店",
@@ -837,14 +875,15 @@
       "note": "公開平台參考均消約 NT$700；實際餐價請以店家最新公告為準",
       "checkedAt": "2026-09-09",
       "source": "愛食記台南吃到飽分類（2026-09-09）",
-      "url": "https://ifoodie.tw/explore/台南市/list/市火鍋吃到飽",
+      "url": "https://www.powerofmeat.com.tw/",
       "tags": [
         "燒肉吃到飽"
       ],
       "rating": 4.9,
       "reviewCount": 34003,
       "ratingSource": "愛食記頁面評分",
-      "avgSpend": 700
+      "avgSpend": 700,
+      "urlType": "official"
     },
     {
       "name": "健康燒肉屋 貴一郎",
@@ -866,7 +905,8 @@
       "rating": 4.3,
       "reviewCount": 45,
       "ratingSource": "愛食記頁面評分",
-      "avgSpend": 450
+      "avgSpend": 450,
+      "urlType": "needs_verification"
     },
     {
       "name": "咚豬咚豬韓國烤肉吃到飽 台南東區店",
@@ -888,7 +928,8 @@
       "rating": 4.5,
       "reviewCount": 13,
       "ratingSource": "愛食記頁面評分",
-      "avgSpend": 299
+      "avgSpend": 299,
+      "urlType": "needs_verification"
     }
   ]
 }
