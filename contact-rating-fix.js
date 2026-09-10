@@ -37,7 +37,6 @@
 
   const tel=v=>String(v||'').replace(/[^0-9+]/g,'');
   const mapUrl=r=>'https://www.google.com/maps/search/?api=1&query='+encodeURIComponent((r.name||'')+' '+(r.address||'台南'));
-  const googleSearchUrl=r=>'https://www.google.com/search?q='+encodeURIComponent((r.name||'')+' 台南 Google 評分');
   const isTel=a=>/^tel:/i.test(a.getAttribute('href')||'');
   const isBooking=a=>/電話訂位|線上訂位|官方訂位|booking|reserve/i.test((a.textContent||'')+' '+(a.getAttribute('href')||''));
   const isMap=a=>{
@@ -91,12 +90,10 @@
       host.insertAdjacentHTML('beforeend',`<a href="tel:${tel(r.phone)}">☎️ 電話</a>`);
     }
 
-    // 5) 沒有 Google 評分才提供查詢入口。
-    current=[...card.querySelectorAll('a')];
-    if(!r.rating&&!current.some(a=>a.classList.contains('google-rating-link'))){
-      const host=card.querySelector('.actions')||card;
-      host.insertAdjacentHTML('beforeend',`<a class="google-rating-link" href="${googleSearchUrl(r)}" target="_blank" rel="noopener">⭐ 查看 Google 評分</a>`);
-    }
+    // 5) 評分：已有可靠 Google 評分就只顯示評分；沒有評分就只顯示「尚無 Google 評分」。
+    //    不再額外產生「查看 Google 評分」按鈕，避免卡片資訊過度重複。
+    current=[...card.querySelectorAll('a.google-rating-link')];
+    current.forEach(a=>a.remove());
   }
 
   function enhance(){
