@@ -1,6 +1,6 @@
 /* 2026-09-10: final data quality normalization
    - Fill known missing Google ratings without replacing existing ratings.
-   - Fill verified phone aliases only when current phone is missing/placeholder.
+   - Fill verified phone aliases and correct known stale/incorrect phone entries.
    - Remove any legacy "查看 Google 評分" links.
    - Keep data conservative: never invent a rating or phone.
 */
@@ -47,7 +47,8 @@
     '元素餐廳（台南大員皇冠假日酒店）':'06-512-1807',
     '夏都城食百匯自助餐廳':'06-292-0656',
     '小時厚牛排 台南永康店':'06-302-1239',
-    '小時厚牛排-台南永康店':'06-302-1239'
+    '小時厚牛排-台南永康店':'06-302-1239',
+    '漢來海港 台南南紡店':'06-236-9288'
   };
 
   function placeholder(v){
@@ -60,7 +61,10 @@
       r.rating=ratings[name];
       r.ratingSource='Google Maps';
     }
-    if(placeholder(r.phone) && phones[name]) r.phone=phones[name];
+    // Fill known missing numbers, and correct the known stale Hanlai number in data.js.
+    if(phones[name] && (placeholder(r.phone) || (name==='漢來海港 台南南紡店' && /07-?412-?8068/i.test(String(r.phone))))){
+      r.phone=phones[name];
+    }
     if(typeof r.rating==='number' && !r.ratingSource) r.ratingSource='Google Maps';
   }
 
