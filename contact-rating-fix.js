@@ -1,6 +1,5 @@
 /* 2026-09-10: Google rating + contact + booking UI corrections */
 (function(){
-  // Only values verified as Google/Maps in the current research pass are marked as Google.
   const googleRatings={
     '兩餐 Dookki 台南店':{rating:4.1,reviewCount:2351},
     '牧鍋 頂級熟成牛鍋物':{rating:4.5,reviewCount:1731},
@@ -31,19 +30,46 @@
   function tel(v){return String(v||'').replace(/[^0-9+]/g,'');}
   function mapUrl(r){return 'https://www.google.com/maps/search/?api=1&query='+encodeURIComponent((r.name||'')+' '+(r.address||'台南'));}
   function googleSearchUrl(r){return 'https://www.google.com/search?q='+encodeURIComponent((r.name||'')+' 台南 Google 評分');}
-  function hasGoogleMapLink(actions){
-    return [...actions.querySelectorAll('a')].some(a=>/google\.com\/maps/i.test(a.href));
+  function hasMap(actions){return [...actions.querySelectorAll('a')].some(a=>/google\.com\/maps/i.test(a.href));}
+  function isBookingLink(a){return /訂位|booking|reserve/i.test((a.textContent||'')+' '+a.href);}
+  function cleanupActions(actions,r){
+    const links=[...actions.querySelectorAll('a')];
+    const seenHref=new Set();
+    for(const a of links){
+      const href=a.href||'';
+      if(seenHref.has(href)){a.remove();continue;}
+      seenHref.add(href);
+    }
+    const current=[...actions.querySelectorAll('a')];
+    const telLinks=current.filter(a=>/^tel:/i.test(a.getAttribute('href')||''));
+    telLinks.slice(1).forEach(a=>a.remove());
+    // 電話訂位與「電話」功能相同：沒有線上訂位時只留一個電話按鈕，不再重複顯示電話訂位。
+    if(!r.bookingUrl){
+      [...actions.querySelectorAll('a')].filter(isBookingLink).forEach(a=>{
+        if(/電話訂位/i.test(a.textContent||''))a.remove();
+      });
+    }else{
+      // 有線上訂位時只保留一個線上訂位按鈕。
+      const bookingLinks=[...actions.querySelectorAll('a')].filter(a=>a.href===r.bookingUrl || /線上訂位|官方訂位/i.test(a.textContent||''));
+      bookingLinks.slice(1).forEach(a=>a.remove());
+    }
+    const maps=[...actions.querySelectorAll('a')].filter(a=>/google\.com\/maps/i.test(a.href));
+    maps.slice(1).forEach(a=>a.remove());
   }
   function enhance(){
     document.querySelectorAll('.card').forEach(card=>{
       const h=card.querySelector('h3');if(!h)return;
       const r=data.find(x=>x.name===h.textContent.trim());if(!r)return;
       const actions=card.querySelector('.actions');if(!actions)return;
-      if(r.phone && !actions.querySelector('a[href^="tel:"]'))actions.insertAdjacentHTML('beforeend',`<a href="tel:${tel(r.phone)}">☎️ 電話</a>`);
-      if(r.__bookable && r.bookingUrl && ![...actions.querySelectorAll('a')].some(a=>a.href===r.bookingUrl))actions.insertAdjacentHTML('beforeend',`<a href="${r.bookingUrl}" target="_blank" rel="noopener">🔴 線上訂位</a>`);
-      if(r.__bookable && !r.bookingUrl && r.phone && !actions.querySelector('.phone-booking'))actions.insertAdjacentHTML('beforeend',`<a class="phone-booking" href="tel:${tel(r.phone)}">📞 電話訂位</a>`);
-      if(!hasGoogleMapLink(actions))actions.insertAdjacentHTML('beforeend',`<a class="map-link" href="${mapUrl(r)}" target="_blank" rel="noopener">🗺️ 開啟地圖</a>`);
-      if(!r.rating && !actions.querySelector('.google-rating-link'))actions.insertAdjacentHTML('beforeend',`<a class="google-rating-link" href="${googleSearchUrl(r)}" target="_blank" rel="noopener">⭐ 查看 Google 評分</a>`);
+      cleanupActions(actions,r);
+      const hasTel=!!actions.querySelector('a[href^="tel:"]');
+      if(r.phone&&!hasTel)actions.insertAdjacentHTML('beforeend',`<a href="tel:${tel(r.phone)}">☎️ 電話</a>`);
+      const hasBooking=[...actions.querySelectorAll('a')].some(a=>a.href===r.bookingUrl && r.bookingUrl);
+      if(r.__bookable&&r.bookingUrl&&!hasBooking)actions.insertAdjacentHTML('beforeend',`<a href="${r.bookingUrl}" target="_blank" rel="noopener">🔴 線上訂位</a>`);
+      if(!hasMap(actions))actions.insertAdjacentHTML('beforeend',`<a class="map-link" href="${mapUrl(r)}" target="_blank" rel="noopener">🗺️ 開啟地圖</a>`);
+      const hasGoogleRatingLink=actions.querySelector('.google-rating-link');
+      if(!r.rating&&!hasGoogleRatingLink)actions.insertAdjacentHTML('beforeend',`<a class="google-rating-link" href="${googleSearchUrl(r)}" target="_blank" rel="noopener">⭐ 查看 Google 評分</a>`);
+      cleanupActions(actions,r);
     });
     document.querySelectorAll('#modal .row').forEach(row=>{
       const key=row.querySelector('.k')?.textContent?.trim()||'';
@@ -57,7 +83,7 @@
       const card=el.closest('.card');const h=card?.querySelector('h3');const r=data.find(x=>x.name===h?.textContent?.trim());
       if(!r)return;
       if(r.rating)el.textContent=`⭐ ${Number(r.rating).toFixed(1)}（Google）`;
-      else if(!/查看 Google 評分/.test(el.textContent||''))el.textContent='尚無 Google 評分';
+      else el.textContent='尚無 Google 評分';
     });
   }
   const oldRender=window.render;
