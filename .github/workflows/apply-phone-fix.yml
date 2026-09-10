@@ -26,7 +26,7 @@ jobs:
             '億品鍋 台南麻豆店':'06-571-3805',
             '億品鍋 台南佳里店':'06-723-6111',
             '億品鍋 惠南旗艦店':'06-263-3175',
-            '億品鍋 成大勝利店':'06-236-1613',
+            '億品鍋 成大勝利店':'06-200-3168',
             '武灰鍋 平價個人小火鍋':'06-358-3988',
             '九鼎鍋 開元店':'06-200-5529',
             'XM 麻辣鍋':'06-302-5299',
@@ -91,7 +91,6 @@ jobs:
                   s, n = re.subn(pattern, lambda m: m.group(1)+phone+m.group(3), s, count=1)
               p.write_text(s, encoding='utf-8')
 
-          # Load the verified phone override after all restaurant data/fixes.
           idx=Path('index.html')
           s=idx.read_text(encoding='utf-8')
           if 'phone-fix.js' not in s:
@@ -99,7 +98,6 @@ jobs:
               insert=needle+'\n<script src="phone-fix.js?v=20260910-1"></script>'
               if needle in s:
                   s=s.replace(needle,insert,1)
-          # Keep direct-call metadata support available.
           if 'phone-action-fix' not in s:
               inject='''\n<script id="phone-action-fix">\n(function(){\n  const norm=p=>String(p||'').replace(/[^0-9+]/g,'');\n  const isPhone=p=>/^06\\d{7,8}$/.test(norm(p)) || /^0[2-8]\\d{7,8}$/.test(norm(p));\n  (window.RESTAURANTS||[]).forEach(r=>{if(r.phone && isPhone(r.phone)) r.phoneDisplay=r.phone;});\n})();\n</script>\n'''
               s=s.replace('</body>',inject+'</body>')
@@ -111,5 +109,5 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add data.js restore-82.js index.html
           git diff --cached --quiet && exit 0
-          git commit -m "fix: add verified restaurant phone numbers"
+          git commit -m "fix: keep verified phone numbers consistent"
           git push
