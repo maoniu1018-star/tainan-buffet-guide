@@ -3,6 +3,7 @@
    - Fill verified phone aliases and correct known stale/incorrect phone entries.
    - Remove any legacy "查看 Google 評分" links.
    - Keep data conservative: never invent a rating or phone.
+   - Move price reminder near the top for visibility.
 */
 (function(){
   'use strict';
@@ -94,8 +95,19 @@
     });
   }
 
+  function movePriceNoticeToTop(){
+    const notice=document.querySelector('.notice');
+    const hero=document.querySelector('.hero');
+    if(notice && hero && hero.parentNode){
+      hero.insertAdjacentElement('afterend',notice);
+      notice.dataset.movedTop='1';
+    }
+  }
+
   cleanRatingLinks();
   cleanCreatorDuplicate();
+  movePriceNoticeToTop();
+
   if(window.MutationObserver){
     const root=document.getElementById('cards');
     if(root){
