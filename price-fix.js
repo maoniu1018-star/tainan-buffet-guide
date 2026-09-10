@@ -1,63 +1,45 @@
-// 價格表四格修正：平日午餐／平日晚餐／假日午餐／假日晚餐
+// 82 間資料恢復＋四格價格版；此檔在 data.js 後執行，將缺少的 21 間補回並統一重新渲染。
 (function(){
-  function parsePrice(r){
-    if(r&&r.prices&&typeof r.prices==='object'){
-      return {
-        weekdayLunch:r.prices.weekdayLunch||'依方案',
-        weekdayDinner:r.prices.weekdayDinner||'依方案',
-        holidayLunch:r.prices.holidayLunch||'依方案',
-        holidayDinner:r.prices.holidayDinner||'依方案'
-      };
-    }
-    const s=String((r&&r.price)||'').trim()||'依店家公告';
-    const out={weekdayLunch:'依方案',weekdayDinner:'依方案',holidayLunch:'依方案',holidayDinner:'依方案'};
-    let m;
-    m=s.match(/平日\s*午(?:餐)?\s*[:：]?\s*([^；，,]+)/); if(m) out.weekdayLunch=m[1].trim();
-    m=s.match(/平日\s*晚(?:餐)?\s*[:：]?\s*([^；，,]+)/); if(m) out.weekdayDinner=m[1].trim();
-    m=s.match(/假日\s*午(?:餐)?\s*[:：]?\s*([^；，,]+)/); if(m) out.holidayLunch=m[1].trim();
-    m=s.match(/假日\s*晚(?:餐)?\s*[:：]?\s*([^；，,]+)/); if(m) out.holidayDinner=m[1].trim();
-    if(/假日/.test(s)&&!(/假日\s*午/.test(s)||/假日\s*晚/.test(s))){
-      m=s.match(/假日\s*[:：]?\s*([^；，,]+)/); if(m){out.holidayLunch=m[1].trim();out.holidayDinner=m[1].trim();}
-    }
-    if(/平日/.test(s)&&!(/平日\s*午/.test(s)||/平日\s*晚/.test(s))){
-      m=s.match(/平日\s*[:：]?\s*([^；，,]+)/); if(m){out.weekdayLunch=m[1].trim();out.weekdayDinner=m[1].trim();}
-    }
-    // 單一價格／起價：只在沒有更細分資料時呈現為「起」價，其他餐期保留依方案，避免誤導。
-    if(out.weekdayLunch==='依方案'&&out.weekdayDinner==='依方案'&&out.holidayLunch==='依方案'&&out.holidayDinner==='依方案'){
-      out.weekdayLunch=s;
-    }
-    return out;
-  }
-  window.priceFour= parsePrice;
-
-  window.budgetMatch=function(r,b){
-    if(!b)return true;
-    const p=parsePrice(r);
-    const nums=[p.weekdayLunch,p.weekdayDinner,p.holidayLunch,p.holidayDinner]
-      .map(x=>String(x).replace(/,/g,'').match(/(?:NT\$|\$)?\s*(\d{3,5})/))
-      .filter(Boolean).map(m=>Number(m[1]));
-    if(!nums.length)return false;
-    const n=Math.min.apply(null,nums);
-    return b==='under300'?n<300:b==='300to500'?n>=300&&n<=500:b==='500to800'?n>500&&n<=800:b==='800to1200'?n>800&&n<=1200:n>1200;
-  };
-
-  window.render=function(){
-    const rows=filtered();
-    $('#resultInfo').textContent=`目前顯示 ${rows.length} 間`;
-    $('#cards').innerHTML=rows.length?rows.map(r=>{
-      const p=parsePrice(r);
-      const map='https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(r.name+' '+r.address);
-      return `<article class="card"><div class="badges"><span class="badge">${esc(r.type||'吃到飽')}</span>${(r.tags||[]).slice(0,2).map(v=>`<span class="badge">${esc(v)}</span>`).join('')}<span class="badge ${r.status&&r.status.includes('🟢')?'ok':'warn'}">${esc(r.status||'待確認')}</span></div><h3>${esc(r.name)}</h3><div class="rating">${stars(r)}</div><div class="addr">📍 ${esc(r.address||'—')}</div><div class="addr">☎️ ${r.phone&&r.phone!=='依官方最新資訊'?`<a href="tel:${esc(r.phone.replace(/-/g,''))}">${esc(r.phone)}</a>`:esc(r.phone||'—')}</div><div class="prices"><div class="pricebox"><div class="lab">平日午餐</div><div class="num">${esc(p.weekdayLunch)}</div></div><div class="pricebox"><div class="lab">平日晚餐</div><div class="num">${esc(p.weekdayDinner)}</div></div><div class="pricebox"><div class="lab">假日午餐</div><div class="num">${esc(p.holidayLunch)}</div></div><div class="pricebox"><div class="lab">假日晚餐</div><div class="num">${esc(p.holidayDinner)}</div></div></div><div class="meta"><div><b>兒童：</b>${esc(r.child||'依店家公告')}</div><div><b>服務費：</b>${esc(r.service||'依店家公告')}</div></div><div class="locbar"><a class="locbtn primary" href="${map}" target="_blank" rel="noopener">🗺️ 開啟地圖</a></div><div class="actions"><button class="main" data-name="${esc(r.name)}">完整資訊／來源</button>${r.official?`<a href="${esc(r.official)}" target="_blank" rel="noopener">🌐 官方網站</a>`:''}</div></article>`;
-    }).join(''):'<div class="notice">找不到符合條件的餐廳，請清除篩選。</div>';
-    $cardsButtons();
-  };
-
-  window.detail=function(r){
-    const p=parsePrice(r);
-    const map='https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(r.name+' '+r.address);
-    return `<h2>${esc(r.name)}</h2><div class="rating">${stars(r)}</div><div class="rows"><div class="row"><div class="k">價目表</div><div class="v">平日午餐：${esc(p.weekdayLunch)}<br>平日晚餐：${esc(p.weekdayDinner)}<br>假日午餐：${esc(p.holidayLunch)}<br>假日晚餐：${esc(p.holidayDinner)}<br>兒童：${esc(r.child||'依店家公告')}<br>服務費：${esc(r.service||'依店家公告')}</div></div><div class="row"><div class="k">地址</div><div class="v">${esc(r.address||'—')}</div></div><div class="row"><div class="k">電話</div><div class="v">${esc(r.phone||'—')}</div></div><div class="row"><div class="k">營業時間</div><div class="v">${esc(r.hours||'—')}</div></div><div class="row"><div class="k">特色／備註</div><div class="v">${esc(r.desc||'—')} ${esc(r.note||'')}</div></div><div class="row"><div class="k">資料來源</div><div class="v">${esc(r.source||'—')}</div></div><div class="row"><div class="k">最後核對</div><div class="v">2026/09/10</div></div></div><div class="actions"><a class="main" href="${map}" target="_blank" rel="noopener">🗺️ 開啟地圖</a>${r.phone&&/^06-\d/.test(r.phone)?`<a href="tel:${r.phone.replace(/-/g,'')}">☎️ 電話</a>`:''}${r.official?`<a href="${esc(r.official)}" target="_blank" rel="noopener">🌐 官方網站</a>`:''}${r.booking?`<a href="${esc(r.booking)}" target="_blank" rel="noopener">🔴 官方訂位</a>`:''}</div>`;
-  };
-  window.show=function(r){$('#detail').innerHTML=detail(r);$('#modal').classList.add('show')};
-  // app.js 已完成初次 render；這裡再次依四格價格邏輯重繪。
-  render();
+const EXTRA=[
+{name:'饗翻天臭臭鍋 永康鹽行店',rating:4.5,reviewCount:3,ratingSource:'Google Maps',type:'🍲 火鍋',tags:['🍱 自助吧'],area:'永康區',price:'約 $230',prices:{weekdayLunch:'約 NT$230',weekdayDinner:'約 NT$230',holidayLunch:'約 NT$230',holidayDinner:'約 NT$230'},address:'台南市永康區新中街188號',phone:'06-2530815',hours:'11:00–14:00；17:00–22:30',desc:'火鍋＋免費自助吧，含飲料、爆米花、冰品等。',source:'2026/07 公開餐飲資料＋商家資料',status:'🟢 已核對'},
+{name:'饗翻天臭臭鍋 新營店',type:'🍲 火鍋',tags:['🍱 自助吧'],area:'新營區',price:'約 $300',prices:{weekdayLunch:'約 NT$300',weekdayDinner:'約 NT$300',holidayLunch:'約 NT$300',holidayDinner:'約 NT$300'},address:'台南市新營區民生路95號',phone:'依最新資訊',hours:'11:00–14:00；17:00–21:30',desc:'火鍋＋自助吧。',source:'近期公開餐飲資料',status:'🟢 已核對'},
+{name:'饗翻天臭臭鍋 南區中華南店',type:'🍲 火鍋',tags:['🍱 自助吧'],area:'南區',price:'約 $180',prices:{weekdayLunch:'約 NT$180',weekdayDinner:'約 NT$180',holidayLunch:'約 NT$180',holidayDinner:'約 NT$180'},address:'台南市南區中華南路二段101之1號',phone:'06-2624462',hours:'11:00–14:00；17:00–22:00',desc:'火鍋＋自助吧，飲料、爆米花、冰品等自助內容。',source:'近期公開餐飲資料',status:'🟢 已核對'},
+{name:'饗翻天臭臭鍋 永康南台店',rating:5.0,reviewCount:1,ratingSource:'Google Maps',type:'🍲 火鍋',tags:['🍱 自助吧'],area:'永康區',price:'約 $150',prices:{weekdayLunch:'約 NT$150',weekdayDinner:'約 NT$150',holidayLunch:'約 NT$150',holidayDinner:'約 NT$150'},address:'台南市永康區南臺街186號',phone:'06-2434045',hours:'11:00–14:30；16:30–22:30',desc:'火鍋＋自助吧，飲料、爆米花、冰品等無限供應。',source:'近期公開餐飲資料',status:'🟢 已核對'},
+{name:'温玥坊鍋物',rating:4.7,reviewCount:64,ratingSource:'Google Maps',type:'🍲 火鍋',tags:['🍱 自助吧'],area:'永康區',price:'約 $400',prices:{weekdayLunch:'週一～週四優惠約 NT$358＋10%清潔費',weekdayDinner:'約 NT$400起＋10%清潔費',holidayLunch:'約 NT$400起＋10%清潔費',holidayDinner:'約 NT$400起＋10%清潔費'},address:'台南市永康區文化路16號',phone:'06-2036608',hours:'11:00–22:30',desc:'單點主食＋60種以上自助吧吃到飽；蔬菜、火鍋料、飲料、冰品、麵類等。',source:'2026/06 公開菜單／食記＋商家資料',status:'🟢 已核對'},
+{name:'蕾鼎鍋物',rating:5.0,reviewCount:281,ratingSource:'Google Maps',type:'🍲 火鍋',tags:['🍱 自助吧'],area:'安平區',price:'約 $500',prices:{weekdayLunch:'商業午餐約 NT$299起（此餐期自助吧依最新公告）',weekdayDinner:'約 NT$500／人',holidayLunch:'約 NT$500／人',holidayDinner:'約 NT$500／人'},address:'台南市安平區文平路267號',phone:'06-2978585',hours:'11:00–22:00；平日中午供應商業午餐',desc:'一般火鍋方案有30+種自助內容；平日午餐另有299元起商業午餐，與自助吧方案不同，避免誤標。',source:'2026/07 公開菜單／食記＋商家資料',status:'🟡 部分核對'},
+{name:'十色鍋物',rating:4.8,reviewCount:1138,ratingSource:'Google Maps',type:'🍲 火鍋',tags:['🍱 自助吧'],area:'東區',price:'約 $249起＋10%',prices:{weekdayLunch:'—（17:00後營業）',weekdayDinner:'約 NT$249起＋10%',holidayLunch:'—（17:00後營業）',holidayDinner:'約 NT$249起＋10%'},address:'台南市東區裕農路582號',phone:'06-2890636',hours:'17:00–01:00',desc:'任一套餐可享飲料、咖啡、冰沙、冰淇淋、仙草愛玉等自助吧吃到飽，用餐約90分鐘。',source:'2026/04 公開菜單／食記＋商家資料',status:'🟢 已核對'},
+{name:'一個圓鍋火鍋店',type:'🍲 火鍋',tags:['♾️ 吃到飽','🍱 自助吧'],area:'北區',price:'平日約 $499；假日約 $599',prices:{weekdayLunch:'約 NT$499＋清潔費',weekdayDinner:'約 NT$499＋清潔費',holidayLunch:'約 NT$599＋清潔費',holidayDinner:'約 NT$599＋清潔費'},address:'台南市北區文成三路173號',phone:'依最新資訊',hours:'11:00–22:00',desc:'火鍋＋自助吧吃到飽，用餐約120分鐘；平假日價格不同。',source:'2026 公開菜單／食記',status:'🟡 部分核對'},
+{name:'麻佬二 台南店',type:'🍲 火鍋',tags:['🍱 自助吧'],area:'北區',price:'約 $180–395',prices:{weekdayLunch:'約 NT$180–395',weekdayDinner:'約 NT$180–395',holidayLunch:'約 NT$180–395',holidayDinner:'約 NT$180–395'},address:'台南市北區文賢路與武聖路附近',phone:'依最新資訊',hours:'依最新資訊',desc:'平價小火鍋＋自助吧，咖哩、滷肉飯、霜淇淋等無限供應；不收服務費。',source:'食尚玩家／公開餐飲資料',status:'🟡 部分核對'},
+{name:'井賀鍋物 安南店',type:'🍲 火鍋',tags:['♾️ 吃到飽','🍱 自助吧'],area:'安南區',price:'平日約 $288起；假日約 $368起',prices:{weekdayLunch:'約 NT$288起＋10%服務費',weekdayDinner:'約 NT$288起＋10%服務費',holidayLunch:'約 NT$368起＋10%服務費',holidayDinner:'約 NT$368起＋10%服務費'},address:'台南市安南區安和路二段301號',phone:'依最新資訊',hours:'依最新資訊',desc:'吃到飽鍋物＋自助熟食、蔬菜、飲料、冰品等。141cm以上平日基本費288元；例假日需選368元以上套餐。',source:'井賀官方網站＋2026/06 公開資料',status:'🟢 已核對',official:'https://www.jinghe-hotpot.com.tw/chi.html'},
+{name:'武灰鍋平價個人小火鍋',rating:5.0,reviewCount:3,ratingSource:'Google Maps',type:'🍲 火鍋',tags:['🍱 自助吧'],area:'中西區',price:'約 $200／人',prices:{weekdayLunch:'—（17:00後營業）',weekdayDinner:'約 NT$200／人',holidayLunch:'—（17:00後營業）',holidayDinner:'約 NT$200／人'},address:'台南市中西區武聖路5號',phone:'依最新資訊',hours:'17:00–23:00',desc:'平價個人小火鍋＋自助吧吃到飽，提供滷肉飯、薯片、冰淇淋、飲料等。',source:'2026 公開餐飲資料＋商家資料',status:'🟢 已核對'},
+{name:'億品鍋 台南頂美店 MINI SHABU SHABU',rating:3.0,reviewCount:4,ratingSource:'Google Maps',type:'🍲 火鍋',tags:['🍱 自助吧'],area:'安平區',price:'約 $180／人',prices:{weekdayLunch:'約 NT$180／人',weekdayDinner:'約 NT$180／人',holidayLunch:'約 NT$180／人',holidayDinner:'約 NT$180／人'},address:'台南市安平區民權路四段101號',phone:'06-3589449',hours:'10:30–22:30',desc:'百元小火鍋＋自助吧吃到飽，提供豬油拌飯、沙拉、涼麵、爆米花、冰淇淋、霜淇淋、咖啡與飲料等。',source:'台南旅遊網＋公開餐飲資料',status:'🟢 已核對'},
+{name:'億品鍋 台南佳里店',rating:4.0,reviewCount:2,ratingSource:'Google Maps',type:'🍲 火鍋',tags:['🍱 自助吧'],area:'佳里區',price:'約 $200／人',prices:{weekdayLunch:'約 NT$200／人',weekdayDinner:'約 NT$200／人',holidayLunch:'約 NT$200／人',holidayDinner:'約 NT$200／人'},address:'台南市佳里區中山路223號',phone:'依最新資訊',hours:'11:00–22:00',desc:'火鍋＋自助吧吃到飽。價格依現行菜單為準。',source:'2026 公開餐飲資料',status:'🟡 部分核對'},
+{name:'鬥牛士石燒牛排 台南Focus店',rating:5.0,reviewCount:13,ratingSource:'Google Maps',type:'🥩 牛排',tags:['🍱 自助吧'],area:'中西區',price:'約 $500／人',prices:{weekdayLunch:'約 NT$279起／人',weekdayDinner:'約 NT$459起／人',holidayLunch:'約 NT$459起／人',holidayDinner:'約 NT$459起／人'},address:'台南市中西區中山路166號8樓',phone:'依最新資訊',hours:'11:00–22:00',desc:'牛排排餐附自助吧；湯品、飲料、冰淇淋無限供應。',source:'2026 店家頁＋公開餐飲資料',status:'🟢 已核對'},
+{name:'牛約客牛排屋',rating:5.0,reviewCount:3,ratingSource:'Google Maps',type:'🥩 牛排',tags:['🍱 自助吧'],area:'北區',price:'約 $350／人',prices:{weekdayLunch:'約 NT$350／人',weekdayDinner:'約 NT$350／人',holidayLunch:'約 NT$350／人',holidayDinner:'約 NT$350／人'},address:'台南市北區文賢路837號',phone:'06-2807113',hours:'11:00–14:30；17:00–22:30',desc:'牛排排餐＋自助式沙拉吧吃到飽，另有DIY泡麵。',source:'2026 公開餐飲資料＋商家資料',status:'🟢 已核對'},
+{name:'初巴適麻辣鍋 台南1號店',rating:5.0,reviewCount:7,ratingSource:'Google Maps',type:'🍲 火鍋',tags:['♾️ 吃到飽','🍱 自助吧','🔴 可以訂位'],area:'東區',price:'約 $1,199／人',prices:{weekdayLunch:'約 NT$1,199／人',weekdayDinner:'約 NT$1,199／人',holidayLunch:'約 NT$1,199／人',holidayDinner:'約 NT$1,199／人'},address:'台南市東區中華東路一段88號1樓',phone:'依最新資訊',hours:'11:30–22:00',desc:'麻辣鍋吃到飽，肉品依方案無限點餐；另有自助吧與多種附餐。',source:'2026 公開餐飲資料＋店家資料',status:'🟢 已核對'},
+{name:'敝姓鍋 台南海安店',rating:4.6,reviewCount:13,ratingSource:'Google Maps',type:'🍲 火鍋',tags:['🍱 自助吧'],area:'北區',price:'約 $350–400／人',prices:{weekdayLunch:'週五～週日約 NT$350–400／人',weekdayDinner:'約 NT$350–400／人',holidayLunch:'約 NT$350–400／人',holidayDinner:'約 NT$350–400／人'},address:'台南市北區海安路三段930號',phone:'06-2511283',hours:'週一～週四 17:00–21:30；週五～週日 11:00–14:00、17:00–22:00',desc:'火鍋＋自助吧；飲料、霜淇淋無限供應，另有珍珠奶茶。',source:'2026/01 公開餐飲資料＋商家資料',status:'🟢 已核對'},
+{name:'月季 特色鴛鴦火鍋吃到飽',rating:4.3,reviewCount:0,ratingSource:'Google Maps',type:'🍲 火鍋',tags:['♾️ 吃到飽','🍱 自助吧'],area:'東區',price:'約 $450／人',prices:{weekdayLunch:'約 NT$450／人＋10%',weekdayDinner:'約 NT$450／人＋10%',holidayLunch:'約 NT$450／人＋10%',holidayDinner:'約 NT$450／人＋10%'},address:'台南市東區中華東路三段285號',phone:'06-2678778',hours:'11:00–22:30',desc:'鴛鴦火鍋吃到飽；蔬菜、火鍋料、肉品、炸物、熟食、甜點、冰品、飲料等自助吧無限享用，用餐100分鐘。',source:'2026/03 公開餐飲資料＋店家資料',status:'🟢 已核對'},
+{name:'橫濱牛排 台南三井店',rating:4.2,reviewCount:3,ratingSource:'Google Maps',type:'🥩 牛排',tags:['🍱 自助吧','🔴 可以訂位'],area:'歸仁區',price:'平日午餐約 $370起；晚餐／假日約 $400起',prices:{weekdayLunch:'約 NT$370起／人',weekdayDinner:'約 NT$400起／人',holidayLunch:'約 NT$400起／人',holidayDinner:'約 NT$400起／人'},address:'台南市歸仁區歸仁大道101號2樓',phone:'06-3032563',hours:'11:00–21:30',desc:'半自助吧 Semi Buffet；點主餐即可享沙拉、飯、咖哩、湯、甜點、霜淇淋、飲料等自助內容。',source:'橫濱牛排官方網站＋MITSUI OUTLET PARK 台南官方資料＋2026公開資料',status:'🟢 已核對',official:'https://www.yokohama-steakhouse.com.tw/'},
+{name:'温家堡燒肉吃到飽',rating:5.0,reviewCount:2,ratingSource:'Google Maps',type:'🔥 燒肉／韓式',tags:['♾️ 吃到飽','🍱 自助吧','🔴 可以訂位'],area:'永康區',price:'平日 NT$1,280＋10%；假日 NT$1,380＋10%',prices:{weekdayLunch:'平日無午餐／17:00後 NT$1,280＋10%',weekdayDinner:'NT$1,280＋10%／人',holidayLunch:'NT$1,380＋10%／人',holidayDinner:'NT$1,380＋10%／人'},address:'台南市永康區文化路12號2樓',phone:'06-2032888',hours:'平日 17:00–23:00；假日 11:00–23:00',desc:'高檔海鮮與燒肉吃到飽，鱈場蟹腳、松葉蟹腳、小青龍、龍膽石斑、蝦類等可自助取用；另有哈根達斯、莫凡彼、銀波布丁等甜點。',source:'食尚玩家 2026/07＋愛食記 2026/08',status:'🟢 近期已核對'},
+{name:'咚豬咚豬 韓國烤肉吃到飽 台南東區中華門市',rating:4.5,reviewCount:13,ratingSource:'Google Maps',type:'🔥 燒肉／韓式',tags:['♾️ 吃到飽','🍱 自助吧','🔴 可以訂位'],area:'東區',price:'平日午餐約 NT$339起；平日晚餐／假日約 NT$429起',prices:{weekdayLunch:'約 NT$339起／人',weekdayDinner:'約 NT$429起／人',holidayLunch:'約 NT$429起／人',holidayDinner:'約 NT$429起／人'},address:'台南市東區中華東路三段291號',phone:'06-2678008',hours:'11:00–22:30',desc:'韓式烤肉＋火鍋吃到飽，自助吧提供肉品、炸物、沙拉、韓式料理、飲料、霜淇淋與甜點等無限供應。',source:'2026/05–08 公開資料＋愛食記',status:'🟢 近期已核對'}
+];
+const existing=Array.isArray(window.RESTAURANTS)?window.RESTAURANTS:[];
+const byName=new Map(existing.map(r=>[r.name,r]));
+EXTRA.forEach(r=>byName.set(r.name,r));
+window.RESTAURANTS=Array.from(byName.values());
+function price(r){if(r.prices)return r.prices;const s=String(r.price||'依店家公告');const o={weekdayLunch:'依店家公告',weekdayDinner:'依店家公告',holidayLunch:'依店家公告',holidayDinner:'依店家公告'};let m;
+m=s.match(/平日\s*午[^；]*/);if(m)o.weekdayLunch=m[0].replace(/平日\s*午餐?\s*/,'').replace(/^[:：]\s*/,'')||s;
+m=s.match(/平日\s*晚[^；]*/);if(m)o.weekdayDinner=m[0].replace(/平日\s*晚餐?\s*/,'').replace(/^[:：]\s*/,'')||s;
+m=s.match(/假日\s*午[^；]*/);if(m)o.holidayLunch=m[0].replace(/假日\s*午餐?\s*/,'').replace(/^[:：]\s*/,'')||s;
+m=s.match(/假日\s*晚[^；]*/);if(m)o.holidayDinner=m[0].replace(/假日\s*晚餐?\s*/,'').replace(/^[:：]\s*/,'')||s;
+if(Object.values(o).every(v=>v==='依店家公告'))o={weekdayLunch:s,weekdayDinner:s,holidayLunch:s,holidayDinner:s};return o;}
+function num(v){const m=String(v||'').replace(/,/g,'').match(/(?:NT\$|\$)\s*(\d{3,5})|(?<!\d)(\d{3,5})(?:\s*元|\s*\/|\s*起)?/);return m?Number(m[1]||m[2]):Infinity}
+function esc2(v){return String(v??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
+function cat(r){return categoryOf(r)}
+function budget(r,b){if(!b)return true;const p=price(r),n=Math.min(num(p.weekdayLunch),num(p.weekdayDinner),num(p.holidayLunch),num(p.holidayDinner));return b==='under300'?n<300:b==='300to500'?n>=300&&n<=500:b==='500to800'?n>500&&n<=800:b==='800to1200'?n>800&&n<=1200:n>1200}
+function filt(){let a=window.RESTAURANTS.filter(r=>{const t=[r.name,r.type,r.area,r.address,r.desc].join(' ').toLowerCase();return(!state.q||t.includes(state.q.toLowerCase()))&&(!state.district||r.area===state.district)&&(state.type==='全部'||cat(r)===state.type)&&budget(r,state.budget)});if(state.sort==='weekdayAsc')a.sort((a,b)=>num(price(a).weekdayLunch)-num(price(b).weekdayLunch));if(state.sort==='ratingDesc')a.sort((a,b)=>(b.rating??-1)-(a.rating??-1));if(state.sort==='name')a.sort((a,b)=>a.name.localeCompare(b.name,'zh-Hant'));return a}
+window.render=function(){const rows=filt();$('#resultInfo').textContent=`目前顯示 ${rows.length} 間`;$('#statCount').textContent=`已收錄 ${window.RESTAURANTS.length} 間`;$('#sumCount').textContent=`${window.RESTAURANTS.length} 間`;const rr=window.RESTAURANTS.map(r=>r.rating).filter(x=>typeof x==='number');$('#sumRating').textContent=rr.length?(rr.reduce((a,b)=>a+b,0)/rr.length).toFixed(1):'—';const ns=window.RESTAURANTS.flatMap(r=>Object.values(price(r)).map(num)).filter(Number.isFinite);$('#sumMin').textContent=ns.length?`NT$${Math.min(...ns).toLocaleString()}`:'—';$('#cards').innerHTML=rows.length?rows.map(r=>{const p=price(r);const map='https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(r.name+' '+r.address);return `<article class="card"><div class="badges"><span class="badge">${esc2(r.type||'吃到飽')}</span>${(r.tags||[]).slice(0,2).map(v=>`<span class="badge">${esc2(v)}</span>`).join('')}<span class="badge ${r.status&&r.status.includes('🟢')?'ok':'warn'}">${esc2(r.status||'待確認')}</span></div><h3>${esc2(r.name)}</h3><div class="rating">${stars(r)}</div><div class="addr">📍 ${esc2(r.address||'—')}</div><div class="addr">☎️ ${r.phone&&r.phone!=='依官方最新資訊'?`<a href="tel:${esc2(r.phone.replace(/-/g,''))}">${esc2(r.phone)}</a>`:esc2(r.phone||'—')}</div><div class="prices"><div class="pricebox"><div class="lab">平日午餐</div><div class="num">${esc2(p.weekdayLunch)}</div></div><div class="pricebox"><div class="lab">平日晚餐</div><div class="num">${esc2(p.weekdayDinner)}</div></div><div class="pricebox"><div class="lab">假日午餐</div><div class="num">${esc2(p.holidayLunch)}</div></div><div class="pricebox"><div class="lab">假日晚餐</div><div class="num">${esc2(p.holidayDinner)}</div></div></div><div class="meta"><div><b>兒童：</b>${esc2(r.child||'依店家公告')}</div><div><b>服務費：</b>${esc2(r.service||'依店家公告')}</div></div><div class="locbar"><a class="locbtn primary" href="${map}" target="_blank" rel="noopener">🗺️ 開啟地圖</a></div><div class="actions"><button class="main" data-name="${esc2(r.name)}">完整資訊／來源</button>${r.official?`<a href="${esc2(r.official)}" target="_blank" rel="noopener">🌐 官方網站</a>`:''}</div></article>`}).join(''):'<div class="notice">找不到符合條件的餐廳，請清除篩選。</div>';$cardsButtons()};
+window.detail=function(r){const p=price(r);const map='https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(r.name+' '+r.address);return `<h2>${esc2(r.name)}</h2><div class="rating">${stars(r)}</div><div class="rows"><div class="row"><div class="k">價目表</div><div class="v">平日午餐：${esc2(p.weekdayLunch)}<br>平日晚餐：${esc2(p.weekdayDinner)}<br>假日午餐：${esc2(p.holidayLunch)}<br>假日晚餐：${esc2(p.holidayDinner)}<br>兒童：${esc2(r.child||'依店家公告')}<br>服務費：${esc2(r.service||'依店家公告')}</div></div><div class="row"><div class="k">地址</div><div class="v">${esc2(r.address||'—')}</div></div><div class="row"><div class="k">電話</div><div class="v">${esc2(r.phone||'—')}</div></div><div class="row"><div class="k">營業時間</div><div class="v">${esc2(r.hours||'—')}</div></div><div class="row"><div class="k">特色／備註</div><div class="v">${esc2(r.desc||'—')} ${esc2(r.note||'')}</div></div><div class="row"><div class="k">資料來源</div><div class="v">${esc2(r.source||'—')}</div></div><div class="row"><div class="k">最後核對</div><div class="v">2026/09/10</div></div></div><div class="actions"><a class="main" href="${map}" target="_blank" rel="noopener">🗺️ 開啟地圖</a>${r.phone&&/^06-\d/.test(r.phone)?`<a href="tel:${r.phone.replace(/-/g,'')}">☎️ 電話</a>`:''}${r.official?`<a href="${esc2(r.official)}" target="_blank" rel="noopener">🌐 官方網站</a>`:''}</div>`};
+window.show=function(r){$('#detail').innerHTML=detail(r);$('#modal').classList.add('show')};
+setTimeout(render,0);
 })();
