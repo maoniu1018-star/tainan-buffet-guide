@@ -105,16 +105,17 @@
     const stats=wrap && wrap.querySelector('.stats');
     const controls=document.querySelector('.controls');
     if(hero && wrap){
-      // Put the notice inside the hero, directly below the stats, so it is visible without a large full-width gap.
       if(stats) stats.insertAdjacentElement('afterend',notice);
       else wrap.appendChild(notice);
       notice.classList.add('top-price-notice');
+      notice.id='notice';
       notice.dataset.movedTop='1';
       return true;
     }
     if(controls && controls.parentNode){
       controls.parentNode.insertBefore(notice,controls);
       notice.classList.add('top-price-notice');
+      notice.id='notice';
       notice.dataset.movedTop='1';
       return true;
     }
@@ -126,9 +127,9 @@
     const style=document.createElement('style');
     style.id='notice-layout-fix';
     style.textContent=`
-      .hero .top-price-notice{box-sizing:border-box;width:100%;margin:18px 0 0;padding:10px 14px;border:1px solid rgba(239,142,174,.28);border-radius:12px;background:rgba(255,255,255,.62);font-size:13px;line-height:1.5;color:#6b4f5b;}
+      .hero .top-price-notice{box-sizing:border-box;width:min(820px,100%);margin:18px auto 0;padding:11px 18px;border:1px solid rgba(239,142,174,.28);border-radius:14px;background:rgba(255,255,255,.72);font-size:13px;line-height:1.55;color:#6b4f5b;text-align:center;box-shadow:0 4px 14px rgba(190,120,150,.06);}
       .hero .top-price-notice b{color:#7a4f61;font-weight:700;}
-      @media(max-width:760px){.hero .top-price-notice{margin-top:14px;padding:9px 12px;font-size:12px;border-radius:10px;}}
+      @media(max-width:760px){.hero .top-price-notice{width:100%;margin-top:14px;padding:9px 12px;font-size:12px;border-radius:11px;}}
     `;
     document.head.appendChild(style);
   }
