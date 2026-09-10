@@ -45,7 +45,9 @@
     '遠東 Café 台南遠東香格里拉':'06-702-8856',
     '台南大飯店 歐式自助餐':'06-224-9886',
     '元素餐廳（台南大員皇冠假日酒店）':'06-512-1807',
-    '夏都城食百匯自助餐廳':'06-292-0656'
+    '夏都城食百匯自助餐廳':'06-292-0656',
+    '小時厚牛排 台南永康店':'06-302-1239',
+    '小時厚牛排-台南永康店':'06-302-1239'
   };
 
   function placeholder(v){
@@ -58,13 +60,10 @@
       r.rating=ratings[name];
       r.ratingSource='Google Maps';
     }
-    if(placeholder(r.phone) && phones[name]){
-      r.phone=phones[name];
-    }
+    if(placeholder(r.phone) && phones[name]) r.phone=phones[name];
     if(typeof r.rating==='number' && !r.ratingSource) r.ratingSource='Google Maps';
   }
 
-  // Remove every legacy rating-search CTA. Actual ratings remain visible in the rating row.
   function cleanRatingLinks(){
     document.querySelectorAll('a.google-rating-link').forEach(a=>a.remove());
     document.querySelectorAll('a').forEach(a=>{
