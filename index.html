@@ -1,10 +1,24 @@
 <!doctype html>
 <html lang="zh-Hant">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="台南吃到飽、Buffet、火鍋、燒肉、牛排與自助吧價格大全。">
-<title>台南吃到飽｜價格大全</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="台南吃到飽、Buffet、火鍋、燒肉、牛排與自助吧價格大全。查平日、假日、午餐、晚餐價格、服務費與兒童費用。">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<link rel="canonical" href="https://maoniu1018-star.github.io/tainan-buffet-guide/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="台南吃到飽｜價格大全">
+<meta property="og:description" content="台南吃到飽、Buffet、火鍋、燒肉、牛排與自助吧價格大全。">
+<meta property="og:url" content="https://maoniu1018-star.github.io/tainan-buffet-guide/">
+<title>台南吃到飽｜價格大全｜火鍋・燒肉・牛排・自助吧</title>
 <link rel="stylesheet" href="style.css">
+<script type="application/ld+json">{
+  "@context":"https://schema.org",
+  "@type":"WebSite",
+  "name":"台南吃到飽價格大全",
+  "url":"https://maoniu1018-star.github.io/tainan-buffet-guide/",
+  "description":"台南吃到飽、Buffet、火鍋、燒肉、牛排與自助吧價格大全。"
+}</script>
 </head>
 <body>
 <header class="hero"><div class="wrap">
@@ -15,7 +29,7 @@
   <div class="stats"><div class="pill" id="statCount">已收錄 — 間</div><div class="pill">⭐ Google 星評</div><div class="pill">🗺️ Google 地圖</div><div class="pill">📷 Chung NING · Instagram</div></div>
 </div></header>
 <section class="controls"><div class="wrap">
-  <div class="searchrow"><input id="q" class="input" placeholder="搜尋餐廳、地址、料理類型…"><select id="district" class="select"><option value="">全部行政區</option></select><select id="budget" class="select"><option value="">全部預算</option><option value="under300">NT$300 以下</option><option value="300to500">NT$300–500</option><option value="500to800">NT$500–800</option><option value="800to1200">NT$800–1,200</option><option value="over1200">NT$1,200+</option></select><select id="sort" class="select"><option value="default">推薦排序</option><option value="weekdayAsc">平日價格低 → 高</option><option value="dinnerAsc">晚餐價格低 → 高</option><option value="ratingDesc">評分高 → 低</option><option value="name">餐廳名稱</option></select><button id="reset" class="btn">清除篩選</button></div>
+  <div class="searchrow"><input id="q" class="input" placeholder="搜尋餐廳、地址、料理類型…" aria-label="搜尋餐廳、地址、料理類型"><select id="district" class="select" aria-label="行政區"><option value="">全部行政區</option></select><select id="budget" class="select" aria-label="預算"><option value="">全部預算</option><option value="under300">NT$300 以下</option><option value="300to500">NT$300–500</option><option value="500to800">NT$500–800</option><option value="800to1200">NT$800–1,200</option><option value="over1200">NT$1,200+</option></select><select id="sort" class="select" aria-label="排序"><option value="default">推薦排序</option><option value="weekdayAsc">平日價格低 → 高</option><option value="dinnerAsc">晚餐價格低 → 高</option><option value="ratingDesc">評分高 → 低</option><option value="name">餐廳名稱</option></select><button id="reset" class="btn">清除篩選</button></div>
   <div id="chips" class="chips"></div>
 </div></section>
 <main class="wrap" id="restaurants">
@@ -25,95 +39,18 @@
   <div class="notice"><b>⚠️ 價格提醒：</b>價格、兒童費、服務費與節日價可能調整；實際消費前請以店家最新公告為準。</div>
 </main>
 <footer><div class="wrap">台南吃到飽價格大全｜製作者：<a class="creator" href="https://www.instagram.com/h.ning1018/" target="_blank" rel="noopener">Chung NING · Instagram @h.ning1018</a></div></footer>
-<div id="modal" class="modal"><div class="dialog"><button class="close" id="close">×</button><div id="detail"></div></div></div>
-
-<script>window.RESTAURANTS = [
-{name:'肉次方 燒肉放題 台南府前店',rating:4.9,reviewCount:34002,ratingSource:'Google Maps',type:'🔥 燒肉',tags:['♾️ 吃到飽'],area:'安平區',price:'約 $600–800',address:'台南市安平區府前路二段500號 2F-1',phone:'06-299-2997',hours:'依餐期／日期為準',desc:'日式燒肉放題；分店獨立建卡。',source:'商家資料＋食藥署吃到飽稽查交叉核對',status:'🟢 已核對'},
-{name:'涮乃葉 台南大全聯店',rating:4.3,reviewCount:1161,ratingSource:'Google Maps',type:'🍲 火鍋',tags:['♾️ 吃到飽','🍱 自助吧','🔴 可以訂位'],area:'北區',price:'依方案',address:'台南市北區臨安路二段310號 2F',phone:'06-223-1896',hours:'平日 11:00–22:00；假日 10:30–22:00',desc:'蔬菜、麵食、醬料、熟食、甜點飲料等自助內容。',source:'商場／官方資料＋商家資料',status:'🟢 已核對',official:'https://syabuyo.com.tw/'},
-{name:'涮乃葉 台南三井店',rating:3.6,reviewCount:562,ratingSource:'Google Maps',type:'🍲 火鍋',tags:['♾️ 吃到飽','🍱 自助吧','🔴 可以訂位'],area:'歸仁區',price:'依方案',address:'台南市歸仁區歸仁大道101號 2F',phone:'06-303-2863',hours:'依商場營業時間',desc:'健康新鮮吃到飽；三井分店獨立建卡。',source:'MITSUI OUTLET PARK 台南官方資料＋食藥署稽查交叉核對',status:'🟢 已核對'},
-{name:'饗麻饗辣 台南永華旗艦店',rating:4.3,reviewCount:4203,ratingSource:'Google Maps',type:'🍲 火鍋',tags:['♾️ 吃到飽','🍱 自助吧','🔴 可以訂位'],area:'安平區',price:'平日午 658；晚 758；假日 788（另加10%）',address:'台南市安平區永華路二段35號',phone:'依官方最新資訊',hours:'依官方最新資訊',desc:'和牛、海鮮、熟食、壽司、冰品與甜點等吃到飽。',source:'官方網站／分店資料',status:'🟢 已核對',official:'https://www.enjoyhot.com.tw/store.php?act=view&id=1'},
-{name:'億品鍋 台南海安旗艦店',rating:4.6,reviewCount:1542,ratingSource:'Google Maps',type:'🍲 火鍋',tags:['🍱 自助吧','♾️ 吃到飽','💰 $300以下'],area:'北區',price:'約 $180 起',address:'台南市北區海安路三段920號',phone:'06-251-6700',hours:'依官方最新資訊',desc:'沙拉、涼麵、豬油拌飯、甜品、冰淇淋、飲料等自助內容。',source:'台南旅遊網＋官方品牌資料',status:'🟢 已核對'},
-{name:'億品鍋 台南健康店',rating:4.7,reviewCount:1317,ratingSource:'Google Maps',type:'🍲 火鍋',tags:['🍱 自助吧','♾️ 吃到飽','💰 $300以下'],area:'南區',price:'依最新方案',address:'台南市南區健康路一帶（請以官方地圖為準）',phone:'依官方最新資訊',hours:'依官方最新資訊',desc:'平價個人鍋＋自助吧。',source:'官方品牌公告',status:'🟡 部分核對'},
-{name:'億品鍋 台南仁德店',rating:4.8,reviewCount:1904,ratingSource:'Google Maps',type:'🍲 火鍋',tags:['🍱 自助吧','♾️ 吃到飽','💰 $300以下'],area:'仁德區',price:'依最新方案',address:'台南市仁德區',phone:'依官方最新資訊',hours:'依官方最新資訊',desc:'平價個人鍋＋自助吧。',source:'官方品牌公告',status:'🟡 部分核對'},
-{name:'億品鍋 台南永康店',rating:4.3,reviewCount:541,ratingSource:'Google Maps',type:'🍲 火鍋',tags:['🍱 自助吧','♾️ 吃到飽','💰 $300以下'],area:'永康區',price:'依最新方案',address:'台南市永康區',phone:'依官方最新資訊',hours:'依官方最新資訊',desc:'平價個人鍋＋自助吧。',source:'官方品牌資料',status:'🟡 部分核對'},
-{name:'億品鍋 台南安南店',rating:4.8,reviewCount:1617,ratingSource:'Google Maps',type:'🍲 火鍋',tags:['🍱 自助吧','♾️ 吃到飽','💰 $300以下'],area:'安南區',price:'依最新方案',address:'台南市安南區',phone:'依官方最新資訊',hours:'依官方最新資訊',desc:'平價個人鍋＋自助吧。',source:'官方品牌資料',status:'🟡 部分核對'},
-{name:'億品鍋 台南麻豆店',rating:4.5,reviewCount:358,ratingSource:'Google Maps',type:'🍲 火鍋',tags:['🍱 自助吧','♾️ 吃到飽','💰 $300以下'],area:'麻豆區',price:'約 $170 起',address:'台南市麻豆區',phone:'依官方最新資訊',hours:'依官方最新資訊',desc:'官方公告標示自助吧吃到飽。',source:'官方品牌公告',status:'🟢 已核對'},
-{name:'億品鍋 成大勝利店',type:'🍲 火鍋',tags:['🍱 自助吧','♾️ 吃到飽','💰 $300以下'],area:'東區',price:'依最新方案',address:'台南市東區勝利路',phone:'依官方最新資訊',hours:'依官方最新資訊',desc:'平價個人鍋＋自助吧。',source:'官方品牌資料',status:'🟡 部分核對'},
-{name:'億品鍋 惠南旗艦店',rating:4.9,reviewCount:504,ratingSource:'Google Maps',type:'🍲 火鍋',tags:['🍱 自助吧','♾️ 吃到飽','💰 $300以下'],area:'南區',price:'依最新方案',address:'台南市南區',phone:'依官方最新資訊',hours:'依官方最新資訊',desc:'平價個人鍋＋自助吧。',source:'官方品牌資料',status:'🟡 部分核對'},
-{name:'武灰鍋 平價個人小火鍋',type:'🍲 火鍋',tags:['🍱 自助吧','♾️ 吃到飽','💰 $300以下'],area:'台南市區',price:'約 $200–400',address:'台南市',phone:'依商家最新資訊',hours:'依商家最新資訊',desc:'滷肉飯、薯片、冰淇淋、飲料等自助內容；不接受訂位。',source:'商家公開資料',status:'🟡 部分核對'},
-{name:'武灰鍋 平價小火鍋 安和店',type:'🍲 火鍋',tags:['🍱 自助吧','♾️ 吃到飽','💰 $300以下'],area:'安南區',price:'依最新方案',address:'台南市安南區安和路',phone:'依商家最新資訊',hours:'依商家最新資訊',desc:'平價個人鍋＋自助內容。',source:'商家公開資料',status:'🟡 部分核對'},
-{name:'九鼎鍋 開元店',type:'🍲 火鍋',tags:['♾️ 吃到飽','🍱 自助吧','💰 $300以下'],area:'北區',price:'約 $200–400',address:'台南市北區開元路113號',phone:'依最新資訊',hours:'依最新資訊',desc:'火鍋吃到飽。',source:'商家公開資料',status:'🟡 部分核對'},
-{name:'九鼎鍋 大同店',type:'🍲 火鍋',tags:['♾️ 吃到飽','🍱 自助吧','💰 $300以下'],area:'東區',price:'約 $200–400',address:'台南市東區大同路二段361號',phone:'依最新資訊',hours:'依最新資訊',desc:'火鍋吃到飽。',source:'商家公開資料',status:'🟡 部分核對'},
-{name:'XM 麻辣鍋',type:'🍲 火鍋',tags:['♾️ 吃到飽','🍱 自助吧'],area:'永康區',price:'依最新方案',address:'台南市永康區中華路660號',phone:'依最新資訊',hours:'依最新資訊',desc:'麻辣鍋吃到飽。',source:'食藥署 114 年吃到飽稽查交叉核對',status:'🟡 部分核對'},
-{name:'GAMMA（尬麻）火鍋聚場',rating:4.5,reviewCount:2015,ratingSource:'Google Maps',type:'🍲 火鍋',tags:['♾️ 吃到飽','🍱 自助吧'],area:'東區',price:'依最新方案',address:'台南市東區中華東路一段143號',phone:'依最新資訊',hours:'依最新資訊',desc:'火鍋吃到飽。',source:'食藥署 114 年吃到飽稽查交叉核對',status:'🟡 部分核對'},
-{name:'嗑肉石鍋 東門店',type:'🍲 火鍋',tags:['♾️ 吃到飽','🍱 自助吧','🔴 可以訂位'],area:'東區',price:'依最新方案',address:'台南市東區東門路二段387號',phone:'依最新資訊',hours:'依最新資訊',desc:'火鍋吃到飽。',source:'商家公開資料',status:'🟡 部分核對'},
-{name:'牧鍋 頂級熟成牛鍋物',type:'🍲 火鍋',tags:['♾️ 吃到飽','🍱 自助吧'],area:'東區',price:'依最新方案',address:'台南市東區裕農路933號',phone:'依最新資訊',hours:'依最新資訊',desc:'火鍋吃到飽。',source:'商家公開資料',status:'🟡 部分核對'},
-{name:'井賀鍋物 文賢店',type:'🍲 火鍋',tags:['♾️ 吃到飽','🍱 自助吧','🔴 可以訂位'],area:'北區',price:'依最新方案',address:'台南市北區文賢一路77號',phone:'依最新資訊',hours:'依最新資訊',desc:'火鍋吃到飽。',source:'商家公開資料',status:'🟡 部分核對'},
-{name:'狂一鍋 台南仁德店',rating:4.8,reviewCount:2838,ratingSource:'Google Maps',type:'🍲 火鍋',tags:['♾️ 吃到飽','🍱 自助吧'],area:'仁德區',price:'依最新方案',address:'台南市仁德區中山路711號 家樂福仁德店1F',phone:'依最新資訊',hours:'依最新資訊',desc:'火鍋吃到飽。',source:'商家公開資料',status:'🟡 部分核對'},
-{name:'肉多多火鍋 台南東寧店',rating:4.4,reviewCount:2805,ratingSource:'Google Maps',type:'🍲 火鍋',tags:['♾️ 吃到飽','🍱 自助吧'],area:'東區',price:'依最新方案',address:'台南市東區東寧路',phone:'依最新資訊',hours:'依最新資訊',desc:'火鍋＋自助吧；分店獨立建卡。',source:'公開訂位／商家資料',status:'🟡 部分核對'},
-{name:'肉多多火鍋 台南怡平店',rating:4.4,reviewCount:1364,ratingSource:'Google Maps',type:'🍲 火鍋',tags:['♾️ 吃到飽','🍱 自助吧'],area:'安平區',price:'依最新方案',address:'台南市安平區怡平路',phone:'依最新資訊',hours:'依最新資訊',desc:'火鍋＋自助吧。',source:'公開訂位／商家資料',status:'🟡 部分核對'},
-{name:'肉多多火鍋 台南大遠百公園店',rating:4.6,reviewCount:1029,ratingSource:'Google Maps',type:'🍲 火鍋',tags:['♾️ 吃到飽','🍱 自助吧'],area:'中西區',price:'依最新方案',address:'台南市中西區公園路',phone:'依最新資訊',hours:'依最新資訊',desc:'火鍋＋自助吧。',source:'公開訂位／商家資料',status:'🟡 部分核對'},
-{name:'肉多多火鍋 台南新仁店',rating:4.5,reviewCount:777,ratingSource:'Google Maps',type:'🍲 火鍋',tags:['♾️ 吃到飽','🍱 自助吧'],area:'仁德區',price:'約 $439',address:'台南市仁德區大同路三段755號 2F',phone:'依最新資訊',hours:'依最新資訊',desc:'火鍋吃到飽＋自助吧。',source:'商家公開資料',status:'🟡 部分核對'},
-{name:'兩餐 Dookki 台南店',type:'🇰🇷 韓式',tags:['♾️ 吃到飽','🍱 自助吧','🔴 可以訂位'],area:'中西區',price:'依最新方案',address:'台南市中西區中山路139號 2F',phone:'依官方最新資訊',hours:'11:00–23:00；最後收客 21:30',desc:'韓式年糕火鍋吃到飽。',source:'官方品牌／分店資料＋食藥署稽查',status:'🟢 已核對',official:'https://www.dookki.com.tw/tainan-store'},
-{name:'串家物語 台南三井店',type:'🍢 日式',tags:['♾️ 吃到飽','🍱 自助吧','🔴 可以訂位'],area:'歸仁區',price:'依最新方案',address:'台南市歸仁區歸仁大道101號 2F',phone:'依商場最新資訊',hours:'依商場營業時間',desc:'約 90 分鐘無限暢食，串炸、熟食、沙拉、甜點冰淇淋等。',source:'MITSUI OUTLET PARK 台南官方資料＋食藥署稽查',status:'🟢 已核對',official:'https://www.mitsui-shopping-park.com.tw/mop/tainan/tw/shop.html?id=262a75a7'},
-{name:'逐鹿炭火燒肉 台南店',rating:4.3,reviewCount:7175,ratingSource:'Google Maps',type:'🔥 燒肉',tags:['♾️ 吃到飽'],area:'台南市區',price:'依最新方案',address:'台南市',phone:'依最新資訊',hours:'依最新資訊',desc:'炭火燒肉吃到飽。',source:'公開餐飲資料',status:'🟡 部分核對'},
-{name:'灼花燒肉 HIBANA × 深煙酒吧 SHINEN',type:'🔥 燒肉',tags:['♾️ 吃到飽'],area:'台南市區',price:'依最新方案',address:'台南市',phone:'依最新資訊',hours:'依最新資訊',desc:'燒肉吃到飽。',source:'公開餐飲資料',status:'🟡 部分核對'},
-{name:'Oh! Yaki 精緻燒肉吃到飽 台南店',rating:4.5,reviewCount:857,ratingSource:'Google Maps',type:'🔥 燒肉',tags:['♾️ 吃到飽'],area:'台南市區',price:'依最新方案',address:'台南市',phone:'依最新資訊',hours:'依最新資訊',desc:'精緻燒肉吃到飽。',source:'公開餐飲資料',status:'🟡 部分核對'},
-{name:'一底夯燒肉專賣 東平店',rating:4.5,reviewCount:1408,ratingSource:'Google Maps',type:'🔥 燒肉',tags:['♾️ 吃到飽'],area:'東區',price:'依最新方案',address:'台南市東區東平路',phone:'依最新資訊',hours:'依最新資訊',desc:'燒肉吃到飽。',source:'公開餐飲資料',status:'🟡 部分核對'},
-{name:'田季發爺燒肉 台南中華店',rating:4.7,reviewCount:9306,ratingSource:'Google Maps',type:'🔥 燒肉',tags:['♾️ 吃到飽'],area:'東區',price:'依最新方案',address:'台南市東區中華東路',phone:'依最新資訊',hours:'依最新資訊',desc:'燒肉吃到飽。',source:'公開餐飲資料',status:'🟡 部分核對'},
-{name:'本格和牛燒肉放題 台南西門店',rating:4.7,reviewCount:3900,ratingSource:'Google Maps',type:'🔥 燒肉',tags:['♾️ 吃到飽'],area:'中西區',price:'依最新方案',address:'台南市中西區西門路',phone:'依最新資訊',hours:'依最新資訊',desc:'和牛燒肉放題。',source:'公開餐飲資料',status:'🟡 部分核對'},
-{name:'好好吃肉韓式烤肉吃到飽 台南店',rating:4.6,reviewCount:7160,ratingSource:'Google Maps',type:'🇰🇷 韓式',tags:['♾️ 吃到飽'],area:'台南市區',price:'依最新方案',address:'台南市',phone:'依最新資訊',hours:'依最新資訊',desc:'韓式烤肉吃到飽。',source:'公開餐飲資料',status:'🟡 部分核對'},
-{name:'吃道飽火烤兩吃',rating:4.5,reviewCount:2297,ratingSource:'Google Maps',type:'🔥 燒肉',tags:['♾️ 吃到飽'],area:'台南市區',price:'依最新方案',address:'台南市',phone:'依最新資訊',hours:'依最新資訊',desc:'火烤兩吃吃到飽。',source:'公開餐飲資料',status:'🟡 部分核對'},
-{name:'燒肉工廠',rating:3.9,reviewCount:2249,ratingSource:'Google Maps',type:'🔥 燒肉',tags:['♾️ 吃到飽'],area:'東區',price:'平日午 769；晚餐／假日 835（含10%）',address:'台南市東區中華東路一段218號',phone:'依官方最新資訊',hours:'依官方最新資訊',desc:'官方明確列吃到飽專案，120 分鐘。',source:'官方網站 bbqfty.com.tw',status:'🟢 已核對',official:'https://bbqfty.com.tw/'},
-{name:'燒肉眾 台南永康店',type:'🔥 燒肉',tags:['♾️ 吃到飽'],area:'永康區',price:'依最新方案',address:'台南市永康區',phone:'依最新資訊',hours:'依最新資訊',desc:'燒肉吃到飽。',source:'食藥署 114 年吃到飽稽查名單',status:'🟡 部分核對'},
-{name:'小時厚牛排 台南東區店',rating:4.2,reviewCount:2217,ratingSource:'Google Maps',type:'🥩 牛排',tags:['🍱 自助吧','♾️ 吃到飽'],area:'東區',price:'依最新排餐方案',address:'台南市東區中華東路三段325號',phone:'依最新資訊',hours:'依最新資訊',desc:'自助吧含咖哩飯、濃湯、吐司、飲料、咖啡、霜淇淋等。',source:'商家公開資料',status:'🟡 部分核對'},
-{name:'小時厚牛排 台南健康店',rating:4.8,reviewCount:2390,ratingSource:'Google Maps',type:'🥩 牛排',tags:['🍱 自助吧','♾️ 吃到飽'],area:'南區',price:'依最新排餐方案',address:'台南市南區健康路二段387號',phone:'依最新資訊',hours:'依最新資訊',desc:'排餐＋自助吧。',source:'商家公開資料',status:'🟡 部分核對'},
-{name:'小時厚牛排 台南永康店',rating:4.2,reviewCount:388,ratingSource:'Google Maps',type:'🥩 牛排',tags:['🍱 自助吧','♾️ 吃到飽'],area:'永康區',price:'依最新排餐方案',address:'台南市永康區中華路659-1號',phone:'依最新資訊',hours:'依最新資訊',desc:'排餐＋自助吧。',source:'商家公開資料',status:'🟡 部分核對'},
-{name:'公牛隊牛排館',rating:4.0,reviewCount:3795,ratingSource:'Google Maps',type:'🥩 牛排',tags:['🍱 自助吧','♾️ 吃到飽'],area:'永康區',price:'約 $560–880（依方案）',address:'台南市永康區中山北路188號',phone:'06-202-9709',hours:'11:00–14:30；17:00–21:30',desc:'使用者實際體驗確認有自助吧；排餐搭配自助吧。',source:'商家資料＋使用者實際體驗校正',status:'🟢 已核對'},
-{name:'達樂斯美式牛排 東門店',rating:3.9,reviewCount:2176,ratingSource:'Google Maps',type:'🥩 牛排',tags:['🍱 自助吧','♾️ 吃到飽'],area:'東區',price:'依最新排餐方案',address:'台南市東區東門路二段388號',phone:'依最新資訊',hours:'依最新資訊',desc:'濃湯、義大利麵、生菜、水果、冰淇淋、飲料、吐司等自助吧。',source:'商家公開資料',status:'🟡 部分核對'},
-{name:'達樂斯美式牛排 永康店',rating:3.9,reviewCount:2908,ratingSource:'Google Maps',type:'🥩 牛排',tags:['🍱 自助吧','♾️ 吃到飽'],area:'永康區',price:'依最新排餐方案',address:'台南市永康區中正北路39號',phone:'依最新資訊',hours:'依最新資訊',desc:'排餐＋自助吧。',source:'商家公開資料',status:'🟡 部分核對'},
-{name:'牛B牛排',rating:4.6,reviewCount:609,ratingSource:'Google Maps',type:'🥩 牛排',tags:['🍱 自助吧','♾️ 吃到飽'],area:'安平區',price:'依最新排餐方案',address:'台南市安平區國平路158號',phone:'依最新資訊',hours:'依最新資訊',desc:'排餐＋自助吧，含濃湯、吐司、爆米花、飲料、冰沙等。',source:'近期商家資料',status:'🟡 部分核對'},
-{name:'魔力牛牛排館 安平文平店',rating:4.7,reviewCount:649,ratingSource:'Google Maps',type:'🥩 牛排',tags:['🍱 自助吧','♾️ 吃到飽'],area:'安平區',price:'依最新排餐方案',address:'台南市安平區文平路408號',phone:'依最新資訊',hours:'11:15–14:00；16:45–20:30（週二公休）',desc:'飲料、玉米濃湯等自助內容。',source:'店家／半官方資料',status:'🟡 部分核對'},
-{name:'魔力牛牛排館 安南安中店',type:'🥩 牛排',tags:['🍱 自助吧','♾️ 吃到飽'],area:'安南區',price:'依最新排餐方案',address:'台南市安南區安中路一段361-51號',phone:'依最新資訊',hours:'11:15–13:45；16:45–20:30（週二公休）',desc:'飲料、玉米濃湯等自助內容。',source:'店家／半官方資料',status:'🟡 部分核對'},
-{name:'牛室炙燒牛排 BEEFHOUSE 台南海安店',rating:4.4,reviewCount:9044,ratingSource:'Google Maps',type:'🥩 牛排',tags:['🍱 自助吧','♾️ 吃到飽'],area:'北區',price:'依最新方案',address:'台南市北區海安路三段606號',phone:'依最新資訊',hours:'依最新資訊',desc:'牛排吃到飽並有披薩、熟食、冰淇淋等自助內容。',source:'商家公開資料',status:'🟡 部分核對'},
-{name:'一二三木頭人炙燒牛排',rating:4.4,reviewCount:1463,ratingSource:'Google Maps',type:'🥩 牛排',tags:['🍱 自助吧','♾️ 吃到飽'],area:'安南區',price:'約 $200–400',address:'台南市安南區長和路三段177號',phone:'06-357-1515',hours:'11:00–14:00；17:00–21:00',desc:'肉燥飯、咖哩飯、玉米濃湯、烤吐司、冰淇淋等自助內容。',source:'近期探店資料＋商家資料',status:'🟢 已核對'},
-{name:'奇美食品幸福工廠',rating:4.1,reviewCount:9628,ratingSource:'Google Maps',type:'🍱 Buffet',tags:['🍱 自助吧','♾️ 吃到飽','💰 $300以下'],area:'仁德區',price:'成人 $158；101–140cm $118；81–100cm $68',address:'台南市仁德區機場路1008號',phone:'依官方最新資訊',hours:'10:30–15:00；週一休館',desc:'幸福吃到飽自助吧 2.0；港式、中式、台式熟食與水餃、煎餃等。',source:'近期公開資料；官方頁待補',status:'🟡 部分核對'},
-{name:'遠東 CAFÉ 台南遠東香格里拉',type:'🍱 Buffet',tags:['♾️ 吃到飽','🍱 自助吧','🔴 可以訂位'],area:'東區',price:'依餐期',address:'台南市東區大學路西段89號 10F',phone:'依官方最新資訊',hours:'依官方最新資訊',desc:'飯店 Buffet。',source:'飯店／公開餐飲資料',status:'🟡 部分核對'},
-{name:'漢來海港 台南南紡店',rating:4.2,reviewCount:7683,ratingSource:'Google Maps',type:'🍱 Buffet',tags:['♾️ 吃到飽','🍱 自助吧','🔴 可以訂位'],area:'東區',price:'依餐期',address:'台南市東區中華東路一段366號',phone:'依官方最新資訊',hours:'依官方最新資訊',desc:'海鮮與熟食自助餐。',source:'商場／品牌資料',status:'🟡 部分核對'},
-{name:'台糖長榮酒店 吃遍天下自助餐廳',rating:4.1,reviewCount:2172,ratingSource:'Google Maps',type:'🍱 Buffet',tags:['♾️ 吃到飽','🍱 自助吧','🔴 可以訂位'],area:'東區',price:'依餐期',address:'台南市東區中華東路三段336巷1號',phone:'依官方最新資訊',hours:'依官方最新資訊',desc:'飯店自助餐。',source:'飯店／公開餐飲資料',status:'🟡 部分核對'},
-{name:'桂田酒店 阿力海百匯餐廳',type:'🍱 Buffet',tags:['♾️ 吃到飽','🍱 自助吧','🔴 可以訂位'],area:'永康區',price:'依餐期',address:'台南市永康區永安一街99號',phone:'依官方最新資訊',hours:'依官方最新資訊',desc:'飯店百匯自助餐。',source:'飯店／台南市政府交叉資料',status:'🟡 部分核對'},
-{name:'食東西自助餐廳（煙波台南館）',rating:4.6,reviewCount:3207,ratingSource:'Google Maps',type:'🍱 Buffet',tags:['♾️ 吃到飽','🍱 自助吧','🔴 可以訂位'],area:'中西區',price:'依餐期',address:'台南市中西區永福路一段269號',phone:'依官方最新資訊',hours:'依官方最新資訊',desc:'飯店自助餐。',source:'飯店／近期 Buffet 整理交叉資料',status:'🟡 部分核對'},
-{name:'榕廷百匯餐廳（禧榕軒）',rating:4.2,reviewCount:368,ratingSource:'Google Maps',type:'🍱 Buffet',tags:['♾️ 吃到飽','🍱 自助吧','🔴 可以訂位'],area:'北區',price:'依餐期',address:'台南市北區',phone:'依官方最新資訊',hours:'依官方最新資訊',desc:'飯店百匯；官方公告提及平日早餐吃到飽。',source:'台南市政府 2026/09/04 公告＋飯店資料',status:'🟡 部分核對'},
-{name:'福爾摩沙遊艇酒店－威尼斯餐廳',rating:4.5,reviewCount:4684,ratingSource:'Google Maps',type:'🍱 Buffet',tags:['♾️ 吃到飽','🍱 自助吧','🔴 可以訂位'],area:'安平區',price:'依餐期',address:'台南市安平區',phone:'依官方最新資訊',hours:'依官方最新資訊',desc:'自助餐；官方公告提及平日午晚餐自助餐券。',source:'台南市政府 2026/09/04 公告＋飯店資料',status:'🟡 部分核對'},
-{name:'夏都城食百匯自助餐廳',rating:4.1,reviewCount:1657,ratingSource:'Google Maps',type:'🍱 Buffet',tags:['♾️ 吃到飽','🍱 自助吧','🔴 可以訂位'],area:'南區',price:'依餐期',address:'台南市南區',phone:'依官方最新資訊',hours:'依官方最新資訊',desc:'飯店自助百匯。',source:'近期 Buffet 整理＋商家資料',status:'🟡 部分核對'},
-{name:'元素餐廳（台南大員皇冠假日酒店）',rating:4.0,reviewCount:2637,ratingSource:'Google Maps',type:'🍱 Buffet',tags:['♾️ 吃到飽','🍱 自助吧','🔴 可以訂位'],area:'安平區',price:'依餐期',address:'台南市安平區',phone:'依官方最新資訊',hours:'依官方最新資訊',desc:'飯店自助餐。',source:'近期 Buffet 整理＋飯店資料',status:'🟡 部分核對'},
-{name:'台南大飯店 歐式自助餐',rating:3.9,reviewCount:1276,ratingSource:'Google Maps',type:'🍱 Buffet',tags:['♾️ 吃到飽','🍱 自助吧','🔴 可以訂位'],area:'中西區',price:'依餐期',address:'台南市中西區',phone:'依官方最新資訊',hours:'依官方最新資訊',desc:'飯店歐式自助餐。',source:'近期 Buffet 整理＋飯店資料',status:'🟡 部分核對'},
-{name:'甘粹餐廳（台南老爺行旅）',type:'🍱 Buffet',tags:['🍱 自助吧','🔴 可以訂位'],area:'東區',price:'平日午餐 $680+10% 起；假日午餐 $880+10% 起',address:'台南市東區中華東路一段368號 5F',phone:'06-238-3868',hours:'早餐 06:30–10:00；平日午餐 11:30–14:00；週末午餐 11:00–14:00',desc:'目前官方午餐為半自助式：主菜搭配自助沙拉吧；晚餐採預約桌席／包場。',source:'台南老爺行旅官方餐廳頁',status:'🟢 已核對',official:'https://www.hotelroyal.com.tw/zh-tw/Tainan/dining/1435',booking:'https://lihi2.com/aJVIz'},
-];</script><script>
-window.addEventListener('error',function(e){console.error(e.error||e.message);});
-
-const $=id=>document.getElementById(String(id).replace(/^#/,''));
-const sourceData=Array.isArray(window.RESTAURANTS)?window.RESTAURANTS:[];
-const data=[...new Map(sourceData.map(x=>[x.name,x])).values()];
-const cats=['全部','🍱 Buffet','🍲 火鍋','🔥 燒肉','🥩 牛排'];
-function categoryOf(r){const t=String(r.type||''); if(t.includes('Buffet')) return '🍱 Buffet'; if(t.includes('火鍋')) return '🍲 火鍋'; if(t.includes('燒肉')||t.includes('韓式')) return '🔥 燒肉'; if(t.includes('牛排')) return '🥩 牛排'; return '🍱 Buffet'}
-const areas=[...new Set(data.map(x=>x.area).filter(Boolean))].sort();
-areas.forEach(x=>$('#district').insertAdjacentHTML('beforeend',`<option value="${esc(x)}">${esc(x)}</option>`));
-let state={q:'',district:'',budget:'',sort:'default',type:'全部'};
-function esc(v){return String(v??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
-function pnum(s){const m=String(s||'').replace(/,/g,'').match(/(?:NT\$|\$)?\s*(\d{3,5})/);return m?+m[1]:Infinity}
-function stars(r){if(r.rating==null)return '<span class="stars">☆☆☆☆☆</span><span>尚無 Google 評分</span>';const n=Math.max(0,Math.min(5,Number(r.rating)));let o='';for(let i=0;i<5;i++)o+=i<Math.round(n)?'★':'☆';const count=r.reviewCount?`<small>(${Number(r.reviewCount).toLocaleString()} 則)</small>`:'';return `<span class="stars">${o}</span><b>${n.toFixed(1)}</b><small>/5 · Google</small>${count}`}
-function budgetMatch(r,b){if(!b)return true;const n=pnum(r.price);if(!Number.isFinite(n))return false;return b==='under300'?n<300:b==='300to500'?n>=300&&n<=500:b==='500to800'?n>500&&n<=800:b==='800to1200'?n>800&&n<=1200:n>1200}
-function filtered(){let a=data.filter(r=>{const t=[r.name,r.type,r.area,r.address,r.desc].join(' ').toLowerCase();return(!state.q||t.includes(state.q.toLowerCase()))&&(!state.district||r.area===state.district)&&(state.type==='全部'||categoryOf(r)===state.type)&&budgetMatch(r,state.budget)});if(state.sort==='weekdayAsc')a.sort((a,b)=>pnum(a.price)-pnum(b.price));if(state.sort==='ratingDesc')a.sort((a,b)=>(b.rating??-1)-(a.rating??-1));if(state.sort==='name')a.sort((a,b)=>a.name.localeCompare(b.name,'zh-Hant'));return a}
-function splitPrice(x){let s=x.price||'依店家公告';let weekday=s,dinner='—';if(/平日/.test(s)){const parts=s.split('；');weekday=parts[0];dinner=parts.slice(1).join('；')||'—'}else if(/午/.test(s)&&/晚/.test(s)){const parts=s.split('；');weekday=parts[0];dinner=parts.slice(1).join('；')||'—'}else if(/NT\$/.test(s)&&/起/.test(s)){weekday=s;dinner=s}return {weekday,dinner}}
-function detail(r){const map='https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(r.name+' '+r.address);return `<h2>${esc(r.name)}</h2><div class="rating">${stars(r)}</div><div class="rows"><div class="row"><div class="k">價目表</div><div class="v">平日／午餐：${esc(splitPrice(r).weekday)}<br>晚餐／假日：${esc(splitPrice(r).dinner)}<br>兒童：${esc(r.child||'依店家公告')}<br>服務費：${esc(r.service||'依店家公告')}</div></div><div class="row"><div class="k">地址</div><div class="v">${esc(r.address||'—')}</div></div><div class="row"><div class="k">電話</div><div class="v">${esc(r.phone||'—')}</div></div><div class="row"><div class="k">營業時間</div><div class="v">${esc(r.hours||'—')}</div></div><div class="row"><div class="k">特色／備註</div><div class="v">${esc(r.desc||'—')} ${esc(r.note||'')}</div></div><div class="row"><div class="k">資料來源</div><div class="v">${esc(r.source||'—')}</div></div><div class="row"><div class="k">最後核對</div><div class="v">2026/09/10</div></div></div><div class="actions"><a class="main" href="${map}" target="_blank" rel="noopener">🗺️ 開啟地圖</a>${r.phone&&/^06-\d/.test(r.phone)?`<a href="tel:${r.phone.replace(/-/g,'')}">☎️ 電話</a>`:''}${r.official?`<a href="${esc(r.official)}" target="_blank" rel="noopener">🌐 官方網站</a>`:''}${r.booking?`<a href="${esc(r.booking)}" target="_blank" rel="noopener">🔴 官方訂位</a>`:''}</div>`}
-function show(r){$('#detail').innerHTML=detail(r);$('#modal').classList.add('show')}
-function render(){const rows=filtered();$('#resultInfo').textContent=`目前顯示 ${rows.length} 間`;$('#cards').innerHTML=rows.length?rows.map(r=>{const p=splitPrice(r);const map='https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(r.name+' '+r.address);return `<article class="card"><div class="badges"><span class="badge">${esc(r.type||'吃到飽')}</span>${(r.tags||[]).slice(0,2).map(v=>`<span class="badge">${esc(v)}</span>`).join('')}<span class="badge ${r.status&&r.status.includes('🟢')?'ok':'warn'}">${esc(r.status||'待確認')}</span></div><h3>${esc(r.name)}</h3><div class="rating">${stars(r)}</div><div class="addr">📍 ${esc(r.address||'—')}</div><div class="addr">☎️ ${r.phone&&r.phone!=='依官方最新資訊'?`<a href="tel:${esc(r.phone.replace(/-/g,''))}">${esc(r.phone)}</a>`:esc(r.phone||'—')}</div><div class="prices"><div class="pricebox"><div class="lab">平日／午餐</div><div class="num">${esc(p.weekday)}</div></div><div class="pricebox"><div class="lab">晚餐／假日</div><div class="num">${esc(p.dinner)}</div></div></div><div class="meta"><div><b>兒童：</b>${esc(r.child||'依店家公告')}</div><div><b>服務費：</b>${esc(r.service||'依店家公告')}</div></div><div class="locbar"><a class="locbtn primary" href="${map}" target="_blank" rel="noopener">🗺️ 開啟地圖</a></div><div class="actions"><button class="main" data-name="${esc(r.name)}">完整資訊／來源</button>${r.official?`<a href="${esc(r.official)}" target="_blank" rel="noopener">🌐 官方網站</a>`:''}</div></article>`}).join(''):'<div class="notice">找不到符合條件的餐廳，請清除篩選。</div>';$cardsButtons()}
-function $cardsButtons(){document.querySelectorAll('[data-name]').forEach(b=>b.onclick=()=>{const r=data.find(x=>x.name===b.dataset.name);if(r)show(r)})}
-cats.forEach((c,i)=>{const b=document.createElement('button');b.className='chip'+(i===0?' active':'');b.textContent=c;b.onclick=()=>{state.type=c;document.querySelectorAll('.chip').forEach(x=>x.classList.remove('active'));b.classList.add('active');render()};$('#chips').appendChild(b)});
-$('#q').oninput=e=>{state.q=e.target.value;render()};$('#district').onchange=e=>{state.district=e.target.value;render()};$('#budget').onchange=e=>{state.budget=e.target.value;render()};$('#sort').onchange=e=>{state.sort=e.target.value;render()};$('#reset').onclick=()=>{state={q:'',district:'',budget:'',sort:'default',type:'全部'};$('#q').value='';$('#district').value='';$('#budget').value='';$('#sort').value='default';document.querySelectorAll('.chip').forEach((x,i)=>x.classList.toggle('active',i===0));render()};
-$('#close').onclick=()=>$('#modal').classList.remove('show');$('#modal').onclick=e=>{if(e.target.id==='modal')$('#modal').classList.remove('show')};
-$('#statCount').textContent=`已收錄 ${data.length} 間`;$('#sumCount').textContent=`${data.length} 間`;const nums=data.map(x=>pnum(x.price)).filter(Number.isFinite);$('#sumMin').textContent=nums.length?`NT$${Math.min(...nums).toLocaleString()}`:'—';const rs=data.map(x=>x.rating).filter(x=>typeof x==='number');$('#sumRating').textContent=rs.length?(rs.reduce((a,b)=>a+b,0)/rs.length).toFixed(1):'—';render();
-
+<div id="modal" class="modal" role="dialog" aria-modal="true" aria-label="餐廳完整資訊"><div class="dialog"><button class="close" id="close" aria-label="關閉">×</button><div id="detail"></div></div></div>
+<script>window.RESTAURANTS = [];</script>
+<script src="data.js"></script>
+<script src="app.js"></script>
+<script type="application/ld+json" id="restaurant-schema">{"@context":"https://schema.org","@type":"ItemList","name":"台南吃到飽餐廳列表","itemListElement":[]}</script>
+<script>
+(function(){
+  function updateSchema(){
+    var data=window.RESTAURANTS||[]; var el=document.getElementById('restaurant-schema'); if(!el)return;
+    el.textContent=JSON.stringify({'@context':'https://schema.org','@type':'ItemList','name':'台南吃到飽餐廳列表','numberOfItems':data.length,'itemListElement':data.map(function(r,i){return {'@type':'ListItem','position':i+1,'name':r.name,'url':'https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(r.name+' '+(r.address||'台南'))};})});
+  }
+  updateSchema();
+})();
 </script>
 </body></html>
