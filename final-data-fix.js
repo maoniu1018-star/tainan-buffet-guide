@@ -61,8 +61,7 @@
       r.rating=ratings[name];
       r.ratingSource='Google Maps';
     }
-    // Fill known missing numbers, and correct the known stale Hanlai number in data.js.
-    if(phones[name] && (placeholder(r.phone) || (name==='漢來海港 台南南紡店' && /07-?412-?8068/i.test(String(r.phone))))){
+    if(phones[name] && (placeholder(r.phone) || (name==='漢來海港 台南南紡店' && /0[67]-?412-?8068/i.test(String(r.phone))))){
       r.phone=phones[name];
     }
     if(typeof r.rating==='number' && !r.ratingSource) r.ratingSource='Google Maps';
