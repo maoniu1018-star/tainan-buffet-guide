@@ -70,3 +70,32 @@
   };
   (window.RESTAURANTS||[]).forEach(r=>{if(phones[r.name])r.phone=phones[r.name];});
 })();
+
+/* Final notice placement guard: keep the price reminder directly below the hero,
+   with compact styling and #notice anchor support. Runs after other fixer scripts. */
+(function(){
+  'use strict';
+  function placeNotice(){
+    const notice=document.querySelector('.notice');
+    const hero=document.querySelector('.hero');
+    if(!notice || !hero || !hero.parentNode) return;
+    notice.id='notice';
+    notice.classList.add('top-price-notice');
+    if(hero.nextElementSibling!==notice){
+      hero.parentNode.insertBefore(notice,hero.nextSibling);
+    }
+    if(!document.getElementById('price-notice-final-style')){
+      const style=document.createElement('style');
+      style.id='price-notice-final-style';
+      style.textContent=`
+        .top-price-notice{box-sizing:border-box;width:min(1120px,calc(100% - 32px));margin:16px auto 12px;padding:11px 16px;border:1px solid rgba(239,142,174,.28);border-radius:14px;background:#fff7fa;color:#6b4f5b;font-size:13px;line-height:1.55;box-shadow:0 2px 10px rgba(128,76,96,.05);}
+        .top-price-notice b{color:#7a4f61;font-weight:700;}
+        .top-price-notice{scroll-margin-top:16px;}
+        @media(max-width:760px){.top-price-notice{width:calc(100% - 24px);margin:12px auto 10px;padding:9px 12px;font-size:12px;border-radius:11px;}}
+      `;
+      document.head.appendChild(style);
+    }
+  }
+  window.addEventListener('load',()=>setTimeout(placeNotice,1800));
+  setTimeout(placeNotice,1800);
+})();
