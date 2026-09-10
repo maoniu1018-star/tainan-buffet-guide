@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://maoniu1018-star.github.io/tainan-buffet-guide/sitemap.xml
