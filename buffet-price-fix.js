@@ -15,5 +15,5 @@
   const A=window.RESTAURANTS||[];
   A.forEach(r=>{if(P[r.name]){r.prices=P[r.name];r.price=r.prices.weekdayLunch;}});
   const串=A.find(r=>r.name==='串家物語 台南三井店');
-  if(串) 串.bookingUrl='https://inline.app/booking/-L3RNFbAlXuITYXJJ3v7/-MuAhjlIDbmHRz8OWmzH';
+  if(串){串.bookingUrl='https://inline.app/booking/-L3RNFbAlXuITYXJJ3v7/-MuAhjlIDbmHRz8OWmzH';串.official=串.bookingUrl;}
 })();
