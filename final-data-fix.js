@@ -87,7 +87,15 @@
       if(/查看\s*Google\s*評分/i.test((a.textContent||'').trim())) a.remove();
     });
   }
+
+  function cleanCreatorDuplicate(){
+    document.querySelectorAll('.stats .pill').forEach(pill=>{
+      if(/Chung\s*NING|製作者/i.test((pill.textContent||'').trim())) pill.remove();
+    });
+  }
+
   cleanRatingLinks();
+  cleanCreatorDuplicate();
   if(window.MutationObserver){
     const root=document.getElementById('cards');
     if(root){
