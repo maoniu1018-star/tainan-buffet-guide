@@ -40,8 +40,12 @@
     '武灰鍋 平價小火鍋 安和店':'06-251-8997',
     '九鼎鍋 大同店':'06-215-5676',
     '嗑肉石鍋 東門店':'06-602-0358',
+    '麻佬二 台南店':'0968-114-508',
     '遠東 CAFÉ 台南遠東香格里拉':'06-702-8856',
-    '遠東 Café 台南遠東香格里拉':'06-702-8856'
+    '遠東 Café 台南遠東香格里拉':'06-702-8856',
+    '台南大飯店 歐式自助餐':'06-224-9886',
+    '元素餐廳（台南大員皇冠假日酒店）':'06-512-1807',
+    '夏都城食百匯自助餐廳':'06-292-0656'
   };
 
   function placeholder(v){
@@ -54,10 +58,9 @@
       r.rating=ratings[name];
       r.ratingSource='Google Maps';
     }
-    if((placeholder(r.phone)) && phones[name]){
+    if(placeholder(r.phone) && phones[name]){
       r.phone=phones[name];
     }
-    // Keep an explicit marker for QA/debugging without changing the visible UI.
     if(typeof r.rating==='number' && !r.ratingSource) r.ratingSource='Google Maps';
   }
 
