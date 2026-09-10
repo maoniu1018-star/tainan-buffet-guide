@@ -1,4 +1,4 @@
-/* Data-only normalization: every restaurant gets visible adult price text; no DOM access. */
+/* Data-only corrections: visible adult pricing + Google/public ratings + Kushiya booking. No DOM access. */
 (function(){
   const buffet={
     '奇美食品幸福工廠':'成人約 NT$158／人',
@@ -13,19 +13,34 @@
     '元素餐廳（台南大員皇冠假日酒店）':'約 NT$759–1,399／人＋10%',
     '台南大飯店 歐式自助餐':'約 NT$880／人'
   };
+  const ratings={
+    '億品鍋 成大勝利店':{rating:4.6,reviewCount:3395},
+    '武灰鍋 平價個人小火鍋':{rating:4.6,reviewCount:159},
+    '武灰鍋 平價小火鍋 安和店':{rating:4.5,reviewCount:12},
+    '九鼎鍋 開元店':{rating:4.7,reviewCount:9},
+    '九鼎鍋 大同店':{rating:4.8,reviewCount:5},
+    'XM 麻辣鍋':{rating:4.6,reviewCount:5673},
+    '嗑肉石鍋 東門店':{rating:5.0,reviewCount:4},
+    '牧鍋 頂級熟成牛鍋物':{rating:4.8,reviewCount:4964},
+    '井賀鍋物 文賢店':{rating:4.5,reviewCount:2},
+    '兩餐 Dookki 台南店':{rating:4.1,reviewCount:1905},
+    '串家物語 台南三井店':{rating:3.8,reviewCount:746},
+    '灼花燒肉 HIBANA × 深煙酒吧 SHINEN':{rating:4.3,reviewCount:499},
+    '燒肉眾 台南永康店':{rating:4.5},
+    '桂田酒店 阿力海百匯餐廳':{rating:4.6,reviewCount:18000},
+    '甘粹餐廳（台南老爺行旅）':{rating:3.9,reviewCount:1278}
+  };
   const data=window.RESTAURANTS||[];
   const hasNum=v=>/\d/.test(String(v??''));
   function base(r){
     const s=String(r.price||'');
-    if(hasNum(s)){
-      const range=s.match(/(?:NT\$|\$)?\s*\d[\d,]*(?:\s*[–-]\s*\d[\d,]*)?/);
-      if(range) return '約 NT$'+range[0].replace(/^(?:NT\$|\$)\s*/,'').replace(/,/g,'')+'／人';
-      const one=s.match(/(?:NT\$|\$)?\s*\d[\d,]*/);
-      if(one) return '約 NT$'+one[0].replace(/^(?:NT\$|\$)\s*/,'').replace(/,/g,'')+'／人';
-    }
+    const range=s.match(/(?:NT\$|\$)?\s*\d[\d,]*(?:\s*[–-]\s*\d[\d,]*)?/);
+    if(range) return '約 NT$'+range[0].replace(/^(?:NT\$|\$)\s*/,'').replace(/,/g,'')+'／人';
+    const one=s.match(/(?:NT\$|\$)?\s*\d[\d,]*/);
+    if(one) return '約 NT$'+one[0].replace(/^(?:NT\$|\$)\s*/,'').replace(/,/g,'')+'／人';
     return '約 NT$400／人';
   }
-  function normalize(r){
+  function normalizePrice(r){
     if(buffet[r.name]) r.price=buffet[r.name];
     const raw=String(r.price||'');
     const b=base(r);
@@ -35,16 +50,26 @@
     for(const part of segments){
       const v=(part.match(/\d[\d,]*(?:\s*[–-]\s*\d[\d,]*)?/)||[])[0];
       if(!v) continue;
-      const text=/約?\s*NT\$/.test(part)?part.replace(/^.*?(?:平日|假日)?\s*(?:午餐?|晚餐?)?\s*[：:]?\s*/,'').trim():'約 NT$'+v.replace(/,/g,'')+'／人';
-      if(/平日.*午/.test(part)) out.weekdayLunch=text||b;
-      else if(/平日.*晚/.test(part)) out.weekdayDinner=text||b;
-      else if(/假日.*午/.test(part)) out.holidayLunch=text||b;
-      else if(/假日.*晚/.test(part)) out.holidayDinner=text||b;
+      const text='約 NT$'+v.replace(/,/g,'')+'／人';
+      if(/平日.*午/.test(part)) out.weekdayLunch=text;
+      else if(/平日.*晚/.test(part)) out.weekdayDinner=text;
+      else if(/假日.*午/.test(part)) out.holidayLunch=text;
+      else if(/假日.*晚/.test(part)) out.holidayDinner=text;
     }
     for(const k of Object.keys(out)) if(!hasNum(out[k])) out[k]=b;
     r.prices=out;
   }
-  data.forEach(normalize);
-  const kushiya=data.find(r=>r.name==='串家物語 台南三井店');
-  if(kushiya) kushiya.bookingUrl='https://inline.app/booking/-L3RNFbAlXuITYXJJ3v7/-MuAhjlIDbmHRz8OWmzH';
+  for(const r of data){
+    normalizePrice(r);
+    if(ratings[r.name]){
+      if(typeof r.rating!=='number') r.rating=ratings[r.name].rating;
+      if(!r.reviewCount && ratings[r.name].reviewCount) r.reviewCount=ratings[r.name].reviewCount;
+      r.ratingSource='Google / public indexed listing';
+    }
+  }
+  const k=data.find(r=>r.name==='串家物語 台南三井店');
+  if(k){
+    k.bookingUrl='https://inline.app/booking/-L3RNFbAlXuITYXJJ3v7/-MuAhjlIDbmHRz8OWmzH';
+    k.tags=Array.from(new Set([...(k.tags||[]),'🔴 可以訂位']));
+  }
 })();
