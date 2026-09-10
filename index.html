@@ -1,24 +1,13 @@
 <!doctype html>
 <html lang="zh-Hant">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="description" content="台南吃到飽、Buffet、火鍋、燒肉、牛排與自助吧價格大全。查平日、假日、午餐、晚餐價格、服務費與兒童費用。">
 <meta name="robots" content="index,follow,max-image-preview:large">
 <link rel="canonical" href="https://maoniu1018-star.github.io/tainan-buffet-guide/">
-<meta property="og:type" content="website">
-<meta property="og:title" content="台南吃到飽｜價格大全">
-<meta property="og:description" content="台南吃到飽、Buffet、火鍋、燒肉、牛排與自助吧價格大全。">
-<meta property="og:url" content="https://maoniu1018-star.github.io/tainan-buffet-guide/">
+<meta property="og:type" content="website"><meta property="og:title" content="台南吃到飽｜價格大全"><meta property="og:description" content="台南吃到飽、Buffet、火鍋、燒肉、牛排與自助吧價格大全。"><meta property="og:url" content="https://maoniu1018-star.github.io/tainan-buffet-guide/">
 <title>台南吃到飽｜價格大全｜火鍋・燒肉・牛排・自助吧</title>
 <link rel="stylesheet" href="style.css">
-<script type="application/ld+json">{
-  "@context":"https://schema.org",
-  "@type":"WebSite",
-  "name":"台南吃到飽價格大全",
-  "url":"https://maoniu1018-star.github.io/tainan-buffet-guide/",
-  "description":"台南吃到飽、Buffet、火鍋、燒肉、牛排與自助吧價格大全。"
-}</script>
 </head>
 <body>
 <header class="hero"><div class="wrap">
@@ -29,7 +18,7 @@
   <div class="stats"><div class="pill" id="statCount">已收錄 — 間</div><div class="pill">⭐ Google 星評</div><div class="pill">🗺️ Google 地圖</div><div class="pill">📷 Chung NING · Instagram</div></div>
 </div></header>
 <section class="controls"><div class="wrap">
-  <div class="searchrow"><input id="q" class="input" placeholder="搜尋餐廳、地址、料理類型…" aria-label="搜尋餐廳、地址、料理類型"><select id="district" class="select" aria-label="行政區"><option value="">全部行政區</option></select><select id="budget" class="select" aria-label="預算"><option value="">全部預算</option><option value="under300">NT$300 以下</option><option value="300to500">NT$300–500</option><option value="500to800">NT$500–800</option><option value="800to1200">NT$800–1,200</option><option value="over1200">NT$1,200+</option></select><select id="sort" class="select" aria-label="排序"><option value="default">推薦排序</option><option value="weekdayAsc">平日價格低 → 高</option><option value="dinnerAsc">晚餐價格低 → 高</option><option value="ratingDesc">評分高 → 低</option><option value="name">餐廳名稱</option></select><button id="reset" class="btn">清除篩選</button></div>
+  <div class="searchrow"><input id="q" class="input" placeholder="搜尋餐廳、地址、料理類型…"><select id="district" class="select"><option value="">全部行政區</option></select><select id="budget" class="select"><option value="">全部預算</option><option value="under300">NT$300 以下</option><option value="300to500">NT$300–500</option><option value="500to800">NT$500–800</option><option value="800to1200">NT$800–1,200</option><option value="over1200">NT$1,200+</option></select><select id="sort" class="select"><option value="default">推薦排序</option><option value="weekdayAsc">平日價格低 → 高</option><option value="dinnerAsc">晚餐價格低 → 高</option><option value="ratingDesc">評分高 → 低</option><option value="name">餐廳名稱</option></select><button id="reset" class="btn">清除篩選</button></div>
   <div id="chips" class="chips"></div>
 </div></section>
 <main class="wrap" id="restaurants">
@@ -39,18 +28,8 @@
   <div class="notice"><b>⚠️ 價格提醒：</b>價格、兒童費、服務費與節日價可能調整；實際消費前請以店家最新公告為準。</div>
 </main>
 <footer><div class="wrap">台南吃到飽價格大全｜製作者：<a class="creator" href="https://www.instagram.com/h.ning1018/" target="_blank" rel="noopener">Chung NING · Instagram @h.ning1018</a></div></footer>
-<div id="modal" class="modal" role="dialog" aria-modal="true" aria-label="餐廳完整資訊"><div class="dialog"><button class="close" id="close" aria-label="關閉">×</button><div id="detail"></div></div></div>
+<div id="modal" class="modal"><div class="dialog"><button class="close" id="close">×</button><div id="detail"></div></div></div>
 <script>window.RESTAURANTS = [];</script>
 <script src="data.js"></script>
 <script src="app.js"></script>
-<script type="application/ld+json" id="restaurant-schema">{"@context":"https://schema.org","@type":"ItemList","name":"台南吃到飽餐廳列表","itemListElement":[]}</script>
-<script>
-(function(){
-  function updateSchema(){
-    var data=window.RESTAURANTS||[]; var el=document.getElementById('restaurant-schema'); if(!el)return;
-    el.textContent=JSON.stringify({'@context':'https://schema.org','@type':'ItemList','name':'台南吃到飽餐廳列表','numberOfItems':data.length,'itemListElement':data.map(function(r,i){return {'@type':'ListItem','position':i+1,'name':r.name,'url':'https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(r.name+' '+(r.address||'台南'))};})});
-  }
-  updateSchema();
-})();
-</script>
 </body></html>
