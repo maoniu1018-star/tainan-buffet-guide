@@ -1,9 +1,10 @@
-name: Inject contact rating fix
+name: Inject contact rating and service fee fixes
 on:
   push:
     branches: [main]
     paths:
       - 'contact-rating-fix.js'
+      - 'service-fee-fix.js'
       - '.github/workflows/inject-contact-rating-fix.yml'
 permissions:
   contents: write
@@ -12,23 +13,31 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Inject latest contact rating fix
+      - name: Inject latest UI fixes
         shell: bash
         run: |
           python - <<'PY'
           from pathlib import Path
+          import re
           p=Path('index.html')
           s=p.read_text(encoding='utf-8')
-          old='<script src="contact-rating-fix.js?v=20260910-1"></script>'
-          new='<script src="contact-rating-fix.js?v=20260910-2"></script>'
-          if old in s:
-              s=s.replace(old,new,1)
-          elif new not in s:
-              marker='<script src="buffet-price-fix.js?v=20260910-20260910-1"></script>'
-              if marker in s:
-                  s=s.replace(marker,marker+'\n'+new,1)
-              else:
-                  s=s.replace('</body>',new+'\n</body>',1)
+          contact='<script src="contact-rating-fix.js?v=20260910-2"></script>'
+          service='<script src="service-fee-fix.js?v=20260910-1"></script>'
+          marker='<script src="buffet-price-fix.js?v=20260910-20260910-1"></script>'
+          if 'contact-rating-fix.js' in s:
+              s=re.sub(r'<script src="contact-rating-fix\.js\?v=[^"]+"></script>',contact,s)
+          elif marker in s:
+              s=s.replace(marker,marker+'\n'+contact,1)
+          else:
+              s=s.replace('</body>',contact+'\n</body>',1)
+          if 'service-fee-fix.js' in s:
+              s=re.sub(r'<script src="service-fee-fix\.js\?v=[^"]+"></script>',service,s)
+          elif contact in s:
+              s=s.replace(contact,contact+'\n'+service,1)
+          elif marker in s:
+              s=s.replace(marker,marker+'\n'+service,1)
+          else:
+              s=s.replace('</body>',service+'\n</body>',1)
           p.write_text(s,encoding='utf-8')
           PY
       - name: Commit index update
@@ -36,5 +45,5 @@ jobs:
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add index.html
-          git diff --cached --quiet || git commit -m 'chore: load final contact rating fix'
+          git diff --cached --quiet || git commit -m 'chore: load contact and service fee fixes'
           git push
