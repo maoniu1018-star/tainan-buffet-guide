@@ -33,7 +33,14 @@
     '饗翻天臭臭鍋 南區中華南店':4.5,
     '饗翻天臭臭鍋〖南區中華南店〗':4.5,
     '一個圓鍋火鍋店':4.8,
-    '井賀鍋物 安南店':4.5
+    '井賀鍋物 安南店':4.5,
+    '麻佬二 台南店':4.6,
+    '麻佬二 手作麻辣':4.6
+  };
+
+  const reviewCounts={
+    '麻佬二 台南店':1190,
+    '麻佬二 手作麻辣':1190
   };
 
   const phones={
@@ -43,6 +50,7 @@
     '九鼎鍋 大同店':'06-215-5676',
     '嗑肉石鍋 東門店':'06-602-0358',
     '麻佬二 台南店':'0968-114-508',
+    '麻佬二 手作麻辣':'0968-114-508',
     '億品鍋 台南安南店':'06-247-7700',
     '遠東 CAFÉ 台南遠東香格里拉':'06-702-8856',
     '遠東 Café 台南遠東香格里拉':'06-702-8856',
@@ -66,6 +74,7 @@
       r.rating=ratings[name];
       r.ratingSource='Google Maps';
     }
+    if(reviewCounts[name] && !Number.isFinite(Number(r.reviewCount))) r.reviewCount=reviewCounts[name];
     if(phones[name] && (placeholder(r.phone) || (name==='漢來海港 台南南紡店' && /0[67]-?412-?8068/i.test(String(r.phone))))){
       r.phone=phones[name];
     }
