@@ -1,0 +1,11 @@
+{
+  "name": "台南吃到飽價格大全",
+  "short_name": "台南吃到飽",
+  "description": "台南吃到飽、Buffet、火鍋、燒肉、牛排與自助吧價格大全。",
+  "start_url": "/tainan-buffet-guide/",
+  "scope": "/tainan-buffet-guide/",
+  "display": "standalone",
+  "background_color": "#fff8fb",
+  "theme_color": "#ef8eae",
+  "lang": "zh-Hant"
+}
