@@ -1,0 +1,1 @@
+window.RATING_OFFICIAL_FIX={"肉次方 燒肉放題 台南府前店":{"official":"https://syabuyo.com.tw/"}};\n(function(){const d=window.RESTAURANTS||[];const m=window.RATING_OFFICIAL_FIX||{};for(const r of d){const x=m[r.name];if(!x)continue;if(x.rating!=null){r.rating=x.rating;r.reviewCount=x.reviewCount;r.ratingSource="Google Maps";}if(x.official)r.official=x.official;}})();\n
