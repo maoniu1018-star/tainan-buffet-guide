@@ -3,7 +3,7 @@
    - Fill verified phone aliases and correct known stale/incorrect phone entries.
    - Remove any legacy "查看 Google 評分" links.
    - Keep data conservative: never invent a rating or phone.
-   - Force price reminder to the top, after the page renderer has completed.
+   - Move the price reminder into the hero area with compact styling.
 */
 (function(){
   'use strict';
@@ -100,32 +100,49 @@
     if(!notices.length) return false;
     const notice=notices[0];
     for(const extra of notices.slice(1)) extra.remove();
-    const controls=document.querySelector('.controls');
     const hero=document.querySelector('.hero');
-    if(controls && controls.parentNode){
-      controls.parentNode.insertBefore(notice,controls);
+    const wrap=hero && hero.querySelector('.wrap');
+    const stats=wrap && wrap.querySelector('.stats');
+    const controls=document.querySelector('.controls');
+    if(hero && wrap){
+      // Put the notice inside the hero, directly below the stats, so it is visible without a large full-width gap.
+      if(stats) stats.insertAdjacentElement('afterend',notice);
+      else wrap.appendChild(notice);
+      notice.classList.add('top-price-notice');
       notice.dataset.movedTop='1';
       return true;
     }
-    if(hero && hero.parentNode){
-      hero.parentNode.insertBefore(notice,hero.nextSibling);
+    if(controls && controls.parentNode){
+      controls.parentNode.insertBefore(notice,controls);
+      notice.classList.add('top-price-notice');
       notice.dataset.movedTop='1';
       return true;
     }
     return false;
   }
 
+  function applyNoticeLayout(){
+    if(document.getElementById('notice-layout-fix')) return;
+    const style=document.createElement('style');
+    style.id='notice-layout-fix';
+    style.textContent=`
+      .hero .top-price-notice{box-sizing:border-box;width:100%;margin:18px 0 0;padding:10px 14px;border:1px solid rgba(239,142,174,.28);border-radius:12px;background:rgba(255,255,255,.62);font-size:13px;line-height:1.5;color:#6b4f5b;}
+      .hero .top-price-notice b{color:#7a4f61;font-weight:700;}
+      @media(max-width:760px){.hero .top-price-notice{margin-top:14px;padding:9px 12px;font-size:12px;border-radius:10px;}}
+    `;
+    document.head.appendChild(style);
+  }
+
   function cleanup(){
     cleanRatingLinks();
     cleanCreatorDuplicate();
+    applyNoticeLayout();
     movePriceNoticeToTop();
   }
 
   cleanup();
   document.addEventListener('DOMContentLoaded',cleanup,{once:true});
-  setTimeout(cleanup,0);
-  setTimeout(cleanup,100);
-  setTimeout(cleanup,500);
+  [0,100,500,1000].forEach(ms=>setTimeout(cleanup,ms));
 
   if(window.MutationObserver && document.body){
     let busy=false;
