@@ -44,5 +44,19 @@ $('q').oninput=e=>{state.q=e.target.value;render()};$('district').onchange=e=>{s
 render();
 })();
 </script>
+
+<script id="phone-action-fix">
+(function(){
+  const norm=p=>String(p||'').replace(/[^0-9+]/g,'');
+  const isPhone=p=>/^06\d{7,8}$/.test(norm(p)) || /^0[2-8]\d{7,8}$/.test(norm(p));
+  const render=()=>{
+    (window.RESTAURANTS||[]).forEach(r=>{
+      if(!r.phone || !isPhone(r.phone)) return;
+      r.phoneDisplay=r.phone;
+    });
+  };
+  render();
+})();
+</script>
 </body>
 </html>
