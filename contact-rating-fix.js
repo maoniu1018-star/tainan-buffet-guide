@@ -1,22 +1,11 @@
-/* 2026-09-10: ratings + contact + booking UI corrections */
+/* 2026-09-10: Google rating + contact + booking UI corrections */
 (function(){
-  const ratings={
-    '億品鍋 成大勝利店':{rating:4.6,reviewCount:3395},
-    '武灰鍋 平價個人小火鍋':{rating:5.0,reviewCount:3},
-    '武灰鍋平價個人小火鍋':{rating:5.0,reviewCount:3},
-    '九鼎鍋 開元店':{rating:4.7},
-    '九鼎鍋 大同店':{rating:4.8},
-    'XM 麻辣鍋':{rating:4.6,reviewCount:5673},
-    '嗑肉石鍋 東門店':{rating:5.0},
+  // Only values verified as Google/Maps in the current research pass are marked as Google.
+  const googleRatings={
+    '兩餐 Dookki 台南店':{rating:4.1,reviewCount:2351},
     '牧鍋 頂級熟成牛鍋物':{rating:4.5,reviewCount:1731},
-    '井賀鍋物 文賢店':{rating:4.5},
-    '兩餐 Dookki 台南店':{rating:4.1,reviewCount:1905},
-    '串家物語 台南三井店':{rating:3.9,reviewCount:967},
-    '灼花燒肉 HIBANA × 深煙酒吧 SHINEN':{rating:4.3,reviewCount:499},
-    '燒肉眾 台南永康店':{rating:4.5,reviewCount:752},
     '桂田酒店 阿力海百匯餐廳':{rating:4.6,reviewCount:16970},
-    '甘粹餐廳（台南老爺行旅）':{rating:3.9,reviewCount:1400},
-    '魔力牛牛排館 安南安中店':{rating:4.7}
+    '甘粹餐廳（台南老爺行旅）':{rating:3.9,reviewCount:1400}
   };
   const phones={
     '億品鍋 成大勝利店':'06-200-3168',
@@ -33,14 +22,15 @@
   };
   const data=window.RESTAURANTS||[];
   for(const r of data){
-    const x=ratings[r.name];
-    if(x){r.rating=x.rating;if(x.reviewCount)r.reviewCount=x.reviewCount;r.ratingSource='Google Maps';}
+    const x=googleRatings[r.name];
+    if(x){r.rating=x.rating;r.reviewCount=x.reviewCount;r.ratingSource='Google Maps';}
     if(phones[r.name])r.phone=phones[r.name];
     if(booking[r.name])r.bookingUrl=booking[r.name];
     if(/可以訂位|訂位/.test((r.tags||[]).join(' ')))r.__bookable=true;
   }
   function tel(v){return String(v||'').replace(/[^0-9+]/g,'');}
   function mapUrl(r){return 'https://www.google.com/maps/search/?api=1&query='+encodeURIComponent((r.name||'')+' '+(r.address||'台南'));}
+  function googleSearchUrl(r){return 'https://www.google.com/search?q='+encodeURIComponent((r.name||'')+' 台南 Google 評分');}
   function enhance(){
     document.querySelectorAll('.card').forEach(card=>{
       const h=card.querySelector('h3');if(!h)return;
@@ -50,6 +40,7 @@
       if(r.__bookable && r.bookingUrl && ![...actions.querySelectorAll('a')].some(a=>a.href===r.bookingUrl))actions.insertAdjacentHTML('beforeend',`<a href="${r.bookingUrl}" target="_blank" rel="noopener">🔴 線上訂位</a>`);
       if(r.__bookable && !r.bookingUrl && r.phone && !actions.querySelector('.phone-booking'))actions.insertAdjacentHTML('beforeend',`<a class="phone-booking" href="tel:${tel(r.phone)}">📞 電話訂位</a>`);
       if(!actions.querySelector('.map-link'))actions.insertAdjacentHTML('beforeend',`<a class="map-link" href="${mapUrl(r)}" target="_blank" rel="noopener">📍 Google地圖</a>`);
+      if(!r.rating && !actions.querySelector('.google-rating-link'))actions.insertAdjacentHTML('beforeend',`<a class="google-rating-link" href="${googleSearchUrl(r)}" target="_blank" rel="noopener">⭐ 查看 Google 評分</a>`);
     });
     document.querySelectorAll('#modal .row').forEach(row=>{
       const key=row.querySelector('.k')?.textContent?.trim()||'';
@@ -60,10 +51,10 @@
       value.innerHTML=`<a href="tel:${tel(r.phone)}">☎️ ${r.phone}</a>`;
     });
     document.querySelectorAll('.rating').forEach(el=>{
-      if(/未提供|尚無|—|NaN/.test(el.textContent||'')){
-        const card=el.closest('.card');const h=card?.querySelector('h3');const r=data.find(x=>x.name===h?.textContent?.trim());
-        if(r?.rating)el.textContent=`⭐ ${r.rating.toFixed(1)}（Google）`;
-      }
+      const card=el.closest('.card');const h=card?.querySelector('h3');const r=data.find(x=>x.name===h?.textContent?.trim());
+      if(!r)return;
+      if(r.rating)el.textContent=`⭐ ${Number(r.rating).toFixed(1)}（Google）`;
+      else if(!/查看 Google 評分/.test(el.textContent||''))el.textContent='尚無 Google 評分';
     });
   }
   const oldRender=window.render;
