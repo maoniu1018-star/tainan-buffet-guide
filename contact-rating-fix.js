@@ -3,10 +3,30 @@
   'use strict';
 
   const googleRatings={
-    '兩餐 Dookki 台南店':{rating:4.1,reviewCount:2351},
-    '牧鍋 頂級熟成牛鍋物':{rating:4.5,reviewCount:1731},
-    '桂田酒店 阿力海百匯餐廳':{rating:4.6,reviewCount:16970},
-    '甘粹餐廳（台南老爺行旅）':{rating:3.9,reviewCount:1400}
+'億品鍋 成大勝利店':{rating:4.6},
+'武灰鍋 平價個人小火鍋':{rating:5.0},
+'武灰鍋平價個人小火鍋':{rating:5.0},
+'武灰鍋 平價小火鍋 安和店':{rating:4.5},
+'九鼎鍋 開元店':{rating:4.7},
+'九鼎鍋 大同店':{rating:4.8},
+'XM 麻辣鍋':{rating:4.3},
+'嗑肉石鍋 東門店':{rating:5.0},
+'牧鍋 頂級熟成牛鍋物':{rating:4.5,reviewCount:1731},
+'井賀鍋物 文賢店':{rating:4.5},
+'兩餐 Dookki 台南店':{rating:4.1,reviewCount:2351},
+'串家物語 台南三井店':{rating:3.9,reviewCount:967},
+'灼花燒肉 HIBANA × 深煙酒吧 SHINEN':{rating:4.3,reviewCount:499},
+'燒肉眾 台南永康店':{rating:4.5,reviewCount:752},
+'魔力牛牛排館 安南安中店':{rating:4.2,reviewCount:1106},
+'遠東 CAFÉ 台南遠東香格里拉':{rating:4.3,reviewCount:2800},
+'桂田酒店 阿力海百匯餐廳':{rating:4.6,reviewCount:16970},
+'甘粹餐廳（台南老爺行旅）':{rating:3.9,reviewCount:1400},
+'饗翻天臭臭鍋 新營店':{rating:4.8},
+'饗翻天臭臭鍋〖新營店〗':{rating:4.8},
+'饗翻天臭臭鍋 南區中華南店':{rating:4.5},
+'饗翻天臭臭鍋〖南區中華南店〗':{rating:4.5},
+'一個圓鍋火鍋店':{rating:4.8},
+'井賀鍋物 安南店':{rating:4.5}
   };
   const phones={
     '億品鍋 成大勝利店':'06-200-3168',
