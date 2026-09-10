@@ -1,4 +1,4 @@
-/* Data corrections: prices, service fees, children, ratings, official/booking links. No MutationObserver. */
+/* Data corrections: prices, service fees, children, ratings, official/booking links. */
 (function(){
   const buffet={
     '奇美食品幸福工廠':'成人約 NT$158／人',
@@ -43,6 +43,8 @@
     '饗麻饗辣 台南永華旗艦店':'10%',
     '灼花燒肉 HIBANA × 深煙酒吧 SHINEN':'10%',
     '井賀鍋物 安南店':'10%',
+    '十色鍋物':'10%',
+    '温玥坊鍋物':'清潔費 10%',
     '肉多多火鍋 台南東寧店':'10%',
     '肉多多火鍋 台南怡平店':'10%',
     '肉多多火鍋 台南大遠百公園店':'10%',
@@ -50,7 +52,7 @@
     '兩餐 Dookki 台南店':'清潔費 10%',
     '燒肉眾 台南永康店':'清潔費 10%',
     '嗑肉石鍋 東門店':'清潔費 30元／人',
-    '一個圓鍋火鍋店':'清潔費 30元／人'
+    '一個圓鍋火鍋店':'清潔費 31元／鍋'
   };
   const child={
     '灼花燒肉 HIBANA × 深煙酒吧 SHINEN':'101–130cm 半價；100cm以下免費',
@@ -74,7 +76,6 @@
     '井賀鍋物 文賢店':'https://www.jinghe-hotpot.com.tw/stronghold.html',
     '井賀鍋物 安南店':'https://www.jinghe-hotpot.com.tw/stronghold.html',
     '橫濱牛排 台南三井店':'https://www.yokohama-steakhouse.com.tw/',
-    '兩餐 Dookki 台南店':'https://www.dookki.com.tw/',
     '肉多多火鍋 台南東寧店':'https://booking.twledodo.com/rododo/tw/',
     '肉多多火鍋 台南怡平店':'https://booking.twledodo.com/rododo/tw/',
     '肉多多火鍋 台南大遠百公園店':'https://booking.twledodo.com/rododo/tw/',
@@ -122,15 +123,25 @@
     if(child[r.name]) r.child=child[r.name]; else delete r.child;
     if(official[r.name]) r.official=official[r.name];
     if(booking[r.name]) r.bookingUrl=booking[r.name];
-    if(r.tags?.some(t=>String(t).includes('可以訂位'))){
-      r.__bookable=true;
-    }
+    if(r.tags?.some(t=>String(t).includes('可以訂位'))) r.__bookable=true;
   }
-  function compactPriceText(v){return String(v??'').replace(/NT\$/g,'$').replace(/NT＄/g,'$').replace(/\s+/g,' ').trim();}
+  function compactPriceText(v){
+    return String(v??'')
+      .replace(/NT\$/g,'$').replace(/NT＄/g,'$')
+      .replace(/\s*[＋+]\s*10%/gi,'')
+      .replace(/\s*[＋+]\s*清潔費(?:\s*\d+\s*元\s*(?:\/|／)?\s*(?:人|鍋))?/gi,'')
+      .replace(/\s+/g,' ').trim();
+  }
+  function injectLayoutFix(){
+    if(document.getElementById('price-ui-fix')) return;
+    const s=document.createElement('style'); s.id='price-ui-fix';
+    s.textContent='.prices{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:8px!important}.pricebox{min-width:0!important;overflow:hidden!important}.pricebox .num{font-size:12px!important;line-height:1.2!important;white-space:normal!important;overflow-wrap:anywhere!important;word-break:keep-all!important}.meta{display:grid!important;gap:4px!important;margin-top:9px!important}.meta>div{font-size:12px!important;line-height:1.35!important}.prices .num:after{content:none!important}';
+    document.head.appendChild(s);
+  }
   function enhance(){
+    injectLayoutFix();
     document.querySelectorAll('.card .num').forEach(el=>{
       el.textContent=compactPriceText(el.textContent);
-      el.style.whiteSpace='nowrap';el.style.overflowWrap='normal';el.style.fontSize='13px';el.style.letterSpacing='-.2px';
     });
     document.querySelectorAll('.card .meta>div').forEach(el=>{
       const t=el.textContent||'';
