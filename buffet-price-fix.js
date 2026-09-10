@@ -85,6 +85,7 @@
     '串家物語 台南三井店':'https://inline.app/booking/-L3RNFbAlXuITYXJJ3v7/-MuAhjlIDbmHRz8OWmzH',
     '灼花燒肉 HIBANA × 深煙酒吧 SHINEN':'https://www.google.com/maps/reserve/v/dine/c/9lWr4zKJXqc'
   };
+  window.RESTAURANTS=(window.RESTAURANTS||[]).filter(r=>!['兩餐 Dookki 台南店'].includes(r.name));
   const data=window.RESTAURANTS||[];
   const hasNum=v=>/\d/.test(String(v??''));
   function base(r){
