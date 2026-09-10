@@ -17,19 +17,23 @@ jobs:
             const repo = context.repo.repo;
             const path = 'index.html';
             const file = await github.rest.repos.getContent({owner, repo, path, ref:'main'});
-            const current = Buffer.from(file.data.content, 'base64').toString('utf8');
-            const marker = '<script src="buffet-price-fix.js"></script>';
-            if (!current.includes(marker)) {
-              const needle = '<script src="restore-82.js"></script>';
-              const updated = current.replace(needle, needle + '\n' + marker);
-              if (updated === current) core.setFailed('Target script insertion point was not found.');
+            let current = Buffer.from(file.data.content, 'base64').toString('utf8');
+            let updated = current.replaceAll('buffet-price-fix.js', 'buffet-price-fix.js?v=20260910');
+            const plain = '<script src="buffet-price-fix.js"></script>';
+            const bust = '<script src="buffet-price-fix.js?v=20260910"></script>';
+            if (!updated.includes('buffet-price-fix.js?v=20260910')) {
+              if (updated.includes(plain)) updated = updated.replace(plain, bust);
               else {
-                await github.rest.repos.createOrUpdateFileContents({
-                  owner, repo, path,
-                  message: 'Load Buffet price and booking corrections',
-                  content: Buffer.from(updated).toString('base64'),
-                  sha: file.data.sha,
-                  branch: 'main'
-                });
+                const needle = '<script src="restore-82.js"></script>';
+                updated = updated.replace(needle, needle + '\n' + bust);
               }
+            }
+            if (updated !== current) {
+              await github.rest.repos.createOrUpdateFileContents({
+                owner, repo, path,
+                message: 'Load cached-bust Buffet price correction',
+                content: Buffer.from(updated).toString('base64'),
+                sha: file.data.sha,
+                branch: 'main'
+              });
             }
