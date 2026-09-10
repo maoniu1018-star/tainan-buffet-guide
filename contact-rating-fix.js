@@ -31,6 +31,9 @@
   function tel(v){return String(v||'').replace(/[^0-9+]/g,'');}
   function mapUrl(r){return 'https://www.google.com/maps/search/?api=1&query='+encodeURIComponent((r.name||'')+' '+(r.address||'台南'));}
   function googleSearchUrl(r){return 'https://www.google.com/search?q='+encodeURIComponent((r.name||'')+' 台南 Google 評分');}
+  function hasGoogleMapLink(actions){
+    return [...actions.querySelectorAll('a')].some(a=>/google\.com\/maps/i.test(a.href));
+  }
   function enhance(){
     document.querySelectorAll('.card').forEach(card=>{
       const h=card.querySelector('h3');if(!h)return;
@@ -39,7 +42,7 @@
       if(r.phone && !actions.querySelector('a[href^="tel:"]'))actions.insertAdjacentHTML('beforeend',`<a href="tel:${tel(r.phone)}">☎️ 電話</a>`);
       if(r.__bookable && r.bookingUrl && ![...actions.querySelectorAll('a')].some(a=>a.href===r.bookingUrl))actions.insertAdjacentHTML('beforeend',`<a href="${r.bookingUrl}" target="_blank" rel="noopener">🔴 線上訂位</a>`);
       if(r.__bookable && !r.bookingUrl && r.phone && !actions.querySelector('.phone-booking'))actions.insertAdjacentHTML('beforeend',`<a class="phone-booking" href="tel:${tel(r.phone)}">📞 電話訂位</a>`);
-      if(!actions.querySelector('.map-link'))actions.insertAdjacentHTML('beforeend',`<a class="map-link" href="${mapUrl(r)}" target="_blank" rel="noopener">📍 Google地圖</a>`);
+      if(!hasGoogleMapLink(actions))actions.insertAdjacentHTML('beforeend',`<a class="map-link" href="${mapUrl(r)}" target="_blank" rel="noopener">🗺️ 開啟地圖</a>`);
       if(!r.rating && !actions.querySelector('.google-rating-link'))actions.insertAdjacentHTML('beforeend',`<a class="google-rating-link" href="${googleSearchUrl(r)}" target="_blank" rel="noopener">⭐ 查看 Google 評分</a>`);
     });
     document.querySelectorAll('#modal .row').forEach(row=>{
