@@ -1,4 +1,4 @@
-/* 只補正 Buffet 的成人價格顯示；其他網站內容不動 */
+/* 只補正 Buffet 成人價格與串家物語訂位資料；不操作 DOM、不監聽 MutationObserver */
 (function(){
   const P={
     '奇美食品幸福工廠':{weekdayLunch:'NT$158／人',weekdayDinner:'NT$158／人',holidayLunch:'NT$158／人',holidayDinner:'NT$158／人'},
@@ -13,26 +13,11 @@
     '元素餐廳（台南大員皇冠假日酒店）':{weekdayLunch:'NT$759＋10%',weekdayDinner:'NT$1,099＋10%',holidayLunch:'NT$1,399＋10%',holidayDinner:'NT$1,399＋10%'}
   };
   const A=window.RESTAURANTS||[];
-  function apply(){
-    A.forEach(r=>{
-      if(P[r.name]) r.prices=P[r.name];
-      if(r.name==='串家物語 台南三井店') r.bookingUrl='https://inline.app/booking/-L3RNFbAlXuITYXJJ3v7/-MuAhjlIDbmHRz8OWmzH';
-    });
-    document.querySelectorAll('.card').forEach(card=>{
-      const b=card.querySelector('button[data-name]');
-      if(!b) return;
-      const p=P[b.dataset.name];
-      if(p){
-        const vals=[p.weekdayLunch,p.weekdayDinner,p.holidayLunch,p.holidayDinner];
-        card.querySelectorAll('.pricebox .num').forEach((el,i)=>{ if(vals[i]){el.textContent=vals[i];el.style.fontSize='13px';el.style.lineHeight='1.2';} });
-      }
-      if(b.dataset.name==='串家物語 台南三井店' && !card.querySelector('.booking-fix')){
-        const a=document.createElement('a');a.className='booking-fix';a.href='https://inline.app/booking/-L3RNFbAlXuITYXJJ3v7/-MuAhjlIDbmHRz8OWmzH';a.target='_blank';a.rel='noopener';a.textContent='📅 訂位／定位';
-        const actions=card.querySelector('.actions'); if(actions) actions.appendChild(a);
-      }
-    });
-  }
-  apply();
-  const root=document.getElementById('cards');
-  if(root){new MutationObserver(apply).observe(root,{childList:true,subtree:true});}
+  A.forEach(r=>{
+    if(P[r.name]){r.prices=P[r.name];r.price=P[r.name].weekdayLunch;}
+    if(r.name==='串家物語 台南三井店'){
+      r.bookingUrl='https://inline.app/booking/-L3RNFbAlXuITYXJJ3v7/-MuAhjlIDbmHRz8OWmzH';
+      r.official=r.bookingUrl;
+    }
+  });
 })();
