@@ -1,0 +1,1 @@
+.prices{grid-template-columns:repeat(4,minmax(0,1fr))}.pricebox{min-width:0}.num{overflow-wrap:anywhere}@media(max-width:760px){.prices{grid-template-columns:1fr 1fr}}@media(max-width:420px){.prices{grid-template-columns:1fr 1fr}.pricebox{padding:9px 8px}.lab{font-size:10px}.num{font-size:13px}}
