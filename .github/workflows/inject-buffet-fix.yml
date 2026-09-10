@@ -1,0 +1,30 @@
+name: Inject Buffet price fix
+on:
+  push:
+    branches: [main]
+permissions:
+  contents: write
+jobs:
+  inject:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Ensure price fix script is loaded
+        shell: bash
+        run: |
+          set -e
+          if ! grep -q 'buffet-price-fix.js' index.html; then
+            python - <<'PY'
+from pathlib import Path
+p=Path('index.html')
+s=p.read_text()
+needle='<script src="restore-82.js"></script>'
+s=s.replace(needle, needle+'\n<script src="buffet-price-fix.js"></script>', 1)
+p.write_text(s)
+PY
+            git config user.name 'github-actions[bot]'
+            git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+            git add index.html
+            git commit -m 'Load Buffet price and booking corrections' || exit 0
+            git push
+          fi
