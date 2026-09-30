@@ -139,3 +139,23 @@ footer .creator{color:var(--p)}
     letter-spacing:.04em;
   }
 }
+
+
+/* ===== Desktop header final refinement ===== */
+@media(min-width:621px){
+  .hero{padding:30px 0 34px}
+  .top{display:block;margin-bottom:20px}
+  .brandline{align-items:flex-start}
+  .brand{font-size:22px;letter-spacing:.08em;padding-top:5px}
+  .cn-logo{width:88px;height:88px}
+  .top > .creator{
+    display:block;
+    margin-top:8px;
+    color:#b96f86;
+    font-size:13px;
+    font-weight:600;
+    letter-spacing:.08em;
+  }
+  .hero .kicker{margin-top:2px}
+  .hero h1{margin-top:10px}
+}
