@@ -71,3 +71,43 @@ footer .creator{color:var(--p)}
 .dialog{padding:20px;border-radius:18px}
 .row{grid-template-columns:92px 1fr;gap:10px}
 }
+
+
+/* ===== Mobile filter UX fix ===== */
+@media(max-width:620px){
+  .controls{
+    position:static;
+    padding:10px 0 8px;
+    background:rgba(248,245,240,.96);
+  }
+  .controls .searchrow{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:8px;
+  }
+  .controls .input{
+    height:44px;
+  }
+  .controls .select{
+    height:42px;
+    min-width:0;
+  }
+  .controls .searchrow{
+    grid-template-columns:repeat(3,minmax(0,1fr));
+  }
+  .controls .searchrow .input{
+    grid-column:1 / -1;
+  }
+  .controls .searchrow .btn{
+    grid-column:1 / -1;
+    height:40px;
+  }
+  .controls .chips{
+    margin-top:8px;
+    padding:2px 0 3px;
+  }
+  .controls .chip{
+    padding:7px 12px;
+    font-size:12px;
+  }
+}
