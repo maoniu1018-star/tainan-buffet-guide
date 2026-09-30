@@ -101,12 +101,9 @@
     const notice=notices[0];
     for(const extra of notices.slice(1)) extra.remove();
     const hero=document.querySelector('.hero');
-    const wrap=hero && hero.querySelector('.wrap');
-    const stats=wrap && wrap.querySelector('.stats');
     const controls=document.querySelector('.controls');
-    if(hero && wrap){
-      if(stats) stats.insertAdjacentElement('afterend',notice);
-      else wrap.appendChild(notice);
+    if(hero && hero.parentNode){
+      hero.parentNode.insertBefore(notice,hero.nextSibling);
       notice.classList.add('top-price-notice');
       notice.id='notice';
       notice.dataset.movedTop='1';
