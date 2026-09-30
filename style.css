@@ -118,3 +118,24 @@ footer .creator{color:var(--p)}
   .brandline{gap:9px}
   .cn-logo{width:58px;height:58px}
 }
+
+
+/* ===== Header brand layout refinement ===== */
+@media(min-width:621px){
+  .top{
+    display:block;
+  }
+  .brandline{
+    width:100%;
+  }
+  .cn-logo{
+    width:108px;
+    height:108px;
+  }
+  .top > .creator{
+    display:block;
+    margin-top:12px;
+    font-size:15px;
+    letter-spacing:.04em;
+  }
+}
