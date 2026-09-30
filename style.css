@@ -159,3 +159,18 @@ footer .creator{color:var(--p)}
   .hero .kicker{margin-top:2px}
   .hero h1{margin-top:10px}
 }
+
+
+/* ===== Desktop header redesign ===== */
+@media(min-width:621px){
+  .hero{padding:24px 0 30px}
+  .top{display:block;margin:0 0 14px}
+  .brandline{display:flex;align-items:flex-start;justify-content:space-between;gap:24px}
+  .brand{font-size:23px;line-height:1.25;letter-spacing:.06em;padding-top:8px}
+  .cn-logo{width:76px;height:76px}
+  .top > .creator{display:block;margin:4px 0 0;font-size:12px;font-weight:600;letter-spacing:.1em;color:var(--p)}
+  .hero .kicker{margin-top:0}
+  .hero h1{margin:8px 0 12px}
+  .hero p{line-height:1.7}
+  .hero .stats{margin-top:18px}
+}
