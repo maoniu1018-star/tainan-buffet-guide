@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://maoniu1018-star.github.io/tainan-buffet-guide/</loc>
-    <lastmod>2026-09-10</lastmod>
-  </url>
-  <url>
-    <loc>https://maoniu1018-star.github.io/tainan-buffet-guide/guide.html</loc>
-    <lastmod>2026-09-10</lastmod>
-  </url>
+  <url><loc>https://maoniu1018-star.github.io/tainan-buffet-guide/</loc><lastmod>2026-09-30</lastmod></url>
+  <url><loc>https://maoniu1018-star.github.io/tainan-buffet-guide/guide.html</loc><lastmod>2026-09-10</lastmod></url>
+  <url><loc>https://maoniu1018-star.github.io/tainan-buffet-guide/pages/tainan-buffet.html</loc><lastmod>2026-09-30</lastmod></url>
+  <url><loc>https://maoniu1018-star.github.io/tainan-buffet-guide/pages/tainan-buffet-under-500.html</loc><lastmod>2026-09-30</lastmod></url>
+  <url><loc>https://maoniu1018-star.github.io/tainan-buffet-guide/pages/tainan-hotpot-buffet.html</loc><lastmod>2026-09-30</lastmod></url>
+  <url><loc>https://maoniu1018-star.github.io/tainan-buffet-guide/pages/tainan-bbq-buffet.html</loc><lastmod>2026-09-30</lastmod></url>
+  <url><loc>https://maoniu1018-star.github.io/tainan-buffet-guide/pages/tainan-steak-buffet.html</loc><lastmod>2026-09-30</lastmod></url>
 </urlset>
