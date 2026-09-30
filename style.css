@@ -110,14 +110,11 @@ footer .creator{color:var(--p)}
   }
 }
 
-/* ===== CN brand mark ===== */
+/* ===== CN brand logo ===== */
 .brandline{display:flex;align-items:center;justify-content:space-between;gap:16px;width:100%}
 .brand{line-height:1.2}
-.cnmark{position:relative;width:68px;height:68px;flex:0 0 auto;border:1px solid rgba(177,138,74,.55);border-radius:50%;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.42);color:#8f6740;font-family:Georgia,serif;font-size:24px;font-style:italic;letter-spacing:-.08em;box-shadow:0 4px 18px rgba(90,65,45,.06)}
-.cnmark:before{content:"";position:absolute;left:8px;top:7px;width:38px;height:38px;border:2px solid #b18a4a;border-right-color:transparent;border-bottom-color:transparent;border-radius:50%;transform:rotate(-25deg)}
-.cnmark:after{content:"✦";position:absolute;right:5px;top:7px;font-size:11px;color:#b18a4a}
+.cn-logo{width:78px;height:78px;object-fit:cover;border-radius:50%;mix-blend-mode:multiply;flex:0 0 auto}
 @media(max-width:620px){
   .brandline{gap:9px}
-  .cnmark{width:56px;height:56px;font-size:20px}
-  .cnmark:before{width:31px;height:31px;left:6px;top:6px}
+  .cn-logo{width:58px;height:58px}
 }
