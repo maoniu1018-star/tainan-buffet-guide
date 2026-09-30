@@ -109,3 +109,12 @@ footer .creator{color:var(--p)}
     font-size:12px;
   }
 }
+
+/* ===== CN brand logo ===== */
+.brandline{display:flex;align-items:center;gap:12px}
+.cn-logo{width:72px;height:72px;object-fit:contain;border-radius:50%;mix-blend-mode:multiply;flex:0 0 auto}
+.brand{line-height:1.2}
+@media(max-width:620px){
+  .brandline{gap:9px}
+  .cn-logo{width:54px;height:54px}
+}
