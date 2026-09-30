@@ -40,3 +40,34 @@
 .card:hover{transform:none}
 .summary{padding-top:22px}
 }
+
+
+/* ===== Final micro polish ===== */
+.head{padding-top:8px}
+.head .updated{padding:7px 11px;border:1px solid var(--line);border-radius:999px;background:#fff;font-size:12px}
+.summary .box{transition:transform .18s ease}
+.summary .box:hover{transform:translateY(-2px)}
+.card .badges{min-height:29px}
+.card .addr{margin-top:2px}
+.card .prices .lab{letter-spacing:.03em}
+.card .prices .num{font-size:15px}
+.seo-entry{padding-bottom:4px}
+.monetize .kicker{color:var(--gold)}
+.partner-box .partner-btn{background:#f8f2e8;color:#755a2f;border-color:#e6d6bb}
+footer{background:#fbf9f6}
+footer .creator{color:var(--p)}
+.dialog{border:1px solid var(--line);box-shadow:0 24px 70px rgba(35,25,20,.18)}
+.dialog h2{font-size:28px;line-height:1.35;padding-right:28px}
+.close{color:#756b64;width:38px;height:38px;border-radius:50%;background:#f8f5f0}
+.actions a.main{background:var(--ink)}
+@media(max-width:620px){
+.controls{padding:10px 0}
+.controls .chips{overflow-x:auto;flex-wrap:nowrap;padding-bottom:2px;scrollbar-width:none}
+.controls .chips::-webkit-scrollbar{display:none}
+.chip{flex:0 0 auto}
+.head h2{font-size:27px}
+.head .updated{align-self:flex-start}
+.card h3{font-size:20px}
+.dialog{padding:20px;border-radius:18px}
+.row{grid-template-columns:92px 1fr;gap:10px}
+}
