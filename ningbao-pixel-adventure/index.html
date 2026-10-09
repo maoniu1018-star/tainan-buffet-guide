@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta name="theme-color" content="#17152b"><title>寧寶貓的月光冒險</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#17152b;color:#fff4d8;font-family:ui-monospace,Menlo,monospace;display:flex;justify-content:center;min-height:100vh}main{width:min(100%,520px);padding:14px 12px 24px;display:flex;flex-direction:column;gap:10px}header{text-align:center}h1{font-size:clamp(20px,5vw,28px);margin:4px 0;color:#ffd9e9;text-shadow:3px 3px #704c9c}.sub{font-size:11px;color:#b9b4dc}.panel{background:#282441;border:3px solid #7465a8;box-shadow:0 5px 0 #0d0c1c;border-radius:8px;padding:10px}.stats{display:flex;justify-content:space-between;gap:8px;font-size:12px;flex-wrap:wrap}.stats b{color:#ffd166}canvas{display:block;width:100%;height:auto;aspect-ratio:320/400;image-rendering:pixelated;border:4px solid #ffd166;border-radius:4px;background:#26234d;touch-action:none}.help{font-size:11px;line-height:1.7;color:#d2cdea;text-align:center}.controls{display:grid;grid-template-columns:1fr 1fr 1.2fr;gap:9px}button{font:inherit;font-weight:bold;border:0;border-radius:7px;padding:14px 5px;color:#211a39;background:#ffd166;box-shadow:0 4px 0 #a36e45;touch-action:manipulation;user-select:none;-webkit-user-select:none}button:active{transform:translateY(3px);box-shadow:0 1px 0 #a36e45}button.pink{background:#ff9fc8;box-shadow:0 4px 0 #a44e82}button.purple{background:#aaa0ff;box-shadow:0 4px 0 #6556a9}.message{text-align:center;min-height:42px;font-size:12px;line-height:1.6;color:#fff1b4}footer{text-align:center;font-size:10px;color:#77739c}
+</style>
+</head>
+<body><main>
+<header><h1>✦ 寧寶貓的月光冒險 ✦</h1><div class="sub">PIXEL QUEST · 第 1 關：月光森林</div></header>
+<div class="panel stats"><span>♥ 生命：<b id="hp">3</b></span><span>✦ 月光幣：<b id="coins">0</b>/5</span><span>關卡：<b>01</b></span></div>
+<canvas id="game" width="320" height="400"></canvas>
+<div class="help">收集 5 枚月光幣，避開紫色史萊姆，走到右上方的月亮門！<br>使用下方按鈕，或用鍵盤方向鍵／WASD 操作。</div>
+<div class="controls"><button class="pink" id="left">◀ 左移</button><button class="pink" id="right">右移 ▶</button><button class="purple" id="jump">▲ 跳躍</button></div>
+<div class="controls"><button id="restart">↻ 重新開始</button><button class="purple" id="sound">♪ 音效：關</button><button class="pink" id="up">↑ 向上</button></div>
+<div id="message" class="panel message">冒險開始！寧寶貓，出發吧！</div><footer>寧寶貓原創像素冒險 · 手機觸控版</footer>
+</main>
+<script>
+(()=>{'use strict';
+const canvas=document.getElementById('game'),ctx=canvas.getContext('2d',{alpha:false});if(!ctx){document.getElementById('message').textContent='這個瀏覽器無法啟動畫布，請改用 Safari 開啟。';return}
+ctx.imageSmoothingEnabled=false;const hpEl=document.getElementById('hp'),coinEl=document.getElementById('coins'),msg=document.getElementById('message');
+const T=20,W=16;let keys={},player,coins,slimes,frame=0,won=false,lost=false,sound=false,audio=null,raf=0;
+const solids=new Set(),tile=(x,y)=>x+','+y;
+function world(){solids.clear();for(let x=0;x<W;x++)solids.add(tile(x,18));[[2,15,5],[8,14,4],[3,11,4],[9,10,4],[5,7,4],[11,6,3]].forEach(([x,y,n])=>{for(let i=0;i<n;i++)solids.add(tile(x+i,y))})}
+function reset(){world();player={x:20,y:320,vx:0,vy:0,on:false,hp:3,inv:0,face:1};coins=[[4,14],[10,13],[5,10],[11,9],[12,5]].map(([x,y],i)=>({x:x*T+10,y:y*T+4,got:false,bob:i}));slimes=[{x:7.1,y:17.2,dir:1,min:6,max:10},{x:3.1,y:10.2,dir:1,min:3,max:6}];frame=0;won=lost=false;updateUI();msg.textContent='冒險開始！收集月光幣，找到月亮門。'}
+function beep(freq=520,d=.07){if(!sound)return;try{audio=audio||new(window.AudioContext||window.webkitAudioContext)();if(audio.state==='suspended')audio.resume();const o=audio.createOscillator(),g=audio.createGain();o.connect(g);g.connect(audio.destination);o.type='square';o.frequency.value=freq;g.gain.value=.03;o.start();g.gain.exponentialRampToValueAtTime(.001,audio.currentTime+d);o.stop(audio.currentTime+d)}catch(e){}}
+function updateUI(){hpEl.textContent=player.hp;coinEl.textContent=coins.filter(c=>c.got).length}
+function solidAt(px,py){return solids.has(tile(Math.floor(px/T),Math.floor(py/T)))}
+function hit(x,y){return solidAt(x+3,y+15)||solidAt(x+17,y+15)||solidAt(x+3,y+19)||solidAt(x+17,y+19)}
+function damage(){player.hp--;player.inv=75;beep(130,.18);updateUI();if(player.hp<=0){lost=true;msg.textContent='冒險暫停了！按「重新開始」再試一次。'}else{msg.textContent='哎呀！被史萊姆撞到，還有 '+player.hp+' 顆心。';player.x=20;player.y=320;player.vy=0}}
+function move(){if(won||lost)return;const l=keys.left||keys.ArrowLeft||keys.a,r=keys.right||keys.ArrowRight||keys.d;player.vx=l?-1.8:r?1.8:0;if(l)player.face=-1;if(r)player.face=1;if((keys.up||keys.ArrowUp||keys.w||keys[' '])&&player.on){player.vy=-5.2;player.on=false;beep(360)}player.x=Math.max(0,Math.min(302,player.x+player.vx));if(hit(player.x,player.y))player.x-=player.vx;player.vy=Math.min(6,player.vy+.25);const oldY=player.y;player.y+=player.vy;player.on=false;if(hit(player.x,player.y)){player.y=oldY;if(player.vy>0)player.on=true;player.vy=0}if(player.y>410){damage();return}if(player.inv>0)player.inv--;
+for(const c of coins){if(!c.got&&Math.hypot(player.x+10-c.x,player.y+10-c.y)<17){c.got=true;beep(760,.12);updateUI();msg.textContent='叮！拿到月光幣了！'}}
+for(const s of slimes){s.x+=.025*s.dir;if(s.x>s.max)s.dir=-1;if(s.x<s.min)s.dir=1;if(player.inv===0&&Math.abs(player.x+10-(s.x*T+10))<17&&Math.abs(player.y+12-(s.y*T+10))<17){if(player.vy>1){s.x=s.min;player.vy=-3.2;beep(240)}else{damage();break}}}
+if(player.x>278&&player.y<120){const n=coins.filter(c=>c.got).length;if(n>=5){won=true;msg.textContent='通關成功！月光森林的星星都亮起來了 ✨';beep(880,.2)}else msg.textContent='月亮門還沒開！還差 '+(5-n)+' 枚月光幣。'}}
+function rect(x,y,w,h,col){ctx.fillStyle=col;ctx.fillRect(Math.round(x),Math.round(y),w,h)}
+function cat(x,y){rect(x+2,y+18,16,3,'#15142d');if(player.inv>0&&Math.floor(frame/5)%2===0)return;rect(x+14,y+12,5,4,'#f5e9d0');rect(x+17,y+10,4,4,'#ffd166');rect(x+3,y+2,5,6,'#fff3d6');rect(x+12,y+2,5,6,'#fff3d6');rect(x+2,y+6,16,12,'#fff3d6');rect(x+4,y+4,3,3,'#ff9fc8');rect(x+13,y+4,3,3,'#ff9fc8');rect(x+5,y+10,2,2,'#29243d');rect(x+13,y+10,2,2,'#29243d');rect(x+8,y+13,4,2,'#ff8fbd');rect(x+8,y+4,3,3,'#ffd166');rect(x+5,y+3,3,2,'#ff7daf');rect(x+11,y+3,3,2,'#ff7daf')}
+function draw(){frame++;ctx.fillStyle='#26234d';ctx.fillRect(0,0,320,400);
+for(let i=0;i<45;i++){const x=(i*71+13)%320,y=(i*47+frame*.12)%300;rect(x,y,2,2,i%3===0?'#ffd166':'#bcb8f4')}
+ctx.fillStyle='#ffe7a6';ctx.beginPath();ctx.arc(280,38,17,0,Math.PI*2);ctx.fill();ctx.fillStyle='#26234d';ctx.beginPath();ctx.arc(288,31,15,0,Math.PI*2);ctx.fill();
+for(let x=0;x<320;x+=40){rect(x+9,85,4,70,'#34365f');rect(x,65,23,40,'#354b68');rect(x+4,56,16,20,'#416b70')}
+for(const k of solids){const [tx,ty]=k.split(',').map(Number),x=tx*T,y=ty*T;rect(x,y,20,20,ty>=18?'#476b62':'#66518b');rect(x,y,20,4,'#9ac27e');if(ty>=18)rect(x+12,y+11,4,3,'#36554e')}
+rect(278,76,26,44,'#ffd166');rect(282,80,18,36,'#6c4c8d');rect(286,84,10,28,'#ffcf75');rect(294,97,3,3,'#fff4d8');
+for(const c of coins){if(c.got)continue;const y=c.y+Math.sin(frame/8+c.bob)*3;rect(c.x-5,y-5,10,10,'#ffd166');rect(c.x-3,y-3,6,6,'#fff0a1');rect(c.x-1,y-2,2,4,'#d89a38')}
+for(const s of slimes){const x=s.x*T,y=s.y*T;rect(x+2,y+8,16,9,'#9b8cff');rect(x+5,y+4,10,5,'#9b8cff');rect(x+5,y+10,2,3,'#29243d');rect(x+13,y+10,2,3,'#29243d');rect(x+7,y+15,6,2,'#d7ccff')}
+cat(player.x,player.y);if(won||lost){rect(25,150,270,75,'#17152b');rect(29,154,262,67,'#ffd166');ctx.fillStyle='#29243d';ctx.textAlign='center';ctx.font='bold 15px monospace';ctx.fillText(won?'STAGE CLEAR!':'TRY AGAIN',160,181);ctx.font='10px monospace';ctx.fillText(won?'月光森林恢復光芒！':'再試一次就會成功！',160,201)}}
+function loop(){move();draw();raf=requestAnimationFrame(loop)}
+document.addEventListener('keydown',e=>{if(['ArrowLeft','ArrowRight','ArrowUp',' ','ArrowDown'].includes(e.key))e.preventDefault();keys[e.key]=true;if(e.key===' ')keys[' ']=true});document.addEventListener('keyup',e=>{keys[e.key]=false});
+function bind(id,k){const el=document.getElementById(id);const start=e=>{e.preventDefault();keys[k]=true};const end=e=>{e.preventDefault();keys[k]=false};el.addEventListener('pointerdown',start);['pointerup','pointercancel','pointerleave'].forEach(ev=>el.addEventListener(ev,end));el.addEventListener('contextmenu',e=>e.preventDefault())}
+bind('left','left');bind('right','right');bind('jump','up');bind('up','up');document.getElementById('restart').addEventListener('click',reset);document.getElementById('sound').addEventListener('click',()=>{sound=!sound;document.getElementById('sound').textContent='♪ 音效：'+(sound?'開':'關');if(sound)beep()});
+reset();if(raf)cancelAnimationFrame(raf);loop();
+})();
+</script></body></html>
