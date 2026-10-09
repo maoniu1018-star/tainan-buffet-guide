@@ -51,7 +51,7 @@ footer{text-align:center;font-size:9px;color:#77739c}
 </div>
 <div class="help">直接在遊戲畫面按方向鍵：◀ ▶ 移動、▲ 跳躍、▼ 快速下降。右側紫色按鈕也可跳躍。<br>方向鍵可持續按住；畫面已鎖定，避免操作時整頁滑動。</div>
 <div class="controls"><button class="utility" id="restart">↻ 重新開始</button><button class="utility purple" id="sound">♪ 音效：關</button></div>
-<div id="message" class="panel message">收集 5 枚月光幣，避開史萊姆，抵達右上角的月亮門！</div>
+<div id="message" class="panel message">跳躍高度已加強！按住 ▲ 或右側「跳躍」鍵，跳上平台收集 5 枚月光幣。</div>
 <footer>寧寶貓原創像素冒險 · 手機觸控操作版</footer>
 </main>
 <script>
@@ -72,13 +72,13 @@ function move(){
  const left=keys.left||keys.ArrowLeft||keys.a,right=keys.right||keys.ArrowRight||keys.d;
  player.vx=left?-2.15:right?2.15:0;if(left)player.face=-1;if(right)player.face=1;
  // ▲ jumps; allow a fresh press or held input to jump immediately upon landing
- if((keys.up||keys.ArrowUp||keys.w||keys[' '])&&player.on){player.vy=-6.0;player.on=false;beep(360)}
- if(keys.down||keys.ArrowDown||keys.s){player.vy=Math.max(player.vy,2.8)}
+ if((keys.up||keys.ArrowUp||keys.w||keys[' '])&&player.on){player.vy=-8.2;player.on=false;beep(420)}
+ if(keys.down||keys.ArrowDown||keys.s){player.vy=Math.max(player.vy,2.4)}
  // horizontal collision
  let nx=Math.max(0,Math.min(320-player.w,player.x+player.vx));
  if(!overlapsSolid(nx,player.y))player.x=nx;
  // vertical, resolve each direction to platform boundaries
- player.vy=Math.min(7,player.vy+.22);
+ player.vy=Math.min(6.5,player.vy+.19);
  let ny=player.y+player.vy;
  if(player.vy>=0){
   const oldBottom=player.y+player.h,newBottom=ny+player.h;let land=null;
