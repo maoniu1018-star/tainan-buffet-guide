@@ -1,129 +1,32 @@
 <!doctype html>
-<html lang="zh-Hant">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<meta name="theme-color" content="#17152b">
-<title>寧寶貓的月光冒險</title>
+<html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover"><meta name="theme-color" content="#19152f"><title>月姬魔法學園：星夜覺醒</title>
 <style>
-:root{--bg:#17152b;--cream:#fff4d8;--pink:#ff9fc8;--gold:#ffd166;--purple:#aaa0ff}
-*{box-sizing:border-box}
-html,body{margin:0;width:100%;min-height:100%;background:var(--bg);color:var(--cream);font-family:ui-monospace,Menlo,monospace;overscroll-behavior:none}
-body{display:flex;justify-content:center;touch-action:pan-y}
-body.playing{overflow:hidden;position:fixed;inset:0}
-main{width:min(100%,520px);padding:calc(8px + env(safe-area-inset-top)) 10px calc(12px + env(safe-area-inset-bottom));display:flex;flex-direction:column;gap:8px}
-header{text-align:center;flex-shrink:0}h1{font-size:clamp(19px,5vw,27px);margin:3px 0;color:#ffd9e9;text-shadow:3px 3px #704c9c}.sub{font-size:10px;color:#b9b4dc}
-.panel{background:#282441;border:3px solid #7465a8;box-shadow:0 4px 0 #0d0c1c;border-radius:8px;padding:8px}
-.stats{display:flex;justify-content:space-between;gap:6px;font-size:11px;flex-wrap:wrap}.stats b{color:var(--gold)}
-.game-wrap{position:relative;width:100%;border:4px solid var(--gold);border-radius:5px;overflow:hidden;background:#26234d;line-height:0;touch-action:none;flex-shrink:0}
-canvas{display:block;width:100%;height:auto;aspect-ratio:320/400;image-rendering:pixelated;touch-action:none}
-.overlay{position:absolute;inset:0;pointer-events:none}
-.dpad{position:absolute;left:3%;bottom:4%;width:36%;aspect-ratio:1;display:grid;grid-template-columns:1fr 1fr 1fr;grid-template-rows:1fr 1fr 1fr;gap:4px;pointer-events:auto;touch-action:none}
-.ctrl{border:2px solid #fff1d7a8;border-radius:12px;background:#27223dc9;color:#fff4d8;font-size:clamp(18px,5vw,26px);font-weight:bold;padding:0;box-shadow:0 3px 0 #100e21;display:flex;align-items:center;justify-content:center;touch-action:none;user-select:none;-webkit-user-select:none}
-.ctrl:active,.ctrl.active{background:#ff9fc8e8;color:#241934;transform:scale(.96)}
-.ctrl.up{grid-column:2;grid-row:1}.ctrl.left{grid-column:1;grid-row:2}.ctrl.right{grid-column:3;grid-row:2}.ctrl.down{grid-column:2;grid-row:3}
-.action{position:absolute;right:4%;bottom:6%;width:24%;aspect-ratio:1;border-radius:50%;background:#aaa0ffe8;border:3px solid #fff1d7;color:#211a39;font-size:clamp(12px,3.6vw,17px);font-weight:900;pointer-events:auto;touch-action:none;box-shadow:0 4px 0 #6556a9;line-height:1.2;padding:3px}
-.action:active,.action.active{transform:scale(.94);background:#ffd166}
-.help{text-align:center;font-size:10px;line-height:1.5;color:#d2cdea}
-.controls{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-button.utility{font:inherit;font-weight:bold;border:0;border-radius:7px;padding:10px 5px;color:#211a39;background:var(--gold);box-shadow:0 3px 0 #a36e45;touch-action:manipulation}
-button.utility.purple{background:var(--purple);box-shadow:0 3px 0 #6556a9}
-.message{text-align:center;min-height:38px;font-size:11px;line-height:1.5;color:#fff1b4}
-footer{text-align:center;font-size:9px;color:#77739c}
-@media(max-height:740px){main{gap:5px;padding-top:5px}.sub{font-size:9px}.help{font-size:9px}.panel{padding:6px}.controls button.utility{padding:8px 4px}.message{min-height:30px}}
-</style>
-</head>
-<body>
-<main>
-<header><h1>✦ 寧寶貓的月光冒險 ✦</h1><div class="sub">PIXEL QUEST · 第 1 關：月光森林</div></header>
-<div class="panel stats"><span>♥ 生命：<b id="hp">3</b></span><span>✦ 月光幣：<b id="coins">0</b>/5</span><span>關卡：<b>01</b></span></div>
-<div class="game-wrap" id="gameWrap">
-<canvas id="game" width="320" height="400" aria-label="寧寶貓月光森林遊戲畫面"></canvas>
-<div class="overlay">
- <div class="dpad" aria-label="方向控制">
-  <button class="ctrl up" data-key="up" aria-label="向上">▲</button>
-  <button class="ctrl left" data-key="left" aria-label="向左">◀</button>
-  <button class="ctrl right" data-key="right" aria-label="向右">▶</button>
-  <button class="ctrl down" data-key="down" aria-label="向下">▼</button>
- </div>
- <button class="action" id="jump" aria-label="跳躍">跳<br>躍</button>
-</div>
-</div>
-<div class="help">直接在遊戲畫面按方向鍵：◀ ▶ 移動、▲ 跳躍、▼ 快速下降。右側紫色按鈕也可跳躍。<br>方向鍵可持續按住；畫面已鎖定，避免操作時整頁滑動。</div>
-<div class="controls"><button class="utility" id="restart">↻ 重新開始</button><button class="utility purple" id="sound">♪ 音效：關</button></div>
-<div id="message" class="panel message">跳躍高度已加強！按住 ▲ 或右側「跳躍」鍵，跳上平台收集 5 枚月光幣。</div>
-<footer>寧寶貓原創像素冒險 · 手機觸控操作版</footer>
-</main>
-<script>
-(()=>{'use strict';
-const canvas=document.getElementById('game'),ctx=canvas.getContext('2d',{alpha:false});
-const hpEl=document.getElementById('hp'),coinEl=document.getElementById('coins'),msg=document.getElementById('message');
-const T=20,W=16,H=20,keys={};let player,coins,slimes,frame=0,won=false,lost=false,sound=false,audio=null,raf=0;
-const solids=new Set(),tile=(x,y)=>x+','+y;
-function world(){solids.clear();for(let x=0;x<W;x++)solids.add(tile(x,18));[[2,15,5],[8,14,4],[3,11,4],[9,10,4],[5,7,4],[11,6,3]].forEach(([x,y,n])=>{for(let i=0;i<n;i++)solids.add(tile(x+i,y))})}
-function reset(){world();player={x:42,y:320,w:16,h:18,vx:0,vy:0,on:false,hp:3,inv:0,face:1};coins=[[4,14],[10,13],[5,10],[11,9],[12,5]].map(([x,y],i)=>({x:x*T+10,y:y*T+4,got:false,bob:i}));slimes=[{x:7.1,y:17.2,dir:1,min:6,max:10},{x:3.1,y:10.2,dir:1,min:3,max:6}];frame=0;won=lost=false;updateUI();msg.textContent='收集 5 枚月光幣，避開史萊姆，抵達右上角的月亮門！'}
-function beep(freq=520,d=.07){if(!sound)return;try{audio=audio||new(window.AudioContext||window.webkitAudioContext)();if(audio.state==='suspended')audio.resume();const o=audio.createOscillator(),g=audio.createGain();o.connect(g);g.connect(audio.destination);o.type='square';o.frequency.value=freq;g.gain.value=.025;o.start();g.gain.exponentialRampToValueAtTime(.001,audio.currentTime+d);o.stop(audio.currentTime+d)}catch(e){}}
-function updateUI(){hpEl.textContent=player.hp;coinEl.textContent=coins.filter(c=>c.got).length}
-function isSolid(px,py){return solids.has(tile(Math.floor(px/T),Math.floor(py/T)))}
-function overlapsSolid(x,y){return isSolid(x+2,y+2)||isSolid(x+player.w-2,y+2)||isSolid(x+2,y+player.h-1)||isSolid(x+player.w-2,y+player.h-1)}
-function damage(){if(player.inv>0)return;player.hp--;player.inv=90;beep(140,.15);updateUI();if(player.hp<=0){lost=true;msg.textContent='冒險暫停了！按「重新開始」再試一次。'}else{msg.textContent='被史萊姆碰到！還有 '+player.hp+' 顆心。';player.x=42;player.y=320;player.vx=0;player.vy=0}}
-function move(){
- if(won||lost)return;
- const left=keys.left||keys.ArrowLeft||keys.a,right=keys.right||keys.ArrowRight||keys.d;
- player.vx=left?-2.15:right?2.15:0;if(left)player.face=-1;if(right)player.face=1;
- // ▲ jumps; allow a fresh press or held input to jump immediately upon landing
- if((keys.up||keys.ArrowUp||keys.w||keys[' '])&&player.on){player.vy=-8.2;player.on=false;beep(420)}
- if(keys.down||keys.ArrowDown||keys.s){player.vy=Math.max(player.vy,2.4)}
- // horizontal collision
- let nx=Math.max(0,Math.min(320-player.w,player.x+player.vx));
- if(!overlapsSolid(nx,player.y))player.x=nx;
- // vertical, resolve each direction to platform boundaries
- player.vy=Math.min(6.5,player.vy+.19);
- let ny=player.y+player.vy;
- if(player.vy>=0){
-  const oldBottom=player.y+player.h,newBottom=ny+player.h;let land=null;
-  for(const k of solids){const [tx,ty]=k.split(',').map(Number),px=tx*T,py=ty*T;
-   if(player.x+player.w-2>px&&player.x+2<px+T&&oldBottom<=py+2&&newBottom>=py){if(land===null||py<land)land=py}
-  }
-  if(land!==null){player.y=land-player.h;player.vy=0;player.on=true}else{player.y=ny;player.on=false}
- }else{
-  let hitCeil=false;
-  for(const k of solids){const [tx,ty]=k.split(',').map(Number),px=tx*T,py=ty*T;if(player.x+player.w-2>px&&player.x+2<px+T&&player.y>=py+T-2&&ny<=py+T){hitCeil=true;break}}
-  if(hitCeil){player.vy=0}else player.y=ny;
- }
- if(player.y>410){damage();player.x=42;player.y=320;player.vy=0;return}
- if(player.inv>0)player.inv--;
- for(const c of coins){if(!c.got&&Math.hypot(player.x+8-c.x,player.y+9-c.y)<17){c.got=true;beep(760,.1);updateUI();msg.textContent='叮！拿到月光幣了！'}}
- for(const s of slimes){s.x+=.035*s.dir;if(s.x>s.max)s.dir=-1;if(s.x<s.min)s.dir=1;
-  if(player.inv===0&&Math.abs(player.x+8-(s.x*T+10))<16&&Math.abs(player.y+9-(s.y*T+10))<16){if(player.vy>1){s.x=s.min;player.vy=-3.4;beep(240)}else{damage();break}}
- }
- const n=coins.filter(c=>c.got).length;
- if(player.x>278&&player.y<130){if(n>=5){won=true;msg.textContent='通關成功！月光森林的星星都亮起來了 ✨';beep(880,.2)}else msg.textContent='月亮門還沒開！還差 '+(5-n)+' 枚月光幣。'}
-}
-function rect(x,y,w,h,col){ctx.fillStyle=col;ctx.fillRect(Math.round(x),Math.round(y),w,h)}
-function drawCat(x,y){rect(x+2,y+17,13,3,'#15142d');if(player.inv>0&&Math.floor(frame/5)%2===0)return;rect(x+12,y+11,5,4,'#f5e9d0');rect(x+15,y+9,4,4,'#ffd166');rect(x+2,y+1,5,6,'#fff3d6');rect(x+10,y+1,5,6,'#fff3d6');rect(x+1,y+5,15,12,'#fff3d6');rect(x+3,y+3,3,3,'#ff9fc8');rect(x+11,y+3,3,3,'#ff9fc8');rect(x+4,y+9,2,2,'#29243d');rect(x+11,y+9,2,2,'#29243d');rect(x+7,y+12,4,2,'#ff8fbd');rect(x+7,y+3,3,3,'#ffd166');rect(x+4,y+2,3,2,'#ff7daf');rect(x+10,y+2,3,2,'#ff7daf')}
-function draw(){frame++;ctx.fillStyle='#26234d';ctx.fillRect(0,0,320,400);
- for(let i=0;i<45;i++){const x=(i*71+13)%320,y=(i*47+frame*.12)%300;rect(x,y,2,2,i%3===0?'#ffd166':'#bcb8f4')}
- ctx.fillStyle='#ffe7a6';ctx.beginPath();ctx.arc(280,38,17,0,Math.PI*2);ctx.fill();ctx.fillStyle='#26234d';ctx.beginPath();ctx.arc(288,31,15,0,Math.PI*2);ctx.fill();
- for(let x=0;x<320;x+=40){rect(x+9,85,4,70,'#34365f');rect(x,65,23,40,'#354b68');rect(x+4,56,16,20,'#416b70')}
- for(const k of solids){const [tx,ty]=k.split(',').map(Number),x=tx*T,y=ty*T;rect(x,y,20,20,ty>=18?'#476b62':'#66518b');rect(x,y,20,4,'#9ac27e');if(ty>=18)rect(x+12,y+11,4,3,'#36554e')}
- rect(278,76,26,44,'#ffd166');rect(282,80,18,36,'#6c4c8d');rect(286,84,10,28,'#ffcf75');rect(294,97,3,3,'#fff4d8');
- for(const c of coins){if(c.got)continue;const y=c.y+Math.sin(frame/8+c.bob)*3;rect(c.x-5,y-5,10,10,'#ffd166');rect(c.x-3,y-3,6,6,'#fff0a1');rect(c.x-1,y-2,2,4,'#d89a38')}
- for(const s of slimes){const x=s.x*T,y=s.y*T;rect(x+2,y+8,16,9,'#9b8cff');rect(x+5,y+4,10,5,'#9b8cff');rect(x+5,y+10,2,3,'#29243d');rect(x+13,y+10,2,3,'#29243d');rect(x+7,y+15,6,2,'#d7ccff')}
- drawCat(player.x,player.y);
- if(won||lost){rect(25,150,270,75,'#17152b');rect(29,154,262,67,'#ffd166');ctx.fillStyle='#29243d';ctx.textAlign='center';ctx.font='bold 15px monospace';ctx.fillText(won?'STAGE CLEAR!':'TRY AGAIN',160,181);ctx.font='10px monospace';ctx.fillText(won?'月光森林恢復光芒！':'再試一次就會成功！',160,201)}
-}
-function loop(){move();draw();raf=requestAnimationFrame(loop)}
-// Touch controls live ON the game canvas. Prevent iOS Safari from scrolling/zooming while pressing them.
-function bindButton(el,key){const down=e=>{e.preventDefault();keys[key]=true;el.classList.add('active');try{el.setPointerCapture(e.pointerId)}catch(_){}};const up=e=>{e.preventDefault();keys[key]=false;el.classList.remove('active')};el.addEventListener('pointerdown',down);['pointerup','pointercancel','lostpointercapture','pointerleave'].forEach(ev=>el.addEventListener(ev,up));el.addEventListener('contextmenu',e=>e.preventDefault())}
-document.querySelectorAll('[data-key]').forEach(el=>bindButton(el,el.dataset.key));
-bindButton(document.getElementById('jump'),'up');
-document.addEventListener('keydown',e=>{if(['ArrowLeft','ArrowRight','ArrowUp','ArrowDown',' '].includes(e.key))e.preventDefault();keys[e.key]=true;if(e.key===' ')keys[' ']=true});
-document.addEventListener('keyup',e=>{keys[e.key]=false});
-document.getElementById('restart').addEventListener('click',reset);
-document.getElementById('sound').addEventListener('click',()=>{sound=!sound;document.getElementById('sound').textContent='♪ 音效：'+(sound?'開':'關');if(sound)beep()});
-document.getElementById('gameWrap').addEventListener('touchmove',e=>e.preventDefault(),{passive:false});
-reset();if(raf)cancelAnimationFrame(raf);loop();
-})();
-</script>
-</body></html>
+*{box-sizing:border-box}html,body{margin:0;background:#19152f;color:#fff2fb;font-family:system-ui,-apple-system,sans-serif;overscroll-behavior:none}body{display:flex;justify-content:center}main{width:min(100%,540px);padding:8px 10px 14px;display:flex;flex-direction:column;gap:8px}header{text-align:center}h1{font-size:clamp(20px,5vw,27px);margin:2px;color:#ffe4f5;text-shadow:0 0 12px #ff8dc9,2px 3px #7650a9}.sub{font-size:10px;letter-spacing:2px;color:#cfc2ff}.stats{display:flex;justify-content:space-between;align-items:center;padding:8px;background:#292044;border:1px solid #7f6bb0;border-radius:10px;font-size:12px}.stats b{color:#ffe5a1}.game{position:relative;border:2px solid #e9caff;border-radius:13px;overflow:hidden;box-shadow:0 0 22px #9d6cff55;touch-action:none;line-height:0}canvas{display:block;width:100%;height:auto;aspect-ratio:390/550;touch-action:none}.toast{position:absolute;top:10px;left:50%;transform:translateX(-50%);white-space:nowrap;max-width:90%;overflow:hidden;text-overflow:ellipsis;background:#24183ddd;border:1px solid #e6c9ff;border-radius:20px;padding:7px 12px;font-size:11px;line-height:1.2}.joy{position:absolute;left:12px;bottom:14px;width:118px;height:118px;border-radius:50%;background:#2b204ab8;border:2px solid #ffffff99;touch-action:none}.stick{position:absolute;left:50%;top:50%;width:50px;height:50px;margin:-25px;border-radius:50%;background:linear-gradient(145deg,#ffe8f7,#b9a2ff);border:2px solid white;pointer-events:none}.actions{position:absolute;right:9px;bottom:12px;width:49%;height:137px;pointer-events:none}.act{position:absolute;border:2px solid #fff2ffb8;border-radius:50%;display:flex;align-items:center;justify-content:center;text-align:center;line-height:1.1;font-weight:800;color:#2a1947;box-shadow:0 4px 0 #7e549d;pointer-events:auto;touch-action:none;user-select:none}.act:active,.act.down{transform:scale(.94)}.attack{width:68px;height:68px;right:0;bottom:0;background:linear-gradient(145deg,#fff1a9,#ff9bcb);font-size:13px}.jump{width:52px;height:52px;right:75px;bottom:6px;background:linear-gradient(145deg,#e8dcff,#a58bff);font-size:11px}.magic{width:56px;height:56px;right:47px;bottom:77px;background:linear-gradient(145deg,#fff1fc,#ff8bd0);font-size:11px}.trans{width:47px;height:47px;right:112px;bottom:68px;background:linear-gradient(145deg,#fff4bc,#ffc2e3);font-size:10px}.help{text-align:center;font-size:11px;color:#d9d0f2;line-height:1.5}.tools{display:grid;grid-template-columns:1fr 1fr;gap:8px}.tools button{font:inherit;font-weight:700;border:1px solid #a694d7;border-radius:10px;background:#30254f;color:#fff0fb;padding:10px}.message{text-align:center;font-size:12px;padding:9px;background:#292044;border:1px solid #7f6bb0;border-radius:10px;color:#ffe8b4}@media(max-height:760px){main{gap:5px;padding-top:4px}.game canvas{max-height:56svh;width:auto;max-width:100%;margin:auto}.game{display:flex;justify-content:center}.joy{width:95px;height:95px}.stick{width:42px;height:42px;margin:-21px}.actions{height:115px}.attack{width:59px;height:59px}.jump{width:45px;height:45px;right:65px}.magic{width:48px;height:48px;right:39px;bottom:65px}.trans{width:41px;height:41px;right:94px;bottom:59px}}
+</style></head><body><main>
+<header><h1>☾ 月姬魔法學園：星夜覺醒 ✦</h1><div class="sub">MOON PRINCESS · AWAKENING</div></header>
+<div class="stats"><span>❤ <b id="hp">100</b>%</span><span>✦ 星能 <b id="energy">0</b></span><span>✧ 星晶 <b id="gems">0</b>/5</span><span>關卡 01</span></div>
+<div class="game" id="game"><canvas id="c" width="390" height="550"></canvas><div class="toast" id="toast">擊退夢魘史萊姆，收集星晶！</div><div class="joy" id="joy"><div class="stick" id="stick"></div></div><div class="actions"><button class="act trans" id="trans">✦<br>變身</button><button class="act magic" id="magic">☾<br>月光炮</button><button class="act jump" id="jump">↑<br>跳躍</button><button class="act attack" id="attack">✧<br>攻擊</button></div></div>
+<div class="help">左下搖桿移動 · 右側攻擊／跳躍／月光炮／變身<br>擊敗夢魘、收集星晶，完成星夜試煉！</div><div class="tools"><button id="restart">↻ 重新開始</button><button id="sound">♫ 音效：關</button></div><div class="message" id="message">見習魔法少女，準備迎接第一場星夜試煉！</div>
+</main><script>
+(()=>{'use strict';const $=id=>document.getElementById(id),c=$('c'),x=c.getContext('2d'),W=390,H=550;let p,foes,gems,shots,fx,frame=0,energy=0,collected=0,transformed=false,won=false,lost=false,sound=false,audio,shake=0,keys={left:false,right:false};function toast(t){$('toast').textContent=t}function ui(){$('hp').textContent=Math.max(0,Math.ceil(p.hp));$('energy').textContent=energy;$('gems').textContent=collected}
+function reset(){p={x:62,y:425,vx:0,vy:0,hp:100,on:true,face:1,inv:0,atk:0,mag:0};foes=[{x:210,y:431,hp:3,phase:0},{x:310,y:431,hp:3,phase:2}];gems=[{x:130,y:380},{x:270,y:330},{x:85,y:285},{x:310,y:245},{x:190,y:190}].map(a=>({...a,got:false}));shots=[];fx=[];frame=0;energy=collected=0;transformed=won=lost=false;shake=0;toast('攻擊夢魘怪物，收集星晶！');$('message').textContent='使用攻擊淨化夢魘，收集星晶補充月光炮能量。';ui()}
+function beep(f=500,d=.08){if(!sound)return;try{audio=audio||new(window.AudioContext||window.webkitAudioContext)();if(audio.state==='suspended')audio.resume();let o=audio.createOscillator(),g=audio.createGain();o.connect(g);g.connect(audio.destination);o.type='triangle';o.frequency.value=f;g.gain.value=.03;o.start();g.gain.exponentialRampToValueAtTime(.001,audio.currentTime+d);o.stop(audio.currentTime+d)}catch(e){}}
+function burst(a,b,color,n=12){for(let i=0;i<n;i++){let t=Math.random()*6.28,s=1+Math.random()*3;fx.push({x:a,y:b,vx:Math.cos(t)*s,vy:Math.sin(t)*s-1,life:25+Math.random()*18,color,size:2+Math.random()*3})}}
+function hurt(){if(p.inv||won||lost)return;p.hp-=12;p.inv=55;shake=6;burst(p.x+12,p.y+12,'#ff80b9');ui();beep(130,.12);toast(p.hp<=0?'魔力耗盡！重新開始再挑戰。':'小心夢魘的碰撞！');if(p.hp<=0)lost=true}
+function attack(){if(p.atk||won||lost)return;p.atk=16;beep(620,.05);let hit=false;foes.forEach(f=>{if(f.hp>0&&Math.abs(f.x-p.x-p.face*25)<55&&Math.abs(f.y-p.y)<45){f.hp--;hit=true;burst(f.x+12,f.y,'#d9a8ff');if(f.hp<=0){energy+=2;collected++;burst(f.x+12,f.y,'#ffe6a1',25);toast('夢魘已淨化！獲得星晶 ✨')}else toast('命中！再攻擊幾次！'}});if(hit)ui()}
+function jump(){if(!won&&!lost&&p.on){p.vy=-10.7;p.on=false;beep(350,.06)}}
+function magic(){if(won||lost||p.mag)return;if(energy<2){toast('星能不足！先攻擊敵人或收集星晶。');return}energy-=2;p.mag=25;shots.push({x:p.x+12,y:p.y+8,vx:p.face*7,life:50});burst(p.x+12,p.y+8,'#fff0a6');beep(900,.13);ui();toast('月光星辰！')}
+function trans(){transformed=true;burst(p.x+12,p.y+20,'#ffb7e5',35);beep(760,.2);toast('月光變身！魔力全開！')}
+function update(){frame++;if(!won&&!lost){p.vx=(keys.right?3.1:0)-(keys.left?3.1:0);if(p.vx)p.face=Math.sign(p.vx);p.x=Math.max(8,Math.min(W-32,p.x+p.vx));p.vy=Math.min(9,p.vy+.38);p.y+=p.vy;let floor=H-83;if(p.y>=floor-28){p.y=floor-28;p.vy=0;p.on=true}else p.on=false;if(p.inv)p.inv--;if(p.atk)p.atk--;if(p.mag)p.mag--;
+foes.forEach(f=>{if(f.hp<=0)return;f.phase+=.045;f.x+=Math.sin(f.phase)*.8;if(Math.abs(f.x-p.x)<25&&Math.abs(f.y-p.y)<30)hurt()});
+gems.forEach(g=>{if(!g.got&&Math.hypot(g.x-p.x-12,g.y-p.y-12)<25){g.got=true;collected++;energy++;burst(g.x,g.y,'#fff0a6');beep(920,.1);toast('星晶取得！星能 +1');ui()}});
+shots.forEach(s=>{s.x+=s.vx;s.life--;foes.forEach(f=>{if(f.hp>0&&Math.abs(s.x-f.x-12)<25&&Math.abs(s.y-f.y)<30){f.hp=0;energy++;collected++;s.life=0;burst(f.x+12,f.y,'#fff0a6',25);toast('月光炮命中！夢魘淨化！');ui()}})});shots=shots.filter(s=>s.life>0&&s.x>-10&&s.x<W+10);fx.forEach(a=>{a.x+=a.vx;a.y+=a.vy;a.vy+=.08;a.life--});fx=fx.filter(a=>a.life>0);if(foes.every(f=>f.hp<=0)&&collected>=5){won=true;toast('星夜試煉完成！月之門已開啟！');$('message').textContent='恭喜！妳成為真正的月光守護者！';burst(195,260,'#ffe6a1',70)}}draw();requestAnimationFrame(update)}
+function rect(a,b,w,h,col){x.fillStyle=col;x.fillRect(a,b,w,h)}
+function bg(){let g=x.createLinearGradient(0,0,0,H);g.addColorStop(0,'#171633');g.addColorStop(.55,'#48306f');g.addColorStop(1,'#ee91c1');x.fillStyle=g;x.fillRect(0,0,W,H);for(let i=0;i<65;i++){x.globalAlpha=.4+(i%3)*.2;x.fillStyle=i%5?'#fff3ff':'#ffe9a4';rect((i*79+11)%W,(i*47+frame*.23)%400,2,2)}x.globalAlpha=1;x.save();x.shadowBlur=22;x.shadowColor='#fff0b1';x.fillStyle='#fff0b1';x.beginPath();x.arc(310,75,33,0,7);x.fill();x.fillStyle='#35245f';x.beginPath();x.arc(325,62,29,0,7);x.fill();x.restore();for(let i=0;i<5;i++){let a=i*90-15;x.fillStyle='#2d2455';x.beginPath();x.moveTo(a,365);x.lineTo(a+40,235+i%2*30);x.lineTo(a+80,365);x.fill()}rect(0,H-83,W,83,'#332552');rect(0,H-83,W,5,'#ffb6db');for(let a=0;a<W;a+=38)rect(a,H-58,19,4,'#76518d');x.save();x.shadowBlur=15;x.shadowColor='#ffdc99';x.fillStyle='#ffd98b';x.beginPath();x.roundRect(330,270,43,67,18);x.fill();x.fillStyle='#6b468b';x.beginPath();x.roundRect(337,278,29,56,14);x.fill();x.restore()}
+function hero(){let a=p.x,b=p.y;x.save();if(p.inv&&Math.floor(frame/4)%2===0)x.globalAlpha=.4;if(transformed){x.globalAlpha=.6+Math.sin(frame*.2)*.25;x.strokeStyle='#ffc7ed';x.lineWidth=3;x.beginPath();x.ellipse(a+12,b+17,23,31,0,0,7);x.stroke();x.globalAlpha=1}x.fillStyle='#e99bdb';x.beginPath();x.moveTo(a+5,b+4);x.quadraticCurveTo(a-12,b+17,a-2,b+36);x.lineTo(a+8,b+27);x.fill();x.fillStyle='#f6bce9';x.beginPath();x.ellipse(a+12,b+9,12,13,0,0,7);x.fill();x.fillStyle='#fff0f8';x.beginPath();x.ellipse(a+12,b+13,9,10,0,0,7);x.fill();x.fillStyle='#ff82c2';rect(a+3,b+2,7,4,'#ff82c2');rect(a+13,b+1,8,4,'#ff82c2');x.fillStyle='#ffe9a4';x.beginPath();x.arc(a+12,b+2,4,0,7);x.fill();rect(a+6,b+21,12,14,'#6b4b91');x.fillStyle='#fff0fb';x.beginPath();x.moveTo(a+7,b+21);x.lineTo(a+12,b+27);x.lineTo(a+17,b+21);x.fill();rect(a+5,b+34,6,8,'#ffabd8');rect(a+14,b+34,6,8,'#ffabd8');rect(a+5,b+41,7,4,'#fff0f8');rect(a+14,b+41,7,4,'#fff0f8');rect(a+7,b+12,2,4,'#4e347a');rect(a+15,b+12,2,4,'#4e347a');rect(a+4,b+17,3,2,'#ff92c6');rect(a+17,b+17,3,2,'#ff92c6');x.strokeStyle='#ffe6a1';x.lineWidth=2;x.beginPath();x.moveTo(a+21,b+25);x.lineTo(a+27,b+12);x.stroke();x.fillStyle='#fff1ad';x.beginPath();x.arc(a+27,b+10,4,0,7);x.fill();if(p.atk){x.strokeStyle='#fff2bf';x.lineWidth=5;x.shadowBlur=12;x.shadowColor='#ff9ed5';x.beginPath();x.arc(a+12+p.face*18,b+22,20,-1.2,1.2);x.stroke()}x.restore()}
+function foe(f){if(f.hp<=0)return;let a=f.x,b=f.y+Math.sin(frame*.12+f.phase)*4;x.save();x.shadowBlur=12;x.shadowColor='#b48cff';x.fillStyle='#8c65c7';x.beginPath();x.ellipse(a+12,b+4,18,18,0,0,7);x.fill();x.fillStyle='#d9bfff';x.beginPath();x.ellipse(a+7,b-3,5,8,-.5,0,7);x.ellipse(a+18,b-3,5,8,.5,0,7);x.fill();rect(a+6,b+2,4,6,'#fff2ff');rect(a+15,b+2,4,6,'#fff2ff');rect(a+7,b+4,2,4,'#3d225f');rect(a+16,b+4,2,4,'#3d225f');x.restore();rect(a-1,b-18,26,4,'#302047');rect(a-1,b-18,26*f.hp/3,4,'#ff83b8')}
+function draw(){x.save();if(shake>.5)x.translate((Math.random()-.5)*shake,(Math.random()-.5)*shake);bg();gems.forEach(g=>{if(g.got)return;x.save();x.translate(g.x,g.y+Math.sin(frame*.08+g.x)*4);x.rotate(.78);x.shadowBlur=14;x.shadowColor='#fff0a6';rect(-7,-7,14,14,'#fff0a6');rect(-3,-3,6,6,'#ff9acb');x.restore()});foes.forEach(foe);shots.forEach(s=>{x.save();x.shadowBlur=15;x.shadowColor='#ffe5a1';x.fillStyle='#fff3b0';x.beginPath();x.arc(s.x,s.y,7,0,7);x.fill();x.restore()});fx.forEach(a=>{x.globalAlpha=Math.max(0,a.life/35);rect(a.x,a.y,a.size,a.size,a.color)});x.globalAlpha=1;hero();if(won||lost){rect(30,205,330,95,'#20143cdd');x.fillStyle='#fff0bb';x.textAlign='center';x.font='bold 21px system-ui';x.fillText(won?'STAR MISSION CLEAR!':'TRY AGAIN',195,244);x.font='14px system-ui';x.fillText(won?'月光守護者，妳做到了！':'重新開始，再次挑戰！',195,273)}x.restore()}
+function hold(id,fn){let el=$(id);let end=e=>{e.preventDefault();el.classList.remove('down')};el.addEventListener('pointerdown',e=>{e.preventDefault();el.classList.add('down');fn();try{el.setPointerCapture(e.pointerId)}catch(_){}});['pointerup','pointercancel','lostpointercapture'].forEach(k=>el.addEventListener(k,end))}
+let joy=$('joy'),stick=$('stick'),jid=null;function jm(e){let r=joy.getBoundingClientRect(),dx=e.clientX-(r.left+r.width/2),dy=e.clientY-(r.top+r.height/2),m=r.width*.3,l=Math.hypot(dx,dy);if(l>m){dx=dx/l*m;dy=dy/l*m}stick.style.transform='translate('+dx+'px,'+dy+'px)';keys.left=dx<-10;keys.right=dx>10}joy.addEventListener('pointerdown',e=>{e.preventDefault();jid=e.pointerId;joy.setPointerCapture(jid);jm(e)});joy.addEventListener('pointermove',e=>{if(e.pointerId===jid)jm(e)});function je(e){if(e.pointerId!==jid)return;jid=null;keys.left=keys.right=false;stick.style.transform='translate(0,0)'}['pointerup','pointercancel','lostpointercapture'].forEach(k=>joy.addEventListener(k,je));
+hold('attack',attack);hold('jump',jump);hold('magic',magic);hold('trans',trans);$('restart').onclick=reset;$('sound').onclick=()=>{sound=!sound;$('sound').textContent='♫ 音效：'+(sound?'開':'關');beep()};document.addEventListener('keydown',e=>{if(e.key==='ArrowLeft'||e.key==='a')keys.left=true;if(e.key==='ArrowRight'||e.key==='d')keys.right=true;if(e.key==='ArrowUp'||e.key===' ')jump();if(e.key==='j')attack();if(e.key==='k')magic();if(e.key==='t')trans()});document.addEventListener('keyup',e=>{if(e.key==='ArrowLeft'||e.key==='a')keys.left=false;if(e.key==='ArrowRight'||e.key==='d')keys.right=false});$('game').addEventListener('touchmove',e=>e.preventDefault(),{passive:false});reset();update()})();
+</script></body></html>
