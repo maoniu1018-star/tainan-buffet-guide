@@ -12,7 +12,7 @@ GitHub Pages 靜態網站。
 
 ## 檔案說明
 
-`index.html` 已內嵌完整 61 間餐廳資料與前端程式，避免 GitHub Pages 因外部資料檔載入異常而出現空白餐廳列表。`data.js`、`app.js` 同步保留供維護使用。
+`index.html` 目前透過 `data.js` 載入餐廳資料，首頁筆數會依資料檔動態計算。`data.json` 是舊版資料檔，首頁未引用；維護目前網站時請以 `data.js` 為主要資料來源。
 
 ## GitHub Pages
 將根目錄檔案上傳至既有 repository 的 `main` 分支，Pages 使用 `main / root`。
