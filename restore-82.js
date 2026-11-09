@@ -1,7 +1,7 @@
 (function(){
   const current = window.RESTAURANTS || [];
-  const norm = v => String(v ?? '').replace(/\\s+/g,'').replace(/[（）()]/g,'').toLowerCase();
-  const digits = v => String(v ?? '').replace(/\\D/g,'');
+  const norm = v => String(v ?? '').replace(/\s+/g,'').replace(/[（）()]/g,'').toLowerCase();
+  const digits = v => String(v ?? '').replace(/\D/g,'');
   const sameBranch = (a,b) => {
     const aa=norm(a.address), ba=norm(b.address);
     if(!aa || aa!==ba) return false;
