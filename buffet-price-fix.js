@@ -93,7 +93,7 @@
   function base(r){
     const s=String(r.price||'');
     const m=s.match(/(?:NT\$|\$)?\s*\d[\d,]*(?:\s*[–-]\s*\d[\d,]*)?/);
-    return m?'約 $'+m[0].replace(/^(?:NT\$|\$)\s*/,'').replace(/,/g,'')+'／人':'約 $400／人';
+    return m?'約 $'+m[0].replace(/^(?:NT\$|\$)\s*/,'').replace(/,/g,'')+'／人':'待店家確認';
   }
   function normalizePrice(r){
     if(buffet[r.name]) r.price=buffet[r.name];
