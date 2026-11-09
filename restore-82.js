@@ -1,4 +1,17 @@
-window.RESTAURANTS = (window.RESTAURANTS || []).concat([
+(function(){
+  const current = window.RESTAURANTS || [];
+  const norm = v => String(v ?? '').replace(/\\s+/g,'').replace(/[（）()]/g,'').toLowerCase();
+  const digits = v => String(v ?? '').replace(/\\D/g,'');
+  const sameBranch = (a,b) => {
+    const aa=norm(a.address), ba=norm(b.address);
+    if(!aa || aa!==ba) return false;
+    const ap=digits(a.phone), bp=digits(b.phone);
+    const samePhone=ap.length>=8 && bp.length>=8 && ap===bp;
+    const an=norm(a.name), bn=norm(b.name);
+    const sameName=an===bn || (an.length>=5 && bn.length>=5 && (an.includes(bn)||bn.includes(an)));
+    return samePhone || sameName;
+  };
+  const restored = [
 {name:'饗翻天臭臭鍋 永康鹽行店',rating:4.5,reviewCount:3,ratingSource:'Google Maps',type:'🍲 火鍋',tags:['🍱 自助吧'],area:'永康區',price:'約 $230',prices:{weekdayLunch:'約 NT$230',weekdayDinner:'約 NT$230',holidayLunch:'約 NT$230',holidayDinner:'約 NT$230'},address:'台南市永康區新中街188號',phone:'06-253-0815',hours:'11:00–14:00；17:00–22:30',desc:'火鍋＋免費自助吧，含飲料、爆米花、冰品等。',source:'2026/07 公開餐飲資料＋商家資料',status:'🟢 已核對'},
 {name:'饗翻天臭臭鍋 新營店',type:'🍲 火鍋',tags:['🍱 自助吧'],area:'新營區',price:'約 $300',prices:{weekdayLunch:'約 NT$300',weekdayDinner:'約 NT$300',holidayLunch:'約 NT$300',holidayDinner:'約 NT$300'},address:'台南市新營區民生路95號',phone:'06-656-1116',hours:'11:00–14:00；17:00–21:30',desc:'火鍋＋自助吧。',source:'近期公開餐飲資料',status:'🟢 已核對'},
 {name:'饗翻天臭臭鍋 南區中華南店',type:'🍲 火鍋',tags:['🍱 自助吧'],area:'南區',price:'約 $180',prices:{weekdayLunch:'約 NT$180',weekdayDinner:'約 NT$180',holidayLunch:'約 NT$180',holidayDinner:'約 NT$180'},address:'台南市南區中華南路二段101之1號',phone:'06-262-4462',hours:'11:00–14:00；17:00–22:00',desc:'火鍋＋自助吧，飲料、爆米花、冰品等自助內容。',source:'近期公開餐飲資料',status:'🟢 已核對'},
@@ -20,4 +33,13 @@ window.RESTAURANTS = (window.RESTAURANTS || []).concat([
 {name:'橫濱牛排 台南三井店',rating:4.2,reviewCount:3,ratingSource:'Google Maps',type:'🥩 牛排',tags:['🍱 自助吧','🔴 可以訂位'],area:'歸仁區',price:'平日午餐約 $370起；晚餐／假日約 $400起',prices:{weekdayLunch:'約 NT$370起／人',weekdayDinner:'約 NT$400起／人',holidayLunch:'約 NT$400起／人',holidayDinner:'約 NT$400起／人'},address:'台南市歸仁區歸仁大道101號2樓',phone:'06-303-2563',hours:'11:00–21:30',desc:'半自助吧 Semi Buffet；點主餐即可享沙拉、飯、咖哩、湯、甜點、霜淇淋、飲料等自助內容。',source:'橫濱牛排官方網站＋MITSUI OUTLET PARK 台南官方資料＋2026公開資料',status:'🟢 已核對',official:'https://www.yokohama-steakhouse.com.tw/'},
 {name:'温家堡燒肉吃到飽',rating:5.0,reviewCount:2,ratingSource:'Google Maps',type:'🔥 燒肉／韓式',tags:['♾️ 吃到飽','🍱 自助吧','🔴 可以訂位'],area:'永康區',price:'平日 NT$1,280＋10%；假日 NT$1,380＋10%',prices:{weekdayLunch:'平日無午餐／17:00後 NT$1,280＋10%',weekdayDinner:'NT$1,280＋10%／人',holidayLunch:'NT$1,380＋10%／人',holidayDinner:'NT$1,380＋10%／人'},address:'台南市永康區文化路12號2樓',phone:'06-203-2888',hours:'平日 17:00–23:00；假日 11:00–23:00',desc:'高檔海鮮與燒肉吃到飽，鱈場蟹腳、松葉蟹腳、小青龍、龍膽石斑、蝦類等可自助取用；另有哈根達斯、莫凡彼、銀波布丁等甜點。',source:'食尚玩家 2026/07＋愛食記 2026/08',status:'🟢 近期已核對'},
 {name:'咚豬咚豬 韓國烤肉吃到飽 台南東區中華門市',rating:4.5,reviewCount:13,ratingSource:'Google Maps',type:'🔥 燒肉／韓式',tags:['♾️ 吃到飽','🍱 自助吧','🔴 可以訂位'],area:'東區',price:'平日午餐約 NT$339起；平日晚餐／假日約 NT$429起',prices:{weekdayLunch:'約 NT$339起／人',weekdayDinner:'約 NT$429起／人',holidayLunch:'約 NT$429起／人',holidayDinner:'約 NT$429起／人'},address:'台南市東區中華東路三段291號',phone:'06-267-8008',hours:'11:00–22:30',desc:'韓式烤肉＋火鍋吃到飽，自助吧提供肉品、炸物、沙拉、韓式料理、飲料、霜淇淋與甜點等無限供應。',source:'2026/05–08 公開資料＋愛食記',status:'🟢 近期已核對'}
-]);
+  ];
+  const additions=[];
+  const seen=current.slice();
+  for(const r of restored){
+    if(seen.some(e=>sameBranch(e,r))) continue;
+    additions.push(r);
+    seen.push(r);
+  }
+  window.RESTAURANTS=current.concat(additions);
+})();
