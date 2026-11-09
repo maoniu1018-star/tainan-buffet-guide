@@ -110,7 +110,7 @@
       else if(/假日.*午餐/.test(part)) out.holidayLunch=text;
       else if(/假日.*晚餐/.test(part)) out.holidayDinner=text;
     }
-    for(const k of Object.keys(out)) if(!hasNum(out[k])) out[k]=b;
+    for(const k of Object.keys(out)) if(out[k]===undefined || out[k]===null || String(out[k]).trim()==='') out[k]=b;
     r.prices=out;
   }
   for(const r of data){
