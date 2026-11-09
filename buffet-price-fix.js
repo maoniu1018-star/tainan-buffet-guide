@@ -105,10 +105,10 @@
       const v=(part.match(/\d[\d,]*(?:\s*[–-]\s*\d[\d,]*)?/)||[])[0];
       if(!v) continue;
       const text='約 $'+v.replace(/,/g,'')+'／人';
-      if(/平日.*午/.test(part)) out.weekdayLunch=text;
-      else if(/平日.*晚/.test(part)) out.weekdayDinner=text;
-      else if(/假日.*午/.test(part)) out.holidayLunch=text;
-      else if(/假日.*晚/.test(part)) out.holidayDinner=text;
+      if(/平日.*午餐/.test(part)) out.weekdayLunch=text;
+      else if(/平日.*晚餐/.test(part)) out.weekdayDinner=text;
+      else if(/假日.*午餐/.test(part)) out.holidayLunch=text;
+      else if(/假日.*晚餐/.test(part)) out.holidayDinner=text;
     }
     for(const k of Object.keys(out)) if(!hasNum(out[k])) out[k]=b;
     r.prices=out;
