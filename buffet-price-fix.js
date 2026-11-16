@@ -111,7 +111,8 @@
       else if(/假日.*午餐/.test(part)) out.holidayLunch=text;
       else if(/假日.*晚餐/.test(part)) out.holidayDinner=text;
     }
-    const hasMealLabels=/平日|假日|午餐|晚餐|早餐|下午餐/.test(raw);\n    const fallback=hasMealLabels?'待店家確認':b;\n    for(const k of Object.keys(out)) if(out[k]===undefined || out[k]===null || String(out[k]).trim()==='') out[k]=fallback;
+    const hasMealLabels=/平日|假日|午餐|晚餐|早餐|下午餐/.test(raw);
+    const fallback=hasMealLabels?'待店家確認':b;\n    for(const k of Object.keys(out)) if(out[k]===undefined || out[k]===null || String(out[k]).trim()==='') out[k]=fallback;
     r.prices=out;
   }
   for(const r of data){
