@@ -124,7 +124,7 @@
     if(service[r.name]) r.service=service[r.name];
     if(child[r.name]) r.child=child[r.name]; else delete r.child;
     if(official[r.name]) r.official=official[r.name];
-    if(booking[r.name]) r.bookingUrl=booking[r.name];
+    if(booking[r.name]) r.bookingUrl=booking[r.name];\n    if(r.booking && !r.bookingUrl) r.bookingUrl=r.booking;
     if(r.tags?.some(t=>String(t).includes('可以訂位'))) r.__bookable=true;
   }
   function compactPriceText(v){
