@@ -17,10 +17,11 @@ jobs:
         run: |
           python - <<'PY'
           from pathlib import Path
-          import re
+          import os, re
           p=Path('index.html')
           s=p.read_text(encoding='utf-8')
-          script='<script src="final-data-fix.js?v=20260910-1"></script>'
+          version=os.environ.get('GITHUB_SHA','local')
+          script=f'<script src="final-data-fix.js?v={version}"></script>'
           pattern=r'<script src="final-data-fix\.js\?v=[^"]+"></script>'
           if re.search(pattern,s):
               s=re.sub(pattern,script,s)
