@@ -112,80 +112,8 @@
       else if(/假日.*晚餐/.test(part)) out.holidayDinner=text;
     }
     const hasMealLabels=/平日|假日|午餐|晚餐|早餐|下午餐/.test(raw);
-    const fallback=hasMealLabels?'待店家確認':b;\n    for(const k of Object.keys(out)) if(out[k]===undefined || out[k]===null || String(out[k]).trim()==='') out[k]=fallback;
-    r.prices=out;
-  }
-  for(const r of data){
-    normalizePrice(r);
-    if(ratings[r.name]){
-      if(typeof r.rating!=='number') r.rating=ratings[r.name].rating;
-      if(!r.reviewCount && ratings[r.name].reviewCount) r.reviewCount=ratings[r.name].reviewCount;
-      r.ratingSource='Google Maps';
-    }
-    if(service[r.name]) r.service=service[r.name];
-    if(child[r.name]) r.child=child[r.name]; else delete r.child;
-    if(official[r.name]) r.official=official[r.name];
-    if(booking[r.name]) r.bookingUrl=booking[r.name];\n    if(r.booking && !r.bookingUrl) r.bookingUrl=r.booking;
-    if(r.tags?.some(t=>String(t).includes('可以訂位'))) r.__bookable=true;
-  }
-  function compactPriceText(v){
-    return String(v??'')
-      .replace(/NT\$/g,'$').replace(/NT＄/g,'$')
-      .replace(/\s*[＋+]\s*10%/gi,'')
-      .replace(/\s*[＋+]\s*清潔費(?:\s*\d+\s*元\s*(?:\/|／)?\s*(?:人|鍋))?/gi,'')
-      .replace(/\s+/g,' ').trim();
-  }
-  function injectLayoutFix(){
-    if(document.getElementById('price-ui-fix')) return;
-    const s=document.createElement('style'); s.id='price-ui-fix';
-    s.textContent='.prices{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:8px!important}.pricebox{min-width:0!important;overflow:hidden!important}.pricebox .num{font-size:12px!important;line-height:1.2!important;white-space:normal!important;overflow-wrap:anywhere!important;word-break:keep-all!important}.meta{display:grid!important;gap:4px!important;margin-top:9px!important}.meta>div{font-size:12px!important;line-height:1.35!important}.prices .num:after{content:none!important}';
-    document.head.appendChild(s);
-  }
-  function enhance(){
-    injectLayoutFix();
-    document.querySelectorAll('.card .num').forEach(el=>{
-      el.textContent=compactPriceText(el.textContent);
-    });
-    document.querySelectorAll('.card .meta>div').forEach(el=>{
-      const t=el.textContent||'';
-      if(/兒童：\s*依店家公告/.test(t)||/服務費：\s*依店家公告/.test(t)) el.remove();
-    });
-    document.querySelectorAll('.card').forEach(card=>{
-      const h=card.querySelector('h3'); if(!h) return;
-      const r=data.find(x=>x.name===h.textContent.trim()); if(!r) return;
-      const actions=card.querySelector('.actions'); if(!actions) return;
-      if(r.official && ![...actions.querySelectorAll('a')].some(a=>a.href===r.official)) actions.insertAdjacentHTML('beforeend',`<a href="${r.official}" target="_blank" rel="noopener">🌐 官網</a>`);
-      if(r.bookingUrl && ![...actions.querySelectorAll('a')].some(a=>a.href===r.bookingUrl)) actions.insertAdjacentHTML('beforeend',`<a href="${r.bookingUrl}" target="_blank" rel="noopener">🔴 線上訂位</a>`);
-      if(!r.bookingUrl && r.__bookable && r.phone && /^06-\d/.test(r.phone) && ![...actions.querySelectorAll('a')].some(a=>a.href.includes('tel:'))) actions.insertAdjacentHTML('beforeend',`<a href="tel:${r.phone.replace(/-/g,'')}">☎️ 電話訂位</a>`);
-    });
-    document.querySelectorAll('#modal .row').forEach(row=>{
-      const k=row.querySelector('.k')?.textContent?.trim()||''; const v=row.querySelector('.v')?.textContent||'';
-      if((k==='兒童'||k==='服務費') && /依店家公告/.test(v)) row.remove();
-    });
-  }
-  setTimeout(enhance,30);
-  document.addEventListener('click',()=>setTimeout(enhance,40),true);
-  document.addEventListener('input',()=>setTimeout(enhance,40),true);
-  document.addEventListener('change',()=>setTimeout(enhance,40),true);
-})();
-+m[1].replace(/,/g,'')+'／人':'待店家確認';
-  }
-  function normalizePrice(r){
-    if(buffet[r.name]) r.price=buffet[r.name];
-    const raw=String(r.price||'');
-    const b=base(r);
-    const q=r.prices&&typeof r.prices==='object'?r.prices:{};
-    const out={weekdayLunch:q.weekdayLunch,weekdayDinner:q.weekdayDinner,holidayLunch:q.holidayLunch,holidayDinner:q.holidayDinner};
-    for(const part of raw.split('；').map(x=>x.trim()).filter(Boolean)){
-      const v=(part.match(/\d[\d,]*(?:\s*[–-]\s*\d[\d,]*)?/)||[])[0];
-      if(!v) continue;
-      const text='約 $'+v.replace(/,/g,'')+'／人';
-      if(/平日.*午餐/.test(part)) out.weekdayLunch=text;
-      else if(/平日.*晚餐/.test(part)) out.weekdayDinner=text;
-      else if(/假日.*午餐/.test(part)) out.holidayLunch=text;
-      else if(/假日.*晚餐/.test(part)) out.holidayDinner=text;
-    }
-    const hasMealLabels=/平日|假日|午餐|晚餐|早餐|下午餐/.test(raw);\n    const fallback=hasMealLabels?'待店家確認':b;\n    for(const k of Object.keys(out)) if(out[k]===undefined || out[k]===null || String(out[k]).trim()==='') out[k]=fallback;
+    const fallback=hasMealLabels?'待店家確認':b;
+    for(const k of Object.keys(out)) if(out[k]===undefined || out[k]===null || String(out[k]).trim()==='') out[k]=fallback;
     r.prices=out;
   }
   for(const r of data){
@@ -199,6 +127,7 @@
     if(child[r.name]) r.child=child[r.name]; else delete r.child;
     if(official[r.name]) r.official=official[r.name];
     if(booking[r.name]) r.bookingUrl=booking[r.name];
+    if(r.booking && !r.bookingUrl) r.bookingUrl=r.booking;
     if(r.tags?.some(t=>String(t).includes('可以訂位'))) r.__bookable=true;
   }
   function compactPriceText(v){
@@ -240,4 +169,4 @@
   document.addEventListener('click',()=>setTimeout(enhance,40),true);
   document.addEventListener('input',()=>setTimeout(enhance,40),true);
   document.addEventListener('change',()=>setTimeout(enhance,40),true);
-})();
+})()
