@@ -100,15 +100,17 @@
     const raw=String(r.price||'');
     const b=base(r);
     const q=r.prices&&typeof r.prices==='object'?r.prices:{};
-    const out={weekdayLunch:q.weekdayLunch,weekdayDinner:q.weekdayDinner,holidayLunch:q.holidayLunch,holidayDinner:q.holidayDinner};
+    const out={weekdayLunch:q.weekdayLunch,weekdayAfternoon:q.weekdayAfternoon,weekdayDinner:q.weekdayDinner,holidayLunch:q.holidayLunch,holidayAfternoon:q.holidayAfternoon,holidayDinner:q.holidayDinner};
     for(const part of raw.split('；').map(x=>x.trim()).filter(Boolean)){
       const m=part.match(/(?:NT\$|NT＄|\$)\s*(\d[\d,]*(?:\s*[–-]\s*\d[\d,]*)?)/);
       const v=m&&m[1];
       if(!v) continue;
       const text='約 $'+v.replace(/,/g,'')+'／人';
       if(/平日.*午餐/.test(part)) out.weekdayLunch=text;
+      else if(/平日.*下午餐/.test(part)) out.weekdayAfternoon=text;
       else if(/平日.*晚餐/.test(part)) out.weekdayDinner=text;
       else if(/假日.*午餐/.test(part)) out.holidayLunch=text;
+      else if(/假日.*下午餐/.test(part)) out.holidayAfternoon=text;
       else if(/假日.*晚餐/.test(part)) out.holidayDinner=text;
     }
     const hasMealLabels=/平日|假日|午餐|晚餐|早餐|下午餐/.test(raw);
