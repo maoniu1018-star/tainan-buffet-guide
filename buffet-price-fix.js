@@ -93,7 +93,7 @@
   function base(r){
     const s=String(r.price||'');
     const m=s.match(/(?:NT\$|NT＄|\$)\s*(\d[\d,]*(?:\s*[–-]\s*\d[\d,]*)?)/);
-    return m ? ('約 $' + m[1].replace(/,/g,'') + '／人') : '待店家確認';
+    return m ? ('約 $' + m[1].replace(/,/g,'') + '／人') : '依店家現場菜單';
   }
   function normalizePrice(r){
     if(buffet[r.name]) r.price=buffet[r.name];
@@ -114,7 +114,7 @@
       else if(/假日.*晚餐/.test(part)) out.holidayDinner=text;
     }
     const hasMealLabels=/平日|假日|午餐|晚餐|早餐|下午餐/.test(raw);
-    const fallback=hasMealLabels?'待店家確認':b;
+    const fallback=hasMealLabels?'依店家現場菜單':b;
     for(const k of Object.keys(out)) if(out[k]===undefined || out[k]===null || String(out[k]).trim()==='') out[k]=fallback;
     r.prices=out;
   }
