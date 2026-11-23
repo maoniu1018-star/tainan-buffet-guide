@@ -25,7 +25,7 @@
     '井賀鍋物 文賢店':{rating:4.5},
     '兩餐 Dookki 台南店':{rating:4.1,reviewCount:1905},
     '串家物語 台南三井店':{rating:3.9,reviewCount:967},
-    '灼花燒肉 HIBANA × 深煙酒吧 SHINEN':{rating:4.3,reviewCount:499},
+    '灼花燒肉 HIBANA × 深煙酒吧 SHINEN':{rating:4.3,reviewCount:547},
     '燒肉眾 台南永康店':{rating:4.5,reviewCount:752},
     '桂田酒店 阿力海百匯餐廳':{rating:4.6,reviewCount:18000},
     '甘粹餐廳（台南老爺行旅）':{rating:3.9,reviewCount:1400}
