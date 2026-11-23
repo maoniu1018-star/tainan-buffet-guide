@@ -56,7 +56,7 @@
   };
   const child={
     '桂田酒店 阿力海百匯餐廳':'未滿3歲（身高100cm以下）免費；3–5歲早餐NT$200、其他餐期NT$380；6–11歲半價（120–145cm）＋10%服務費；70歲以上敬老優惠依餐期計價；幼童與敬老優惠免10%服務費',
-    '灼花燒肉 HIBANA × 深煙酒吧 SHINEN':'101–130cm 半價；100cm以下免費',
+    '灼花燒肉 HIBANA × 深煙酒吧 SHINEN':'65歲以上長者、101–130cm孩童半價；100cm以下幼童免費',
     '饗麻饗辣 台南永華旗艦店':'100cm以下免費；100–120cm NT$258；120–140cm NT$388',
     '肉多多火鍋 台南東寧店':'100cm以下免費；101–140cm NT$150',
     '肉多多火鍋 台南怡平店':'100cm以下免費；101–140cm NT$150',
@@ -72,7 +72,7 @@
     '饗麻饗辣 台南永華旗艦店':'https://www.enjoyhot.com.tw/store.php?act=view&id=1',
     '串家物語 台南三井店':'https://www.mitsui-shopping-park.com.tw/mop/tainan/tw/shop.html?id=262a75a7',
     '嗑肉石鍋 東門店':'https://www.meatshotpot.com/stores',
-    '灼花燒肉 HIBANA × 深煙酒吧 SHINEN':'https://hibana.tw/',
+    '灼花燒肉 HIBANA × 深煙酒吧 SHINEN':'https://hibana.tw/menu.php',
     '燒肉工廠':'https://bbqfty.com.tw/',
     '井賀鍋物 文賢店':'https://www.jinghe-hotpot.com.tw/stronghold.html',
     '井賀鍋物 安南店':'https://www.jinghe-hotpot.com.tw/stronghold.html',
