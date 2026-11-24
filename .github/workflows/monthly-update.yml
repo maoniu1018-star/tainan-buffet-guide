@@ -1,9 +1,7 @@
-name: Monthly Buffet Update
+name: Legacy data.json audit (manual only)
 
 on:
   workflow_dispatch:
-  schedule:
-    - cron: "15 19 1 * *"
 
 permissions:
   contents: write
