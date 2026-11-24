@@ -28,15 +28,15 @@ for (const [i, row] of rows.entries()) {
   if (seen.has(label)) duplicates.push(`- ${label}：第 ${seen.get(label) + 1} 筆與第 ${i + 1} 筆重複`);
   else seen.set(label, i);
 
-  if (!row.priceVerified) noPriceDate.push(label);
-  else {
-    const match = String(row.priceVerified).match(/^(\\d{4})[/-](\\d{1,2})[/-](\\d{1,2})$/);
-    if (!match) oldPriceDate.push(`- ${label}：核對日期格式不正確（${row.priceVerified}）`);
-    else {
-      const stamp = Date.UTC(Number(match[1]), Number(match[2]) - 1, Number(match[3]));
-      const age = Math.floor((Date.now() - stamp) / 86400000);
-      if (age > 90) oldPriceDate.push(`- ${label}：價格核對已超過 90 天（${row.priceVerified}）`);
-    }
+  const dateMatch = typeof row.priceVerified === "string"
+    ? row.priceVerified.match(/^(\\d{4})[/-](\\d{1,2})[/-](\\d{1,2})$/)
+    : null;
+  if (!dateMatch) {
+    noPriceDate.push(label);
+  } else {
+    const stamp = Date.UTC(Number(dateMatch[1]), Number(dateMatch[2]) - 1, Number(dateMatch[3]));
+    const age = Math.floor((Date.now() - stamp) / 86400000);
+    if (age > 90) oldPriceDate.push(`- ${label}：價格核對已超過 90 天（${row.priceVerified}）`);
   }
 
   if (/待確認|待查|未確認/.test(String(row.price || ""))) weakPriceEvidence.push(label);
