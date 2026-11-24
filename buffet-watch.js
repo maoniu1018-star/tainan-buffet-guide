@@ -9,11 +9,11 @@ async function main() {
   const response = await fetch(url, { headers: { "User-Agent": "TainanBuffetGuide/1.0" } });
   if (!response.ok) throw new Error("Google News RSS 回應錯誤：" + response.status);
   const xml = await response.text();
-  const blocks = [...xml.matchAll(/<item>([\\s\\S]*?)<\\/item>/g)].map(match => match[1]);
+  const blocks = [...xml.matchAll(/<item>([\s\S]*?)<\/item>/g)].map(match => match[1]);
   const field = (block, name) => {
-    const pattern = new RegExp("<" + name + ">([\\\\s\\\\S]*?)</" + name + ">");
+    const pattern = new RegExp("<" + name + ">([\\s\\S]*?)</" + name + ">");
     const found = block.match(pattern);
-    return found ? found[1].replace(/<!\\[CDATA\\[|\\]\\]>/g, "").replace(/&amp;/g, "&").replace(/&quot;/g, '"').replace(/&#39;/g, "'").trim() : "";
+    return found ? found[1].replace(/<!\[CDATA\[|\]\]>/g, "").replace(/&amp;/g, "&").replace(/&quot;/g, '"').replace(/&#39;/g, "'").trim() : "";
   };
   const items = blocks.map(block => ({
     title: field(block, "title"),
@@ -37,7 +37,7 @@ async function main() {
   for (const item of unique) {
     lines.push("## " + item.title, "", "- 日期：" + item.pubDate, "- 來源：" + (item.source || "Google News"), "- 連結：" + item.link, "");
   }
-  fs.writeFileSync("buffet-watch-report.md", lines.join("\\n"), "utf8");
+  fs.writeFileSync("buffet-watch-report.md", lines.join("\n"), "utf8");
   console.log("完成：找到 " + unique.length + " 則近14天線索。");
 }
 main().catch(error => { console.error(error); process.exit(1); });
