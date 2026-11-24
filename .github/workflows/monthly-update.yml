@@ -1,4 +1,4 @@
-name: Published Restaurant Data Audit
+name: Weekly Tainan Buffet Watch and Data Audit
 
 on:
   workflow_dispatch:
@@ -6,15 +6,16 @@ on:
     paths:
       - 'data.js'
       - 'audit-data.js'
+      - 'buffet-watch.js'
       - '.github/workflows/monthly-update.yml'
   schedule:
-    - cron: "15 19 1 * *"
+    - cron: "0 0 * * 1"
 
 permissions:
   contents: write
 
 jobs:
-  audit:
+  audit-and-watch:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -23,13 +24,15 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: "22"
-      - name: Audit the data actually used by the website
+      - name: Audit published restaurant data
         run: node audit-data.js
-      - name: Commit audit report
+      - name: Search recent Tainan buffet and self-service updates
+        run: node buffet-watch.js
+      - name: Commit audit and watch reports
         if: always()
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data-audit-report.md
-          git diff --cached --quiet || git commit -m "chore: audit published restaurant data"
+          git add data-audit-report.md buffet-watch-report.md
+          git diff --cached --quiet || git commit -m "chore: update weekly buffet watch reports"
           git push
