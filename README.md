@@ -12,7 +12,7 @@ GitHub Pages 靜態網站。
 
 ## 檔案說明
 
-`index.html` 目前透過 `data.js` 載入餐廳資料，首頁筆數會依資料檔動態計算。`data.json` 是舊版資料檔，首頁未引用；維護目前網站時請以 `data.js` 為主要資料來源。
+`index.html` 目前透過 `data.js` 載入餐廳資料，首頁筆數會依資料檔動態計算。`data.json` 是舊版資料檔，首頁未引用；維護目前網站時請以 `data.js` 為主要資料來源。`restore-82.js` 與後續修正腳本會在首頁載入時補充或正規化部分資料。
 
 ## GitHub Pages
 將根目錄檔案上傳至既有 repository 的 `main` 分支，Pages 使用 `main / root`。
@@ -20,3 +20,10 @@ GitHub Pages 靜態網站。
 
 ### Google 星評
 網站星評欄位採 Google Maps 的目前評分與評論數；未取得可靠 Google 資料的店家不填假評分。
+
+
+## 自動更新注意事項
+
+- 公開首頁實際載入的是 `data.js`，不是 `data.json`。
+- `updater.py` 與 `.github/workflows/monthly-update.yml` 目前只檢查及寫入舊版 `data.json`，不會改變公開首頁資料。
+- 為避免把舊資料檔的更新誤認為網站已更新，月更工作流程改為手動觸發；正式餐廳資料仍須依可查證來源更新 `data.js`。
