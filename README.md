@@ -33,7 +33,7 @@ GitHub Pages 靜態網站。
 
 - `buffet-watch.js` 每週搜尋近 14 天台南「吃到飽、自助吧、Buffet、改裝、新開幕」公開報導，產生 `buffet-watch-report.md` 作為待核實線索。
 - 新聞線索不會自動變成正式餐廳資料；必須核對店家官方資訊、電話、地址及實際收費後才加入 `data.js`。
-- GitHub Actions 每週一台灣時間上午 8:00 執行追蹤與資料健檢，也可手動執行。
+- GitHub Actions 每天台灣時間上午 8:00 執行追蹤與資料健檢，也可手動執行。
 
 ## 正式資料健檢（data.js）
 
