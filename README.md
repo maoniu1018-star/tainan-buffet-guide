@@ -27,3 +27,10 @@ GitHub Pages 靜態網站。
 - 公開首頁實際載入的是 `data.js`，不是 `data.json`。
 - `updater.py` 與 `.github/workflows/monthly-update.yml` 目前只檢查及寫入舊版 `data.json`，不會改變公開首頁資料。
 - 為避免把舊資料檔的更新誤認為網站已更新，月更工作流程改為手動觸發；正式餐廳資料仍須依可查證來源更新 `data.js`。
+
+
+## 正式資料健檢（data.js）
+
+- `audit-data.js` 直接載入首頁使用的 `data.js`，檢查必要欄位、重複店名、價格核對日期、待確認價格文字與官方網址格式。
+- `Published Restaurant Data Audit` 每月執行一次，也可在 GitHub Actions 手動執行。
+- 報告寫入 `data-audit-report.md`。此流程只產生健檢報告，不會自行改寫價格、營業狀態或電話；資料變更必須有可追溯證據。
