@@ -2,6 +2,11 @@ name: Published Restaurant Data Audit
 
 on:
   workflow_dispatch:
+  push:
+    paths:
+      - 'data.js'
+      - 'audit-data.js'
+      - '.github/workflows/monthly-update.yml'
   schedule:
     - cron: "15 19 1 * *"
 
