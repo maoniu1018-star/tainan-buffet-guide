@@ -29,7 +29,7 @@ for (const [i, row] of rows.entries()) {
   else seen.set(label, i);
 
   const dateMatch = typeof row.priceVerified === "string"
-    ? row.priceVerified.match(/^(\\d{4})[/-](\\d{1,2})[/-](\\d{1,2})$/)
+    ? row.priceVerified.match(/^(\d{4})[/-](\d{1,2})[/-](\d{1,2})$/)
     : null;
   if (!dateMatch) {
     noPriceDate.push(label);
