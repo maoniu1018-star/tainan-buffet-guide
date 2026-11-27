@@ -39,7 +39,7 @@ for (const [i, row] of rows.entries()) {
   } else if (hasNumericPrice && dateMatch) {
     const stamp = Date.UTC(Number(dateMatch[1]), Number(dateMatch[2]) - 1, Number(dateMatch[3]));
     const age = Math.floor((Date.now() - stamp) / 86400000);
-    if (age > 90) oldPriceDate.push(\`- \${label}：價格核對已超過 90 天（\${verifiedDate}）\`);
+    if (age > 90) oldPriceDate.push("- " + label + "：價格核對已超過 90 天（" + verifiedDate + "）");
   }
 
   if (/待確認|待查|未確認/.test(String(row.price || ""))) weakPriceEvidence.push(label);
