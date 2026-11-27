@@ -28,15 +28,18 @@ for (const [i, row] of rows.entries()) {
   if (seen.has(label)) duplicates.push(`- ${label}：第 ${seen.get(label) + 1} 筆與第 ${i + 1} 筆重複`);
   else seen.set(label, i);
 
-  const dateMatch = typeof row.priceVerified === "string"
-    ? row.priceVerified.match(/^(\d{4})[/-](\d{1,2})[/-](\d{1,2})$/)
-    : null;
-  if (!dateMatch) {
+  const priceText = String(row.price || "");
+  const hasNumericPrice = /(?:NT\$|NTD|新台幣|\$)\s*[\d,]+|[\d,]+\s*元/.test(priceText);
+  const verifiedDate = typeof row.priceVerified === "string"
+    ? row.priceVerified
+    : typeof row.priceVerifiedAt === "string" ? row.priceVerifiedAt : "";
+  const dateMatch = verifiedDate.match(/^(\d{4})[/-](\d{1,2})[/-](\d{1,2})$/);
+  if (hasNumericPrice && !dateMatch) {
     noPriceDate.push(label);
-  } else {
+  } else if (hasNumericPrice && dateMatch) {
     const stamp = Date.UTC(Number(dateMatch[1]), Number(dateMatch[2]) - 1, Number(dateMatch[3]));
     const age = Math.floor((Date.now() - stamp) / 86400000);
-    if (age > 90) oldPriceDate.push(`- ${label}：價格核對已超過 90 天（${row.priceVerified}）`);
+    if (age > 90) oldPriceDate.push(\`- \${label}：價格核對已超過 90 天（\${verifiedDate}）\`);
   }
 
   if (/待確認|待查|未確認/.test(String(row.price || ""))) weakPriceEvidence.push(label);
@@ -58,7 +61,7 @@ const lines = [
   "## 檢查摘要",
   `- 缺少必要欄位：${missing.length}`,
   `- 重複店名：${duplicates.length}`,
-  `- 未標示價格核對日期：${noPriceDate.length}`,
+  `- 有明確價格但未標示核對日期：${noPriceDate.length}`,
   `- 超過 90 天或日期格式異常：${oldPriceDate.length}`,
   `- 價格文字含待確認字樣：${weakPriceEvidence.length}`,
   `- 官方網址格式錯誤：${invalidOfficialUrls.length}`,
@@ -69,7 +72,7 @@ const lines = [
   "## 重複店名",
   ...(duplicates.length ? duplicates : ["- 無"]),
   "",
-  "## 價格核對日期待補",
+  "## 有明確價格但核對日期待補",
   ...(noPriceDate.length ? noPriceDate.map(x => `- ${x}`) : ["- 無"]),
   "",
   "## 價格核對日期過舊或格式異常",
