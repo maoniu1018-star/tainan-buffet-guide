@@ -29,7 +29,7 @@ async function fetchFeed(query) {
   const response = await fetch(url, { headers: { "User-Agent": "TainanBuffetGuide/1.0" } });
   if (!response.ok) throw new Error("RSS " + response.status + "：" + query);
   const xml = await response.text();
-  const blocks = [...xml.matchAll(/<item>([\\s\\S]*?)<\\/item>/g)].map(match => match[1]);
+  const blocks = [...xml.matchAll(/<item>([\s\S]*?)<\/item>/g)].map(match => match[1]);
   return blocks.map(block => ({
     title: field(block, "title"),
     link: field(block, "link"),
